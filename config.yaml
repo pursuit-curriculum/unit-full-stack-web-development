@@ -24,24 +24,24 @@ sequence:
       pursuit_path: intro-to-express-request
       kind: lesson
       activity: repository
-    - name: Express CRUD/MVC Index
+    - name: Express CRUD/MVC - Index
       pursuit_path: express-rest-crud-mvc-index
       kind: lesson
       activity: repository
-    - name: Express Middleware & RESTful Routes: Show & Create
+    - name: Express Middleware & RESTful Routes - Show & Create
       pursuit_path: express-rest-show-create
       kind: lesson
       activity: repository
-    - name: Express RESTful Routes: Delete & Update
+    - name: Express RESTful Routes - Delete & Update
       pursuit_path: express-rest-delete-show
       kind: lesson
       # continue previous lab
       activity: ~
-    - name: Connect Express & Front-end Framework Connection, Cors & Index
+    - name: Connect Express & Front-end Framework Connection - Cors & Index
       pursuit_path: express-connect-react
       kind: lesson
       activity: repository
-    - name: Connect Express & Front-end Framework Show, Delete, & Update
+    - name: Connect Express & Front-end Framework - Show, Delete, & Update
       pursuit_path: express-connect-react
       kind: lesson
       # continue previous lab
