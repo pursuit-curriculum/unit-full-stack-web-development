@@ -84,11 +84,11 @@ sequence:
     - name: PERN Stack
       pursuit_path: pern-crud
       kind: lesson
-      activity: repository
+      activity: ~ # Continue last lab
     - name: PERN Stack - One to Many Back-End
       pursuit_path: pern-one-to-many-back-end
       kind: lesson
-      activity: repository
+      activity: ~ # Continue last lab
     - name: PERN Stack - One to Many Front-End
       pursuit_path: pern-one-to-many-front-end
       kind: lesson
