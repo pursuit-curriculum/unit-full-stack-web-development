@@ -112,6 +112,7 @@ sequence:
     - name: Snack-a-Log Pair Project
       pursuit_path: project-snack-a-log
       kind: project
+      activity: repository
     - name: Full-Stack Portfolio Project
       pursuit_path: project-full-stack-portfolio
       kind: project
