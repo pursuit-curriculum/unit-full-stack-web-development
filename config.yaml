@@ -68,42 +68,54 @@ sequence:
       pursuit_path: intro-to-sql-joins
       kind: lesson
       activity: repository
-    - name: GitHub
-      pursuit_path: github
-      kind: lesson
-      activity: repository
-    - name: Markdown
-      pursuit_path: markdown
-      kind: lesson
-      activity: repository
-    - name: JavaScript on Your Machine
-      pursuit_path: javascript-on-your-machine
-      kind: lesson
-      activity: repository
-    - name: Reference Types
-      pursuit_path: reference-types
-      kind: lesson
-      activity: repository
-    - name: Skill Sharpening
-      pursuit_path: skill-sharpening
-      kind: project
-      activity: repository
-      points_possible: 186
   Full Stack:
-    - name: Accumulator Pattern
-      pursuit_path: accumulator-pattern
+    - name: Express & SQL - Seed & Read
+      pursuit_path: express-sql-seed-reed
       kind: lesson
       activity: repository
-    - name: Dinosaur Museum
-      pursuit_path: dinosaur-museum
+    - name: Express & SQL - Create & Show
+      pursuit_path: express-sql-create-show
+      kind: lesson
+      activity: ~ # Continue last lab
+    - name: Express & SQL - Delete & Update
+      pursuit_path: express-sql-delete-update
+      kind: lesson
+      activity: ~ # Continue last lab
+    - name: PERN Stack
+      pursuit_path: pern-crud
+      kind: lesson
+      activity: repository
+    - name: PERN Stack - One to Many Back-End
+      pursuit_path: pern-one-to-many-back-end
+      kind: lesson
+      activity: repository
+    - name: PERN Stack - One to Many Front-End
+      pursuit_path: pern-one-to-many-front-end
+      kind: lesson
+      activity: ~ # Continue last lab
+    - name: PERN BONUS Topic
+      pursuit_path: pern-many-to-many
+      kind: lesson
+      activity: repository
+    - name: PERN BONUS Topic
+      pursuit_path: pern-many-to-many
+      kind: lesson
+      activity: ~ # Continue last lab
+    - name: App Planning - Trello
+      pursuit_path: app-planning-trello
+      kind: lesson
+      activity: repository
+    - name: App Planning - Wireframes
+      pursuit_path: app-planning-wireframes
+      kind: lesson
+      activity: repository
+    - name: Snack-a-Log Pair Project
+      pursuit_path: project-snack-a-log
+      kind: project
+    - name: Full-Stack Portfolio Project
+      pursuit_path: project-full-stack-portfolio
       kind: project
       activity: repository
-      points_possible: 51
-    - name: End of Module
-      pursuit_path: final-fundamentals
-      kind: assessment
-      activity: repository
-      points_possible: 31
     - name: End of Module Reflection
       elements:
         - kind: deck
