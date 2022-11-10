@@ -70,7 +70,7 @@ sequence:
       activity: repository
   Full Stack:
     - name: Express & SQL - Seed & Read
-      pursuit_path: express-sql-seed-reed
+      pursuit_path: express-sql-seed-read
       kind: lesson
       activity: repository
     - name: Express & SQL - Create & Show
