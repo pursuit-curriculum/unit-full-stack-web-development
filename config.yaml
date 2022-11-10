@@ -1,0 +1,110 @@
+details:
+  name: Full Stack Web Development
+  repository_name: unit-full-stack-web-development
+
+sequence:
+  Servers:
+    - name: Unit 1 Launch
+      elements:
+        - kind: deck
+        - kind: recording
+    - name: Bootstrap CSS
+      pursuit_path: bootstrap-css
+      kind: lesson
+      activity: ~
+    - name: Intro to the Internet and Servers
+      pursuit_path: intro-to-internet-and-servers
+      kind: lesson
+      activity: ~
+    - name: Introduction to Express Response
+      pursuit_path: intro-to-express-response
+      kind: lesson
+      activity: repository
+    - name: Introduction to Express Request
+      pursuit_path: intro-to-express-request
+      kind: lesson
+      activity: repository
+    - name: Express CRUD/MVC Index
+      pursuit_path: express-rest-crud-mvc-index
+      kind: lesson
+      activity: repository
+    - name: Express Middleware & RESTful Routes: Show & Create
+      pursuit_path: express-rest-show-create
+      kind: lesson
+      activity: repository
+    - name: Express RESTful Routes: Delete & Update
+      pursuit_path: express-rest-delete-show
+      kind: lesson
+      # continue previous lab
+      activity: ~
+    - name: Connect Express & Front-end Framework Connection, Cors & Index
+      pursuit_path: express-connect-react
+      kind: lesson
+      activity: repository
+    - name: Connect Express & Front-end Framework Show, Delete, & Update
+      pursuit_path: express-connect-react
+      kind: lesson
+      # continue previous lab
+      activity: ~
+    - name: Budgeting App
+      pursuit_path: project-budgeting-app
+      kind: project
+      activity: repository
+      points_possible: 10
+    - name: Server Deployment
+      pursuit_path: server-deployment
+      kind: lesson
+      activity: lesson or guide?
+  Databases:
+    - name: Intro to Databases & SQL
+      pursuit_path: intro-to-sql
+      kind: lesson
+      activity: repository
+    - name: App Planning ERDs
+      pursuit_path: app-planning-erds
+      kind: lesson
+      activity: repository
+    - name: SQL Joins
+      pursuit_path: intro-to-sql-joins
+      kind: lesson
+      activity: repository
+    - name: GitHub
+      pursuit_path: github
+      kind: lesson
+      activity: repository
+    - name: Markdown
+      pursuit_path: markdown
+      kind: lesson
+      activity: repository
+    - name: JavaScript on Your Machine
+      pursuit_path: javascript-on-your-machine
+      kind: lesson
+      activity: repository
+    - name: Reference Types
+      pursuit_path: reference-types
+      kind: lesson
+      activity: repository
+    - name: Skill Sharpening
+      pursuit_path: skill-sharpening
+      kind: project
+      activity: repository
+      points_possible: 186
+  Full Stack:
+    - name: Accumulator Pattern
+      pursuit_path: accumulator-pattern
+      kind: lesson
+      activity: repository
+    - name: Dinosaur Museum
+      pursuit_path: dinosaur-museum
+      kind: project
+      activity: repository
+      points_possible: 51
+    - name: End of Module
+      pursuit_path: final-fundamentals
+      kind: assessment
+      activity: repository
+      points_possible: 31
+    - name: End of Module Reflection
+      elements:
+        - kind: deck
+        - kind: recording
