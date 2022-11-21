@@ -1,6 +1,6 @@
 ## Building a User-First App
 
-[expermimental link](../../resource-veterinarian-api)
+[expermimental link](../resource-veterinarian-api)
 
 ### User Stories
 
