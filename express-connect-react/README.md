@@ -47,7 +47,7 @@ Which two are new and which ones have we built with express?
 - Go to your bookmarks app and get it started with `nodemon`
 - Open a new tab in terminal <kbd>command</kbd> <kbd>t</kbd>, do not shut down your bookmarks app
 - Note: if you end up having a lot of extra data from testing, just restart your express API (restart nodemon)
-- Fork this [Starter code](https://github.com/joinpursuit/bookmarks-react-starter)
+- Fork the starter code located in your class GitHub Organization called `starter-express-connect-react`
 - `git clone` the forked repository
 - `cd` to the directory where you cloned it
 - `npm install` to install dependencies that are already included in the `package.json`
