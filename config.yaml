@@ -4,7 +4,7 @@ details:
 
 sequence:
   Servers:
-    - name: Unit 1 Launch
+    - name: Unit 4 Launch
       elements:
         - kind: deck
         - kind: recording
@@ -12,6 +12,13 @@ sequence:
       pursuit_path: bootstrap-css
       kind: lesson
       activity: ~
+    ########### NEEDS ATTENTION ############
+    - name: Install PostgreSQL
+      elements:
+        - kind: guide
+          pursuit_path: computer-setup
+        - kind: recording
+    #######################################
     - name: Intro to the Internet and Servers
       pursuit_path: intro-to-internet-and-servers
       kind: lesson
@@ -35,8 +42,7 @@ sequence:
     - name: Express RESTful Routes - Delete & Update
       pursuit_path: express-rest-delete-show
       kind: lesson
-      # continue previous lab
-      activity: ~
+      activity: ~ # continue previous lab
     - name: Connect Express & Front-end Framework Connection - Cors & Index
       pursuit_path: express-connect-react
       kind: lesson
@@ -44,17 +50,22 @@ sequence:
     - name: Connect Express & Front-end Framework - Show, Delete, & Update
       pursuit_path: express-connect-react
       kind: lesson
-      # continue previous lab
-      activity: ~
+      activity: ~ # continue previous lab
     - name: Budgeting App
-      pursuit_path: project-budgeting-app
+      pursuit_path: budgeting-app
       kind: project
       activity: repository
       points_possible: 10
     - name: Server Deployment
       pursuit_path: server-deployment
       kind: lesson
-      activity: lesson or guide?
+    ########### NEEDS ATTENTION ############
+    - name: Server Deployment
+      elements:
+        - kind: guide
+          pursuit_path: guide-deployment
+        - kind: recording
+    #######################################
   Databases:
     - name: Intro to Databases & SQL
       pursuit_path: intro-to-sql
@@ -76,23 +87,32 @@ sequence:
     - name: Express & SQL - Create & Show
       pursuit_path: express-sql-create-show
       kind: lesson
-      activity: ~ # Continue last lab
+      activity: ~ # continue previous lab
     - name: Express & SQL - Delete & Update
       pursuit_path: express-sql-delete-update
       kind: lesson
-      activity: ~ # Continue last lab
+      activity: ~ # continue previous lab
     - name: PERN Stack
       pursuit_path: pern-crud
       kind: lesson
-      activity: ~ # Continue last lab
+      ########### NEEDS ATTENTION ############
+      # Students should submit their backend as a lab
+      # This is a monorepo, so the next thing they will do is the front-end
+      # They should submit the front-end as a separate lab, even though it is in the same repo
+      # Finally, they should submit their attempt at one to many as a third lab
+      # The challenge is that the pursuit path changes for lesson to lesson
+      # But the pursuit path should stay the same for the lab(s)
+      # Right now, when there is a two day lab but one submission I just mark the activity as null
+      # But in this case there are repeated submissions on the same repo
+      #######################################
+      activity: ~ # continue previous lab
     - name: PERN Stack - One to Many Back-End
       pursuit_path: pern-one-to-many-back-end
       kind: lesson
-      activity: ~ # Continue last lab
+      activity: ~ # continue previous lab
     - name: PERN Stack - One to Many Front-End
       pursuit_path: pern-one-to-many-front-end
-      kind: lesson
-      activity: ~ # Continue last lab
+      activity: ~ # continue previous lab
     - name: PERN BONUS Topic
       pursuit_path: pern-many-to-many
       kind: lesson
@@ -110,11 +130,11 @@ sequence:
       kind: lesson
       activity: repository
     - name: Snack-a-Log Pair Project
-      pursuit_path: project-snack-a-log
+      pursuit_path: snack-a-log
       kind: project
       activity: repository
     - name: Full-Stack Portfolio Project
-      pursuit_path: project-full-stack-portfolio
+      pursuit_path: full-stack-portfolio
       kind: project
       activity: repository
     - name: End of Module Reflection
