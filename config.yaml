@@ -19,6 +19,16 @@ sequence:
           pursuit_path: computer-setup
         - kind: recording
     #######################################
+    ########### NEEDS ATTENTION ############
+    - name: Algorithm Challenges (Codewars)
+      elements:
+        - kind: ~ # activity?
+          # need link to introduction
+          # No code wars points officially required for this unit
+          # But instructors do hold code wars sessions
+          # Need a Canvas link so that this resource is findable
+          pursuit_path: algorithm-challenges
+    #######################################
     - name: Intro to the Internet and Servers
       pursuit_path: intro-to-internet-and-servers
       kind: lesson
