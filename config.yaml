@@ -8,10 +8,14 @@ sequence:
       elements:
         - kind: deck
         - kind: recording
+    ########### NEEDS ATTENTION ############
     - name: Bootstrap CSS
       pursuit_path: bootstrap-css
       kind: lesson
       activity: ~
+      # Has starter code that needs to be added
+      # https://github.com/pursuit-curriculum/starter-bootstrap-css
+    #######################################
     ########### NEEDS ATTENTION ############
     - name: Install PostgreSQL
       elements:
@@ -42,7 +46,7 @@ sequence:
       kind: lesson
       activity: repository
     ########### NEEDS ATTENTION ############
-    - name: Intro to Express Pracice
+    - name: Intro to Express Practice
       elements:
         - kind: ~ # practice
           # Needs canvas link to be findable, not an assignment that needs to be turned in
@@ -62,10 +66,14 @@ sequence:
       pursuit_path: express-rest-delete-show
       kind: lesson
       activity: ~ # continue previous lab
+    ########### NEEDS ATTENTION ############
     - name: Connect Express & Front-end Framework Connection - Cors & Index
       pursuit_path: express-connect-react
       kind: lesson
-      activity: repository
+      activity: repository # this repository is for the lab
+      # need additional repository for starter code
+      # https://github.com/pursuit-curriculum/starter-express-connect-react
+    #######################################
     - name: Connect Express & Front-end Framework - Show, Delete, & Update
       pursuit_path: express-connect-react
       kind: lesson
@@ -124,7 +132,13 @@ sequence:
       # Right now, when there is a two day lab but one submission I just mark the activity as null
       # But in this case there are repeated submissions on the same repo
       #######################################
-      activity: ~ # continue previous lab
+      activity:
+        ~ # continue previous lab
+
+
+        ########### NEEDS ATTENTION ############
+        # Has starter code
+        # https://github.com/pursuit-curriculum/starter-pern-crud
     - name: PERN Stack - One to Many Back-End
       pursuit_path: pern-one-to-many-back-end
       kind: lesson
