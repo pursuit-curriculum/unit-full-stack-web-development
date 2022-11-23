@@ -41,6 +41,15 @@ sequence:
       pursuit_path: intro-to-express-request
       kind: lesson
       activity: repository
+    ########### NEEDS ATTENTION ############
+    - name: Intro to Express Pracice
+      elements:
+        - kind: ~ # practice
+          # Needs canvas link to be findable, not an assignment that needs to be turned in
+          # With practice, do we want students to be able to turn it in
+          # Or just share with instructors if they end up completing it in some way?
+          pursuit_path: intro-to-express
+    #######################################
     - name: Express CRUD/MVC - Index
       pursuit_path: express-rest-crud-mvc-index
       kind: lesson
