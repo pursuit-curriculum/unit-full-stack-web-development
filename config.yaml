@@ -8,30 +8,26 @@ sequence:
       elements:
         - kind: deck
         - kind: recording
-    ########### NEEDS ATTENTION ############
     - name: Bootstrap CSS
       pursuit_path: bootstrap-css
       kind: lesson
       activity: ~
-      # Has starter code that needs to be added
-      # https://github.com/pursuit-curriculum/starter-bootstrap-css
-    #######################################
-    ########### NEEDS ATTENTION ############
+      starter: bootstrap-css
     - name: Install PostgreSQL
       elements:
         - kind: guide
           pursuit_path: computer-setup
+          pursuit_subpath: postgresql
         - kind: recording
-    #######################################
     ########### NEEDS ATTENTION ############
-    - name: Algorithm Challenges (Codewars)
-      elements:
-        - kind: ~ # activity?
-          # need link to introduction
-          # No code wars points officially required for this unit
-          # But instructors do hold code wars sessions
-          # Need a Canvas link so that this resource is findable
-          pursuit_path: algorithm-challenges
+    # - name: Algorithm Challenges (Codewars)
+    #   elements:
+    #     - kind: ~ # activity?
+    #       # need link to introduction
+    #       # No code wars points officially required for this unit
+    #       # But instructors do hold code wars sessions
+    #       # Need a Canvas link so that this resource is findable
+    #       pursuit_path: algorithm-challenges
     #######################################
     - name: Intro to the Internet and Servers
       pursuit_path: intro-to-internet-and-servers
@@ -46,13 +42,13 @@ sequence:
       kind: lesson
       activity: repository
     ########### NEEDS ATTENTION ############
-    - name: Intro to Express Practice
-      elements:
-        - kind: ~ # practice
-          # Needs canvas link to be findable, not an assignment that needs to be turned in
-          # With practice, do we want students to be able to turn it in
-          # Or just share with instructors if they end up completing it in some way?
-          pursuit_path: intro-to-express
+    # - name: Intro to Express Practice
+    #   elements:
+    #     - kind: ~ # practice
+    #       # Needs canvas link to be findable, not an assignment that needs to be turned in
+    #       # With practice, do we want students to be able to turn it in
+    #       # Or just share with instructors if they end up completing it in some way?
+    #       pursuit_path: intro-to-express
     #######################################
     - name: Express CRUD/MVC - Index
       pursuit_path: express-rest-crud-mvc-index
@@ -66,14 +62,11 @@ sequence:
       pursuit_path: express-rest-delete-show
       kind: lesson
       activity: ~ # continue previous lab
-    ########### NEEDS ATTENTION ############
     - name: Connect Express & Front-end Framework Connection - Cors & Index
       pursuit_path: express-connect-react
       kind: lesson
-      activity: repository # this repository is for the lab
-      # need additional repository for starter code
-      # https://github.com/pursuit-curriculum/starter-express-connect-react
-    #######################################
+      activity: repository
+      starter: express-connect-react
     - name: Connect Express & Front-end Framework - Show, Delete, & Update
       pursuit_path: express-connect-react
       kind: lesson
@@ -86,13 +79,12 @@ sequence:
     - name: Server Deployment
       pursuit_path: server-deployment
       kind: lesson
-    ########### NEEDS ATTENTION ############
     - name: Server Deployment
       elements:
         - kind: guide
           pursuit_path: guide-deployment
+          pursuit_subpath: render-express-postgres
         - kind: recording
-    #######################################
   Databases:
     - name: Intro to Databases & SQL
       pursuit_path: intro-to-sql
@@ -132,19 +124,15 @@ sequence:
       # Right now, when there is a two day lab but one submission I just mark the activity as null
       # But in this case there are repeated submissions on the same repo
       #######################################
-      activity:
-        ~ # continue previous lab
-
-
-        ########### NEEDS ATTENTION ############
-        # Has starter code
-        # https://github.com/pursuit-curriculum/starter-pern-crud
+      starter: pern-crud
+      activity: ~ # continue previous lab
     - name: PERN Stack - One to Many Back-End
       pursuit_path: pern-one-to-many-back-end
       kind: lesson
       activity: ~ # continue previous lab
     - name: PERN Stack - One to Many Front-End
       pursuit_path: pern-one-to-many-front-end
+      kind: lesson
       activity: ~ # continue previous lab
     - name: PERN BONUS Topic
       pursuit_path: pern-many-to-many
