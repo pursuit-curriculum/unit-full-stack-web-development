@@ -23,12 +23,12 @@ sequence:
       pursuit_path: intro-to-internet-and-servers
       kind: lesson
       activity: canvas_text
-      activity_description: "<p>Watch the Following Videos</p>
+      activity_description: "<h2>Watch the Following Videos</h2>
+      <p>Watch the following videos. Then, write a paragraph or two that answers the questions below the video.</p>
       <ol>
       <li><a href='https://www.khanacademy.org/computing/ap-computer-science-principles/the-internet/introducing-the-internet/v/what-is-the-internet?modal=1'>What is the Internet? </a></li>
       <li><a href='https://www.youtube.com/watch?v=7_LPdttKXPc'>How the Internet Works in 5 Minutes </a></li>
       </ol>
-      <p>Write an algorithm that achieves the following outcome: looking up a word in an online or physical dictionary. Keep in mind any inputs a person may need and the desired output. Additionally, focus on designing for the default scenario (i.e. 'happy path') before thinking about edge cases. If there are any edge cases you think are important to keep in mind, include them at the end.</p>
       <ul>
       <li>What is the internet made up of?</li>
       <li>Why is the internet useful?</li>
