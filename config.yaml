@@ -19,16 +19,6 @@ sequence:
           pursuit_path: computer-setup
           pursuit_subpath: postgresql
         - kind: recording
-    ########### NEEDS ATTENTION ############
-    # - name: Algorithm Challenges (Codewars)
-    #   elements:
-    #     - kind: ~ # activity?
-    #       # need link to introduction
-    #       # No code wars points officially required for this unit
-    #       # But instructors do hold code wars sessions
-    #       # Need a Canvas link so that this resource is findable
-    #       pursuit_path: algorithm-challenges
-    #######################################
     - name: Intro to the Internet and Servers
       pursuit_path: intro-to-internet-and-servers
       kind: lesson
@@ -41,16 +31,7 @@ sequence:
       pursuit_path: intro-to-express-request
       kind: lesson
       activity: repository
-    ########### NEEDS ATTENTION ############
-    # - name: Intro to Express Practice
-    #   elements:
-    #     - kind: ~ # practice
-    #       # Needs canvas link to be findable, not an assignment that needs to be turned in
-    #       # With practice, do we want students to be able to turn it in
-    #       # Or just share with instructors if they end up completing it in some way?
-    #       pursuit_path: intro-to-express
-    #######################################
-    - name: Express CRUD/MVC - Index
+    - name: Express CRUD/MVC
       pursuit_path: express-rest-crud-mvc-index
       kind: lesson
       activity: repository
@@ -58,11 +39,11 @@ sequence:
       pursuit_path: express-rest-show-create
       kind: lesson
       activity: repository
-    - name: Express RESTful Routes - Delete & Update
+    - name: Express Middleware & RESTful Routes - Delete & Update
       pursuit_path: express-rest-delete-show
       kind: lesson
       activity: ~ # continue previous lab
-    - name: Connect Express & Front-end Framework Connection - Cors & Index
+    - name: Connect Express & Front-end Framework - CORS & Index
       pursuit_path: express-connect-react
       kind: lesson
       activity: repository
@@ -77,12 +58,9 @@ sequence:
       activity: repository
       points_possible: 10
     - name: Server Deployment
-      pursuit_path: server-deployment
-      kind: lesson
-    - name: Server Deployment
       elements:
         - kind: guide
-          pursuit_path: guide-deployment
+          pursuit_path: deployment
           pursuit_subpath: render-express-postgres
         - kind: recording
   Databases:
@@ -154,10 +132,12 @@ sequence:
       pursuit_path: snack-a-log
       kind: project
       activity: repository
+      points_possible: 40
     - name: Full-Stack Portfolio Project
       pursuit_path: full-stack-portfolio
       kind: project
       activity: repository
+      points_possible: 47
     - name: End of Module Reflection
       elements:
         - kind: deck
