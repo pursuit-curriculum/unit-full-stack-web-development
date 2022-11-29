@@ -1,171 +1,170 @@
 # Intro to the Internet and Servers
 
-# Topics
+Typically, when software engineers begin learning about the internet, they start with the front end of a website and spend less time focusing on the back end. In this unit, you will focus on back-end and full-stack web development.
 
-Introductions to:
+The back end of an application is made up of servers and databases. Without a robust back-end application, a front-end application is only capable of statically displaying information. While it can be interactive for a user, it cannot store data or handle unknown requests. In this lesson, you will learn how these two sides of applications interact with one another.
 
-- [What is the Internet?](https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/full-stack-express/intro-to-internet-and-servers/README.md#what-is-the-internet)
-- [Clients](https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/full-stack-express/intro-to-internet-and-servers/README.md#what-is-a-client)
-- [Servers](https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/full-stack-express/intro-to-internet-and-servers/README.md#what-is-a-server)
-- [Requests & Responses](https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/full-stack-express/intro-to-internet-and-servers/README.md#types-of-requests)
-- [URLs](https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/full-stack-express/intro-to-internet-and-servers/README.md#different-parts-of-a-url)
-- [HTTP](https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/full-stack-express/intro-to-internet-and-servers/README.md#http)
-- [HTTP Status Codes](https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/full-stack-express/intro-to-internet-and-servers/README.md#http-status-codes)
-- [BONUS: IP Addresses and DNS](https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/full-stack-express/intro-to-internet-and-servers/README.md#bonus)
+## Components of the internet
 
-# Lesson
+In order to learn how to build a back end, it is helpful to understand the basics of the internet and the request-response cycle.
 
-## What is the Internet?
+The internet is made up of many different elements. Most of these components are abstracted away from your day-to-day experience of the internet. People rarely consider the components described in this reading when they use the internet. However, as a software developer, you need to know some fundamentals about how the internet works.
 
-Although the majority of us use the internet every day, many of us have not stopped to reflect or research how the internet actually works. We take for granted its seamless usage in our daily lives.
+### Computer networks
 
-The Internet is the backbone of the World Wide Web (www or w3). The World Wide Web is an interconnected system of webpages that use the Internet in order to connect.
+Computer networks allow the connection of two or more computers to exchange and share data and other resources.
 
-What started in the 1960s as a US military research project, soon evolved into a public infrastructure. The various technologies that support the Internet have evolved over time, but the way it works hasn't changed that much: Internet is a way to connect computers all together.
+Computer networks are everywhere. Within your home or building, you may have many devices that connect to a router, usually to allow the devices access to the internet. A library is another place with several computers connected to a network. The library may also have a copier available on its network. When you are on the library network, it is possible to access and use the copier through the network.
 
-The initial purpose was to share articles and research papers. Now the internet has expanded to far more complex applications that are now part of our daily lives.
+Computer networks can be set up by location, like a company office, metropolitan area, or global network.
 
-The internet is made up of two types of computer interactions: `clients` and `servers`.
+### The internet and the web
 
-![Internet](assets/internet.jpg)
+The internet is a global computer network that uses the Internet protocol suite (TCP/IP). It is a network that includes public and private networks, like schools, businesses, and government networks.
 
-### Client vs. Server
+A protocol is an agreed-upon official set of rules. Protocols allow for consistent and predictable procedures, which in turn allow for easy adaptation across systems.
 
-Computers connected to the web are called **clients** and **servers**. A simplified diagram of how they interact might look like this:
+People often use the terms _the internet_ and _the web_ interchangeably. The world wide web is a subset of the internet (also referred to as _www_ or _w3_ or _the web_). The web can be accessed through a _web browser_ like Chrome, Firefox, or Safari. Websites part of the world wide web often have a URL that starts with `www`.
 
-![](https://mdn.mozillademos.org/files/8973/Client-server.jpg)
+## Components of a request-response cycle
 
-- <kbd>Clients</kbd> make `requests` to `servers`
-- <kbd>Servers</kbd> make `responses` to `clients`
+Computers connected to the web fall into two categories: clients and servers.
 
-There is a lot more that happens under the hood, but we don't need to know it in order to build awesome web apps!
+- _Clients_ make _requests_ to _servers_
+- _Servers_ make _responses_ to _clients_
 
-## What is a Client?
+Here is a simplified diagram of how they interact:
 
-A client can be anything that connects to the internet in order to make `request`s to servers.
+![Request Response Cycle](./assets/client-server.png)
 
-Things like:
+### Client
 
-- Laptops and desktop computers via web browsers like Chrome
-- Smart phones via mobile apps
-- IoT (Internet of Things): Smart fire alarms, smart door lock, smart bicycles etc.
+A client is anything that connects to the internet and makes _requests_ to servers. Think about the last time you used the internet outside of class. You may have:
 
-## What is a Server?
+- requested weather data from a weather website
+- checked the time your favorite coffee shop opens
+- looked up the price of a flight
+- shopped for a gift
+- confirmed an appointment
+- used an app to turn off the lights in your home
 
-A server is just a computer that runs software to take `requests` and send back `responses`.
+Each of these activities involves a client (you and your phone/laptop) making requests to a server and getting responses from the server with some information.
 
-You can make your own computer into a server. But in order for other computers to make requests to it, it would have to be on all the time in order to have uninterrupted service. And, if your web app gets very popular, your laptop will not be able to handle it, because it wasn't designed to be used for this as its main purpose. Therefore, there are typically dedicated computers for this purpose.
+### Server
 
-Here's an image of a server farm that's full of computers that are servers:
+A server is just a computer that can receive _requests_ and _respond_ to those requests.
 
-![](https://static.timesofisrael.com/www/uploads/2019/07/iStock-985895696-e1563876220293.jpg)
+You can make your computer into a server. But for other computers to make requests to it, it would have to be on all the time for uninterrupted service. Additionally, if your app becomes very popular, your laptop will not be able to handle the usage because it was not designed for this as a primary purpose. Instead, there are dedicated computers that are servers.
 
-### Types of Servers
+Here is an image of a server farm that is full of computers that are servers:
 
-1. **Web server**: Web servers show pages and run apps through web browsers. For example, if you are viewing this page on GitHub, your computer has made a request to the GitHub server for it to respond with this particular page.
-2. **Email server**: Email servers facilitate the sending and receiving of email messages.
-3. **FTP server**: FTP servers support the moving of files through File Transfer Protocol tools
+![Server farm](./assets/server-farm.jpeg)
 
-## Types of Requests
+There are several types of servers. Some examples are:
 
-There four common types of requests we can make which correspond to four basic ways we typically want to manipulate data
+- **Web server**: Serves web pages through web browsers.
+- **Email server**: Facilitates sending and receiving email messages.
 
-- `POST` (**C**reate data) - e.g. make a user account
-- `GET`(**R**ead data) - e.g. see user account info
-- `PUT/PATCH` (**U**pdate data) - e.g. update account info
-- `DELETE` (**D**estroy data) - e.g. delete account
+### Databases
 
-This acronym for create, reading, updating and deleting data is C.R.U.D.
+A database is a computer program that stores electronic data in organized collections. Its only job is to manage data. For example, when you sign-up for a new service, your email and password are stored in that service's database.
 
-## Different parts of a URL
+A server contains the logic that manages how a client accesses and interacts with the data.
 
-URL stands for Uniform Resource Locator. It's a string of text characters used by Web browsers, email clients and other software to format the contents of an internet request message.
+For example, a shopping website may store an account with information like your name, address, and credit card in a database. You can view your information through the website's front-end application but cannot access someone else’s data. Your direct interaction is with the server through the web browser. The browser sends your request to the server, and the server interacts with the database, responding with information that is displayed in the front-end application.
 
-![Basic URL](./assets/basic_url.png)
+![Traditional database icon](./assets/request-response-cycle.png)
 
-Let's breakdown the contents of a more complex URL:
+## Requests and responses
+
+In order to build web applications you will use _HTTP_.
+
+HTTP stands for HyperText Transfer Protocol. It is helpful to remember that HTML stands for Hyper-Text Markup Language. The initial purpose of the HTTP protocol was to transfer HTML. Over time it has extended to allow the transfer of JSON, images, and several other types of data. "
+
+Requests and responses are sent via HTTP. The requests are sent to an address represented by a URL.
+
+### URL Components
+
+URLs are addresses of computers and resources on the internet. Requests and responses use these addresses to find one other.
+
+URL stands for Uniform Resource Locator. It's a string of text characters that are formatted in a uniform manner. Web browsers (and other software) use these strings to help locate where to send requests and find resources."
+
+You can see a URL in the browser. Usually, the URL bar is along the top:
+
+![Basic URL](./assets/basic-url.png)
+
+Let's break down the contents of a more complex URL:
 
 ```
-    http://www.example.org:3000/hello/world/index.html?name=foo&limit=20#footer
-    \___/  \_____________/ \__/ \___________________/ \_______________/ \____/
-  protocol  host/domain    port           path            query-string hash/fragment
+ https://www.example.org:3000/hello/world/index.html?name=foo&limit=20#footer
+ \___/ \_____________/ \__/ \___________________/ \_______________/ \____/
+ protocol host/domain port path query-string hash/fragment
 ```
 
-| Element          | About                                                                                                                                                                                                                                                                                                                                                     |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| protocol         | A protocol is a set of rules that is agreed to by all parties (in this case, a server and a client). The most popular application protocol used on the world wide web is HTTP(`S` stands for secure). Other familiar types of application protocols include FTP, SSH, GIT, FILE                                                                           |
-| host/domain name | The host or domain name is looked up in DNS to find the IP address of the host - the server that's providing the resource (see bonus section)                                                                                                                                                                                                             |
-| port             | A server can have multiple applications listening on multiple ports. This allows users to access a different application on the same host - this is usually configured for us, so we don't typically type it                                                                                                                                              |
-| path             | Web servers can organize resources into a system that is similar to files in directories                                                                                                                                                                                                                                                                  |
-| query-string     | The client can pass parameters to the server through the query-string (in a GET request method); the server can then use these to customize the response - such as values to filter a search result                                                                                                                                                       |
-| hash/fragment    | This URL fragment is generally used by the client to identify some portion of the content in the response. If you are reading this on GitHub, you can hover over any header and click on it and it will update the URL, then you can copy the URL and send it to a someone and it will load the page at that header, rather than just starting at the top |
+The URL components are always in the same order.
 
-## HTTP
+| Element          | About                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| protocol         | The application protocol in this example is HTTP or HTTPS (`S` stands for secure). Other familiar types of application protocols include SMTP/POP, and SSH.                                                                                                                                                                                                                                                |
+| host/domain name | The server's name that provides the resource.                                                                                                                                                                                                                                                                                                                                                              |
+| port             | A server can have multiple ports. Multiple ports allow users to access different applications on the same host. The port is usually pre-configured, so it typically does not need to be included in the URL to locate a resource.                                                                                                                                                                          |
+| path             | Web servers can organize resources into a system similar to files and folders in directories.                                                                                                                                                                                                                                                                                                              |
+| query-string     | The client can pass parameters to the server through the query-string. The query-string allows for additional request information to be passed through the URL. For example, if you go to an international website, it may have `lang=en`, which means respond with a web page in English.                                                                                                                 |
+| hash/fragment    | The client can use a hash/fragment to identify some portion of the content in the response. If you click on an element in the table of contents on this page, the page will scroll down to that section and you will see a hash fragment in the URL corresponding to the section. If you send your friend the link with the hash fragment the page will load and automatically scroll down to the section. |
 
-We are going to be working with HTTP (`Hyper-Text-Transfer-Protocol`) in order to build APIs.
+### HTTP Protocol
 
-**Remember** - `HTML` stands for `Hyper-Text Mark-up Langauge`
+The HTTP protocol always starts with a _request_. For every _request_, there can be one and only one _response_.
 
-`HTTP` primarily sends data as strings. It has two main parts: a `header` and a `body`
+We can make four common requests, which correspond to four primary ways we typically want to interact with data.
 
-The header contains important data about the request/response like
+- **POST**: _**C**reate_ data, make a new user account
+- **GET**: _**R**ead_ data, see details of the user account
+- **PUT/PATCH**: _**U**pdate_ data, make changes to the user account
+- **DELETE**: _**D**estroy_ data, delete the user account
 
-- `URL` - From where this resource is coming from
-- `Method` - I.e. a `GET` request
-- `Content-Type` - Types of data allowed. It can just be plain text/HTML or JSON or other files like images or videos
-- `Status Code` - The status code (see below)
+These four ways of interacting with data are often referenced as CRUD. CRUD is an acronym for _create_, _read_, _update_, and _destroy_.
 
-You can look at the headers by opening your browser's dev tools, going to the network tab and selecting a file.
+HTTP primarily sends data as strings. It has two main parts: A _header_ and a _body_.
 
-![](./assets/network-tab-status.png)
+### Header
 
-The body contains any content that may be passing through. For example, the HTML, CSS and JavaScript of a web page or the contents that are coming from a form in the browser.
+The header contains essential data about requests and responses. You can think of it as metadata for requests and responses.
 
-## HTTP Status Codes
+"Metadata is data about other data. An example is when you have a digital photograph, the image is one kind of data. Additionally, there will be metadata for the photograph, which may include the time the image was taken and the location. The metadata is not seen on the image, but can be accessed in other ways. "
 
-HTTP Status Codes help convey information about requests/responses. For example - was it successful? Did it fail (think of a `404` status code - what does it mean? Have you seen a `404` status code on the internet?)
+Some examples of the information included in a header of a request are:
 
-The status codes from 100 - 399, generally provide information that the request/response is normal/going through/successful.
+- **URL**: The location from where the request was made.
+- **Method**: The type of request being made.
 
-The 400s typically denote user error, like trying to access a part of a site without being logged in.
+Some examples of the information included in the header of a response are:
 
-The 500s typically denote a server error. For example: The server has crashed.
+- **Content-Type**: The type of data allowed. It can be plain text, HTML, JSON, or other files like images or videos.
+- **Status Code**: A numerical code that describes the response.
 
-For a memorable introduction see [HTTP Status cats](https://http.cat/), or if you would prefer [HTTP Status Dogs](https://httpstatusdogs.com/)
+You can view headers sent by opening your browser’s dev tools, going to the Network tab, and selecting a file.
 
-## Bonus
+<!-- TODO An overlay on this image highlighting what part of the request is and what is part of the response would be great. -->
 
-There are far more technical details of how the internet works. But we just need an understanding of the things we've covered in order to be able to build our own server.
+![example.com network tab](./assets/network-tab.png)
 
-### IP Addresses & DNS
+When a request or response is sent, a header is always required.
 
-### So what happens, exactly?
+### Body
 
-[Here is a popular 5 minute video](https://www.youtube.com/watch?v=7_LPdttKXPc)
+The body is an optional part of both the HTTP request and response. The body contains data or content.
 
-When you type a web address into your browser:
+For example, a request body might include the data that a user inputted into a form. A response body could consist of the HTML content for your browser to render on the page.
 
-1. The browser goes to the DNS server, and finds the real address of the server that the website lives on.
-2. The browser sends an HTTP request message to the server, asking it to send a copy of the website to the client.
-3. Provided the server approves the client's request, the server sends the client a "200 OK" message, and then starts sending the website's files to the browser as a series of small chunks called data packets.
-4. The browser assembles the small chunks into a complete website and displays it.
+### HTTP Status Codes
 
-#### Finding computers
+HTTP Status Codes help convey information about responses. For example, was the response successful? Or did it fail? If it failed, why? Was it a user error or server error, or something else?
 
-- Source: [_How does the Internet work?_ by mozilla contributors](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work)
+The status codes from 100 - 399 generally confirm that the request/response is OK.
 
-If you want to send a message to a computer, you have to specify which one. Thus any computer linked to a network has a unique address to identify it, called an **IP address**. It's an address made of a series of four numbers separated by dots, for example: `192.168.2.10`.
+The 400s typically denote user error, like trying to access a part of a site without logging in (403) or accessing a web page that does not exist (404).
 
-To make things easier for humans, IP addresses usually have a human readable alias called a **domain name**. For example, `google.com` is the domain name used on top of the IP address `173.194.121.32`. Using the domain name is the easiest way for us to reach a computer over the Internet.
+The 500s typically denote a server error. For example, the server has crashed.
 
-![Show how a domain name can alias an IP address](https://mdn.mozillademos.org/files/8405/dns-ip.png)
-
-The client and server we've described above don't tell the whole story. There are many other parts involved, and we'll describe some of them below.
-
-- **DNS**: Domain Name Servers are like address books for websites. When you type a web address in your browser, the DNS needs to be reached first to translate the address to an ip address.
-- **HTTP** (Hypertext Transfer Protocol): a protocol that defines how clients and servers speak to each other. **Remember** - HTML stands for `Hyper-Text Mark-up Langauge`
-- **Component files**: A website is made up of many different files. These files come in two main types:
-  - **Code files**: Websites are built primarily built from HTML, CSS, and JavaScript.
-  - **Assets**: All the other stuff that makes up a website, such as images, music, video, Word documents, and PDFs.
-
-[More in depth videos](https://www.khanacademy.org/computing/ap-computer-science-principles/the-internet/introducing-the-internet/v/what-is-the-internet?modal=1)
+For a memorable introduction see [HTTP Status cats](https://http.cat/), or if you would prefer [HTTP Status Dogs](https://httpstatusdogs.com/).

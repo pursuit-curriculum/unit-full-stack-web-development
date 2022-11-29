@@ -1,10 +1,3 @@
 # Server Deployment
 
-Give background info
-
-Link to the correct repository, as a guide
-
-Either:
-
-- Render.com
-- Fly.io
+It's time to put your apps online so everyone can see them!
