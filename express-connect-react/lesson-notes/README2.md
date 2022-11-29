@@ -3,16 +3,16 @@
 ## Learning Outcomes
 
 - Complete the remaining RESTful Routes
-  - Show
-  - New
-  - Edit
-  - Delete
+- Show
+- New
+- Edit
+- Delete
 
 ## Continue
 
 So far, we have added functionality to our React app to complete requests and get responses for Index.
 
-Let's get the Show page, New, and Edit forms working
+Let's get the Show page, New, and Edit forms working.
 
 |  #  | Action |         URL         | HTTP Verb |   CRUD   |              Description               |
 | :-: | :----: | :-----------------: | :-------: | :------: | :------------------------------------: |
@@ -23,11 +23,11 @@ Let's get the Show page, New, and Edit forms working
 
 ### Loading a Bookmark on Page Load (Show Page)
 
-If we click on the `pencil` it will take us to our show view in our React app.
+If we click on the `pencil`, it will take us to our show view in our React app.
 
 <details><summary>Show Page Empty</summary>
 
-![](./assets/show-empty.png)
+![](../assets/show-empty.png)
 
 </details>
 
@@ -45,66 +45,66 @@ import axios from "axios";
 const API = process.env.REACT_APP_API_URL;
 ```
 
-We are also using `useParams` from react-router-dom. This will allow us to use the url parameters (in our app, this will be the index position of the array)
+We are also using `useParams` from react-router-dom. This will allow us to use the URL parameters (in our app, this will be the index position of the array)
 
-Our function for show will be very similar. However, we'll add an error message in case the particular bookmark cannot be found. We'll got to `/not-found` which is an invalid index position, which will trigger the 404 route. It still could use even better UI/UX, but this will do for our small build. As a challenge during lab you can work on making this an even nicer experience.
+Our function for Show will be very similar. However, we'll add an error message if the particular bookmark cannot be found. We'll go to `/not-found`, an invalid index position that will trigger the 404 route. It still could use even better UI/UX, but this will do for our small build. As a challenge during lab, you can work on making this an even more excellent experience.
 
-Remember, the structure of the `.then()` function takes a callback.
+Remember, the `.then()` structure takes a callback.
 
-First, it starts with a promise. The axios library functions `get`, `post`, `put`, `delete` (etc) are all functions that return promises.
+First, it starts with a promise. The Axios library functions `get`, `post`, `put`, `delete` (etc.) are all functions that return promises.
 
-A promise is a function that allows you to _WAIT_ for a response and _THEN_ do something. The .`then()` function takes a callback, within that callback you can write code that should run AFTER the first function has been fulfilled (usually by returning a value).
+A promise is a function that allows you to _WAIT_ for a response and _THEN_ do something. The .`then()` function takes a callback, and within that callback, you can write code that should run AFTER the first function has been fulfilled (usually by returning a value).
 
 If you pass an argument into `.then()`, it is the return value from the previous function.
 
-Sometimes, things go wrong (for example, your server is not running), in that case, we add a `.catch()` function which will deal with errors that may occur.
+Sometimes, things go wrong (for example, your server needs to be running). In that case, we add a `.catch()` function to deal with possible errors.
 
 ```js
 .catch(()=>{})
 ```
 
-Additionally, if the function only has one line of code, the curly braces can be skipped and the code can be shortened to:
+Additionally, if the function only has one line of code, the curly braces can be skipped, and the code can be shortened to:
 
 ```js
 .then(response => response.data)
 ```
 
-However, this style is very limiting, we can't add any extra lines of code easily. Se we'll write out the request in a a longer format that is easier to maintain.
+However, this style is very limiting. We can't add any extra lines of code easily. So we'll write out the request in a longer format that is easier to maintain.
 
-### Hooks vs React Stateful Class Components
+### Hooks vs. React Stateful Class Components
 
-If you've worked with array classes you would write
+If you've worked with array classes, you will write.
 
 ```js
 // Declare state, where you can add more properties
 // Set default value of this.state.bookmarks to be an empty array
 this.state = {
-  bookmarks: []
+ bookmarks: []
 }
 
 updateBookmarks () {
-  // Do some stuff
-  // ...
-  // Update state:
-  // use generic this.setState() function, inside the function set which property will be updated
-  this.setState({bookmarks: ["This array is updated"]})
+ // Do some stuff
+ // ...
+ // Update state:
+ // use generic this.setState() function, inside the function set, which property will be updated
+ this.setState({bookmarks: ["This array is updated"]})
 }
 ```
 
-With hooks, it does the same thing, but in a cleaner, more readable way.
+With hooks, it does the same thing but in a cleaner, more readable way.
 
 ```js
 // Declare state for bookmarks only. If you want to add more properties, you would create a new line and call useState() again.
 // Set default value bookmarks to be an empty array
-// Set the name of the funciton that will be in charge of updating bookmarks
+// Set the name of the function that will be in charge of updating bookmarks
 const [bookmarks, setBookmarks] = useState([]);
 
 updateBookmarks() {
-  // Do some stuff
-  // ...
-  // Update state:
-  // Use the function you created and named to update just bookmarks, if you have other properties to update, you would call their specific functions as well
-  setBookmarks(["This array is updated"]);
+ // Do some stuff
+ // ...
+ // Update state:
+ // Use the function you created and named to update just bookmarks. If you have other properties to update, you would call their specific functions as well
+ setBookmarks(["This array is updated"]);
 }
 ```
 
@@ -155,7 +155,7 @@ useEffect(() => {
 
 <details><summary>Show Page Loaded</summary>
 
-![](./assets/show-loaded.png)
+![](../assets/show-loaded.png)
 
 </details>
 
@@ -165,7 +165,7 @@ useEffect(() => {
 
 <br />
 
-When we think of our users, they want to create a bookmark and then want to see some sort of success that their bookmark has been created. So the flow will be:
+When we think of our users, they want to create a bookmark and then want to see the success that their bookmark has been created. So the flow will be:
 
 - A user fills out the create form
 - Presses the submit button
@@ -175,7 +175,7 @@ When we think of our users, they want to create a bookmark and then want to see 
 
 **src/BookmarkNewForm.js**
 
-Add axios for fetch request
+Add Axios for a fetch request.
 
 ```js
 import axios from "axios";
@@ -187,7 +187,7 @@ Add the URL for the API
 const API = process.env.REACT_APP_API_URL;
 ```
 
-Add `useNavigate` so that when a new bookmark is created it navigates back to the index page
+Add `useNavigate` so that it navigates back to the index page when a new bookmark is created.
 
 ```js
 import { useNavigate } from "react-router-dom";
@@ -195,23 +195,23 @@ import { useNavigate } from "react-router-dom";
 const navigate = useNavigate();
 ```
 
-There is a function `handleSubmit`. This is the function that gets called when the form is submitted. 
+There is a function `handleSubmit`. This is the function that gets called when the form is submitted.
 
-First, we must prevent the default. When the form does not have the attributes of `action` and `method`, it will default to refreshing the page. 
+First, we must prevent the default. When the form does not have the attributes of `action` and `method`, it will default to refreshing the page.
 
-After that, we want to write some functionality that will make a POST request and send the form data to our backend. THEN, once the request is complete, we want to navigate the user back to the Index page so that they can see that their new bookmark has been added. 
+After that, we want to write some functionality to make a POST request and send the form data to our backend. THEN, once the request is complete, we want to navigate the user back to the Index page so they can see that their new bookmark has been added.
 
 Put it all together
 
 ```js
 const addBookmark = (newBookmark) => {
-  axios
-    .post(`${API}/bookmarks`, newBookmark)
-    .then(
-      () => {
-        navigate(`/bookmarks`);
-      }
-    .catch((c) => console.error("catch", c));
+ axios
+ .post(`${API}/bookmarks`, newBookmark)
+ .then(
+ () => {
+ navigate(`/bookmarks`);
+ }
+ .catch((c) => console.error("catch", c));
 };
 ```
 
@@ -219,7 +219,7 @@ const addBookmark = (newBookmark) => {
 
 ### Using the Edit Form to Update a Bookmark
 
-The edit form is very similar to the create form. However, for better user experience, it should be pre-filled with the values, rather than requiring the user to type everything from scratch.
+The edit form is very similar to the create form. However, for a better user experience, it should be pre-filled with the values rather than requiring the user to type everything from scratch.
 
 **src/Components/BookmarkEditForm.js**
 
@@ -249,7 +249,7 @@ Now, your form should be pre-loaded with the bookmark data.
 
 <details><summary>Edit Form Loaded</summary>
 
-![](./assets/edit-form-loaded.png)
+![](../assets/edit-form-loaded.png)
 
 </details>
 
@@ -295,4 +295,4 @@ const handleDelete = () => {
 
 ## Summary
 
-We have now created a full CRUD full-stack application, using an express backend and a create-react-app front end. We utilized all 7 RESTful routes.
+We have created a full CRUD full-stack application using an express backend and a create-react-app front end. We utilized all 7 RESTful routes.
