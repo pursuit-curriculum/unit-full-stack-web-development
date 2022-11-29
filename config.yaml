@@ -56,7 +56,7 @@ sequence:
       kind: lesson
       activity: repository
     - name: Express Middleware & RESTful Routes - Delete & Update
-      pursuit_path: express-rest-delete-show
+      pursuit_path: express-rest-delete-update
       kind: lesson
       activity: ~ # continue previous lab
     - name: Connect Express & Front-end Framework - CORS & Index
