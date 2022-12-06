@@ -4,7 +4,7 @@
 
 We'll be building Rosier. The HTML is complete. All we have to do is add the bootstrap code library and apply the appropriate classes.
 
-**Important**: Bootstrap is responsive, so the way things appear will vary based on the browser window's width. If things don't look right, try changing the width. If your CSS does not look perfect, that's ok. This is a practice lesson for you to learn. *Close enough is good enough.*
+**Important**: Bootstrap is responsive, so the way things appear will vary based on the browser window's width. If things don't look right, try changing the width. If your CSS does not look perfect, that's ok. This is a practice lesson for you to learn. **Close enough is good enough.**
 
 ![rosier compelte](../assets/rosier-complete.png)
 ..
