@@ -98,7 +98,7 @@ Let's break down the contents of a more complex URL:
 ```
  https://www.example.org:3000/hello/world/index.html?name=foo&limit=20#footer
  \___/ \_______________/ \__/ \___________________/ \_______________/ \____/
-protocol host/domain   port             path           query-string  hash/fragment
+protocol  host/domain    port         path            query-string  hash/fragment
 ```
 
 The URL components are always in the same order.
