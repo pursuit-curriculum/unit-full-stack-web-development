@@ -26,8 +26,8 @@ This will make staying focused on the component we need to style easier.
 ## Getting started
 
 - [Clone this project onto your computer](https://github.com/9-2-pursuit/starter-bootstrap-css)
-- Navigate to the `build` folder and open this project with your code editor
-- You will work primarily in `index.html` and a little in` main.css`.
+- Navigate to the root directory and open this project with your code editor
+- You will work primarily in `index.html` and a little in` main.css` in the `build` folder .
 - You have access to the `complete` build because catching errors in HTML and CSS can be challenging, so you have a solution, even if you get stuck during the class build as a reference.
 
 **Note:** some classes for images are already set so that they are not too large to work with as we build. The images are also set to `width:100px` in the `main.css` until we can size them correctly. Once they are sized with Bootstrap, we can remove this code from the `main.css`.
