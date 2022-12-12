@@ -3,7 +3,7 @@
 - Go to your bookmarks app and get it started with `nodemon`.
 - Open a new tab in terminal <kbd>command</kbd> <kbd>t</kbd>, do not shut down your bookmarks app
 - Note: if you end up having a lot of extra data from testing, restart your express API (restart nodemon)
-- Fork the starter code in your class GitHub Organization called `starter-express-connect-react`.
+- Fork the starter code in your class GitHub Organization called [starter-express-connect-react](https://github.com/9-2-pursuit/starter-express-connect-react).
 - `git clone` the forked repository.
 - `cd` to the directory where you cloned it.
 - `npm install` to install dependencies already included in the `package.json`.
