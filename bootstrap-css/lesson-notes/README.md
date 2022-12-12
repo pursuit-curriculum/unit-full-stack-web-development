@@ -25,7 +25,7 @@ This will make staying focused on the component we need to style easier.
 
 ## Getting started
 
-- Clone this project onto your computer
+- [Clone this project onto your computer](https://github.com/9-2-pursuit/starter-bootstrap-css)
 - Navigate to the `build` folder and open this project with your code editor
 - You will work primarily in `index.html` and a little in` main.css`.
 - You have access to the `complete` build because catching errors in HTML and CSS can be challenging, so you have a solution, even if you get stuck during the class build as a reference.
