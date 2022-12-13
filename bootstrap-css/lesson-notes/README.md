@@ -226,7 +226,7 @@ For the two text inputs, add the class `form-control`. This should update our fo
 
 Add the classes `mb-3 form-check` to style the div that contains the input with the type checkbox.
 
-Add a class' form-check-input' for the input with the type `checkbox`.
+Add a class `form-check-input` for the input with the type `checkbox`.
 
 For the label, add the class `form-label`.
 
