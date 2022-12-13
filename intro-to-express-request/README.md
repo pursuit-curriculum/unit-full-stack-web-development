@@ -14,7 +14,7 @@
 
 So far, we've been making simple `requests` and getting simple responses.
 
-Let's look at weather site:
+Let's look at a weather site:
 
 [Dark Sky](https://darksky.net/forecast/40.7127,-74.0059/us12/en)
 
@@ -27,8 +27,8 @@ https://darksky.net/forecast/40.7127,-74.0059/us12/en
 ```
     http://darksky.net/forcast/40.7127,-74.0059/us1/en?units=metric&date=05312021
 
-    \___/  \_________/  \___________________________/\_______________/
-  protocol  host/domain          path                  query-string
+    \___/  \_________/  \____________________________/\_________________________/
+  protocol  host/domain             path                       query-string
 ```
 
 How would we build this? Are there developers building a route for every single latitude and longitude? That would seem like a lot of developers would be working around the clock, and the code would not be very DRY.
