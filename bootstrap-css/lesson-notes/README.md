@@ -193,13 +193,13 @@ Let's add another class, `table-striped`, to allow for the better division betwe
 If we want to center the text elements in our table, we could write our own CSS in the `main.css` file. But it is better to use Bootstrap whenever possible. Bootstrap has a class called `text-center` that will center our text. This will allow for more consistent styling and less unexpected behaviors with our styles.
 
 ```html
-<table class="table table-striped table-hover text-center"></table>
+<table class="table table-striped text-center"></table>
 ```
 
 Finally, we can imagine that each row would be a link to an individual view of each tree with more information and the ability to purchase it. We can add a hover effect to assist our users in navigating the site.
 
 ```html
-<table class="table table-striped table-hover text-center table-hover"></table>
+<table class="table table-striped text-center table-hover"></table>
 ```
 
 ## Styling the Form
