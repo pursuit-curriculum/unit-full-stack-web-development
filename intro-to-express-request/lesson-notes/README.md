@@ -343,7 +343,7 @@ Let's add a bit more logic.
 app.get("/calculator/:operator", (req, res) => {
   const { num1, num2 } = req.query;
   let sum = 0;
-  if ((req.params.operator = "add")) {
+  if ((req.params.operator === "add")) {
     sum = Number(num1) + Number(num2);
   }
   res.send("sum is " + sum);
