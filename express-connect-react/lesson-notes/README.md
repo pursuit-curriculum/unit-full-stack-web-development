@@ -106,13 +106,9 @@ With React, we sometimes have to think about _when_ things happen. For us, we wa
 
 If we made the API call first, the DOM was not fully loaded, and the state was updated first, we would risk not seeing our data, even though the API call was successful.
 
-Throughout the rest of this module, we'll use React Hooks for state management instead of React classes.
-
-React has a built-in function called `useEffect` that will control _when_ the functions inside are called.
-
 Inside the `useEffect` function, we will add our initial API call to get all the bookmarks.
 
-- Make a `get` request using Axios. `then` when there is a `response`, do something. In our case, we want to update state using hooks by using the `setBookmarks` that was declared at the beginning of the `App` component. The state will be updated to be our array of bookmark objects.
+- Make a `get` request using Axios. `then` when there is a `response`, do something. In our case, we want to update state by using the `setBookmarks` that was declared at the beginning of the `App` component. The state will be updated to be our array of bookmark objects.
 
 **BONUS:** Promises or async/await? Which one should we use? This author prefers to [Use what the docs recommend](https://axios-http.com/docs/api_intro). In this case, Axios uses promises. You will likely find different style guides based on where you are employed. Also, best practices change over time. Learning and practicing the syntax of promises and async/await is a good idea.
 
