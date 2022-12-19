@@ -120,8 +120,6 @@ Inside the `useEffect` function, we will add our initial API call to get all the
 
 Note: Make sure this code is before the `return` statement
 
-`useEffect` takes two arguments. The first is a callback. The second is an array. The callback takes in the code to execute. The array is the dependency array: this is where you store variables that `useEffect` should watch. When there are changes to these variables, the component should be rerendered.
-
 Let's add `useEffect` to the component. Update the line that imports `useState`
 
 ```js
