@@ -51,7 +51,7 @@ Remember, the `.then()` structure takes a callback.
 
 First, it starts with a promise. The Axios library functions `get`, `post`, `put`, `delete` (etc.) are all functions that return promises.
 
-A promise is a function that allows you to _WAIT_ for a response and _THEN_ do something. The .`then()` function takes a callback, and within that callback, you can write code that should run AFTER the first function has been fulfilled (usually by returning a value).
+*Reminder:* A promise is a function that allows you to _WAIT_ for a response and _THEN_ do something. The .`then()` function takes a callback, and within that callback, you can write code that should run AFTER the first function has been fulfilled (usually by returning a value).
 
 If you pass an argument into `.then()`, it is the return value from the previous function.
 
