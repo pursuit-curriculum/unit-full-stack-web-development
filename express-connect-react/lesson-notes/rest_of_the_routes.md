@@ -23,8 +23,6 @@ Let's get the Show page, New, and Edit forms working.
 
 ### Loading a Bookmark on Page Load (Show Page)
 
-If we click on the `pencil`, it will take us to our show view in our React app.
-
 <details><summary>Show Page Empty</summary>
 
 ![](../assets/show-empty.png)
