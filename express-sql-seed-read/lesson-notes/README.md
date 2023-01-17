@@ -155,7 +155,7 @@ Now try: http://localhost:3003/bookmarks
 
 Why did we name our route `/bookmarks`? Is there a reason we name our route(s) this way?
 
-What would happen if we put this code ABOVE in the middleware setup?
+What would happen if we put this code ABOVE the middleware setup?
 
 ## Setting up The Database
 
