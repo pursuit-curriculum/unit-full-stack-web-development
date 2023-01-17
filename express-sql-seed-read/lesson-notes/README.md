@@ -77,7 +77,7 @@ module.exports = app;
 - What do this file and setup do?
 - What is middleware?
 - What does `app.use(cors())` do?
-- What does `app.use(express.josn())` set up?
+- What does `app.use(express.json())` set up?
 - What does `app.get()` do?
 - What is `req` short for?
 - What is `res` short for?
