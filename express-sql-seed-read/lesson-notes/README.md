@@ -261,7 +261,7 @@ When we installed Postgres, it set up to, by default, run on localhost with a po
 
 ![](../assets/postgres-config.png)
 
-The database `bookmarks_dev` doesn't exist yet. We'll create it next.
+The database `bookmarks_dev` doesn't exist yet. We'll create it next. (??)
 
 **.env**
 
