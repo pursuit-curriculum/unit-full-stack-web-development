@@ -151,7 +151,7 @@ app.get("*", (req, res) => {
 });
 ```
 
-Now try: http://localhost:3000/bookmarks
+Now try: http://localhost:3003/bookmarks
 
 Why did we name our route `/bookmarks`? Is there a reason we name our route(s) this way?
 
