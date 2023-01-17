@@ -22,11 +22,12 @@ node_modules
 
 - `mkdir back-end`
 - `cd back-end`
-
+- `touch server.js`
+- 
 - `git init`
 - `git add -A`
-- `touch server.js`
 - `git commit -m 'first commit'`
+- 
 - `npm init -y` (this will automatically say yes to all the npm default settings - this is fine for tutorials, small test builds, etc.)
 - `touch app.js .env`
 - `npm install express dotenv cors`
