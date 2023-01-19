@@ -113,7 +113,7 @@ Create an async arrow function and be sure to include it in `module.exports`
 const createBookmark = async (bookmark) => {
   try {
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
