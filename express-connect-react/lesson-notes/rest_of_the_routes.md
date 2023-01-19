@@ -23,8 +23,6 @@ Let's get the Show page, New, and Edit forms working.
 
 ### Loading a Bookmark on Page Load (Show Page)
 
-If we click on the `pencil`, it will take us to our show view in our React app.
-
 <details><summary>Show Page Empty</summary>
 
 ![](../assets/show-empty.png)
@@ -53,7 +51,7 @@ Remember, the `.then()` structure takes a callback.
 
 First, it starts with a promise. The Axios library functions `get`, `post`, `put`, `delete` (etc.) are all functions that return promises.
 
-A promise is a function that allows you to _WAIT_ for a response and _THEN_ do something. The .`then()` function takes a callback, and within that callback, you can write code that should run AFTER the first function has been fulfilled (usually by returning a value).
+*Reminder:* A promise is a function that allows you to _WAIT_ for a response and _THEN_ do something. The .`then()` function takes a callback, and within that callback, you can write code that should run AFTER the first function has been fulfilled (usually by returning a value).
 
 If you pass an argument into `.then()`, it is the return value from the previous function.
 
@@ -70,43 +68,6 @@ Additionally, if the function only has one line of code, the curly braces can be
 ```
 
 However, this style is very limiting. We can't add any extra lines of code easily. So we'll write out the request in a longer format that is easier to maintain.
-
-### Hooks vs. React Stateful Class Components
-
-If you've worked with array classes, you will write.
-
-```js
-// Declare state, where you can add more properties
-// Set default value of this.state.bookmarks to be an empty array
-this.state = {
- bookmarks: []
-}
-
-updateBookmarks () {
- // Do some stuff
- // ...
- // Update state:
- // use generic this.setState() function, inside the function set, which property will be updated
- this.setState({bookmarks: ["This array is updated"]})
-}
-```
-
-With hooks, it does the same thing but in a cleaner, more readable way.
-
-```js
-// Declare state for bookmarks only. If you want to add more properties, you would create a new line and call useState() again.
-// Set default value bookmarks to be an empty array
-// Set the name of the function that will be in charge of updating bookmarks
-const [bookmarks, setBookmarks] = useState([]);
-
-updateBookmarks() {
- // Do some stuff
- // ...
- // Update state:
- // Use the function you created and named to update just bookmarks. If you have other properties to update, you would call their specific functions as well
- setBookmarks(["This array is updated"]);
-}
-```
 
 ### Add a Way to Update State
 

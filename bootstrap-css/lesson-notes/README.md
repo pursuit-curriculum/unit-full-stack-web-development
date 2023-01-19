@@ -4,7 +4,7 @@
 
 We'll be building Rosier. The HTML is complete. All we have to do is add the bootstrap code library and apply the appropriate classes.
 
-**Important**: Bootstrap is responsive, so the way things appear will vary based on the browser window's width. If things don't look right, try changing the width. If your CSS does not look perfect, that's ok. This is a practice lesson for you to learn. Close enough is good enough.
+**Important**: Bootstrap is responsive, so the way things appear will vary based on the browser window's width. If things don't look right, try changing the width. If your CSS does not look perfect, that's ok. This is a practice lesson for you to learn. **Close enough is good enough.**
 
 ![rosier compelte](../assets/rosier-complete.png)
 ..
@@ -24,6 +24,7 @@ Our HTML is quite long and busy. We can visually fold up our code with our text 
 This will make staying focused on the component we need to style easier.
 
 ## Getting started
+
 
 - Clone the starter code linked in Canvas
 - Navigate to the `build` folder and open this project with your code editor
@@ -73,7 +74,7 @@ Next, in the `img` tag inside of that div, add the class `img-fluid` - this will
 
 ## Just Restocked
 
-Move down to the `div` that contains the `h3` that reads `On Sale Now` and add the class `container` - When the width is below a certain amount of pixels, the display will be a wider percentage. When the browser is wider, there will be more space around the sides of the container.
+Move down to the `div` that contains the `h3` that reads `Just Restocked` and add the class `container` - When the width is below a certain amount of pixels, the display will be a wider percentage. When the browser is wider, there will be more space around the sides of the container.
 
 Let's add a class to the `h3` to style it more as a display. Generally, text on a web page serves two purposes - as a title/display eye-catching part of the page or as text meant for easy reading. Adding the class `display-4` will increase the font size of the `h3`.
 
@@ -193,13 +194,13 @@ Let's add another class, `table-striped`, to allow for the better division betwe
 If we want to center the text elements in our table, we could write our own CSS in the `main.css` file. But it is better to use Bootstrap whenever possible. Bootstrap has a class called `text-center` that will center our text. This will allow for more consistent styling and less unexpected behaviors with our styles.
 
 ```html
-<table class="table table-striped table-hover text-center"></table>
+<table class="table table-striped text-center"></table>
 ```
 
 Finally, we can imagine that each row would be a link to an individual view of each tree with more information and the ability to purchase it. We can add a hover effect to assist our users in navigating the site.
 
 ```html
-<table class="table table-striped table-hover text-center table-hover"></table>
+<table class="table table-striped text-center table-hover"></table>
 ```
 
 ## Styling the Form
@@ -226,7 +227,7 @@ For the two text inputs, add the class `form-control`. This should update our fo
 
 Add the classes `mb-3 form-check` to style the div that contains the input with the type checkbox.
 
-Add a class' form-check-input' for the input with the type `checkbox`.
+Add a class `form-check-input` for the input with the type `checkbox`.
 
 For the label, add the class `form-label`.
 

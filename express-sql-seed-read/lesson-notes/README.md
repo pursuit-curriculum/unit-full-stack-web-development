@@ -10,6 +10,10 @@ You will gain the best understanding if you try to type everything out. Even tho
 - `git status` to make sure you are not already in a `git` repository
 - `mkdir bookmarks`
 - `cd bookmarks`
+
+- `mkdir back-end`
+- `cd back-end`
+
 - `touch .gitignore`
 
 **.gitignore**
@@ -24,8 +28,7 @@ node_modules
 - `git add -A`
 - `git commit -m 'first commit'`
 
-- `mkdir back-end`
-- `cd back-end`
+
 - `touch server.js`
 - `npm init -y` (this will automatically say yes to all the npm default settings - this is fine for tutorials, small test builds, etc.)
 - `touch app.js .env`
@@ -77,7 +80,7 @@ module.exports = app;
 - What do this file and setup do?
 - What is middleware?
 - What does `app.use(cors())` do?
-- What does `app.use(express.josn())` set up?
+- What does `app.use(express.json())` set up?
 - What does `app.get()` do?
 - What is `req` short for?
 - What is `res` short for?
@@ -108,7 +111,7 @@ Test that your app works: http://localhost:3003
 
 ## Bookmarks Controller
 
-Use <kbd>command</kbd> <kbd>t</kbd> to open a new terminal tab so you can continue your work without having to shut your server down (please note that changes to configuration files do require a hard reset of your server).
+Use <kbd>control</kbd> <kbd>shift</kbd> <kbd>`</kbd> to open a new terminal tab so you can continue your work without having to shut your server down (please note that changes to configuration files do require a hard reset of your server).
 
 **Terminal**
 
@@ -148,11 +151,11 @@ app.get("*", (req, res) => {
 });
 ```
 
-Now try: http://localhost:3000/bookmarks
+Now try: http://localhost:3003/bookmarks
 
 Why did we name our route `/bookmarks`? Is there a reason we name our route(s) this way?
 
-What would happen if we put this code ABOVE in the middleware setup?
+What would happen if we put this code ABOVE the middleware setup?
 
 ## Setting up The Database
 
@@ -258,7 +261,7 @@ When we installed Postgres, it set up to, by default, run on localhost with a po
 
 ![](../assets/postgres-config.png)
 
-The database `bookmarks_dev` doesn't exist yet. We'll create it next.
+The database `bookmarks_dev` doesn't exist yet. We'll create it next. (??)
 
 **.env**
 
@@ -418,4 +421,4 @@ How can you test this route?
 
 ## Lab time!
 
-[Link to Lab](https://github.com/joinpursuit/tuner-full-stack-app)
+[Link to Lab](https://github.com/9-2-pursuit/lab-express-sql-seed-read)

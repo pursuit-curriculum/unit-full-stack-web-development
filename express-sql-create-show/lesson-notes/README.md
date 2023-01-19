@@ -36,7 +36,7 @@ module.exports = {
 
 We will get the `id` from the `req.params` in the show route (in bookmarkController - see below).
 
-We will use `db.one` because we expect one row to be returned.
+We will use `db.oneOrNone` because we expect one row to be returned.
 
 We are passing two arguments, one is the SQL query, and the second is the value coming in from the request. In this case, it is the `id` of the bookmark we want to show.
 
@@ -113,7 +113,7 @@ Create an async arrow function and be sure to include it in `module.exports`
 const createBookmark = async (bookmark) => {
   try {
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 

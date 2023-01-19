@@ -3,7 +3,7 @@
 - Go to your bookmarks app and get it started with `nodemon`.
 - Open a new tab in terminal <kbd>command</kbd> <kbd>t</kbd>, do not shut down your bookmarks app
 - Note: if you end up having a lot of extra data from testing, restart your express API (restart nodemon)
-- Fork the starter code in your class GitHub Organization called `starter-express-connect-react`.
+- Fork the starter code in your class GitHub Organization called [starter-express-connect-react](https://github.com/9-2-pursuit/starter-express-connect-react).
 - `git clone` the forked repository.
 - `cd` to the directory where you cloned it.
 - `npm install` to install dependencies already included in the `package.json`.
@@ -106,21 +106,15 @@ With React, we sometimes have to think about _when_ things happen. For us, we wa
 
 If we made the API call first, the DOM was not fully loaded, and the state was updated first, we would risk not seeing our data, even though the API call was successful.
 
-Throughout the rest of this module, we'll use React Hooks for state management instead of React classes.
-
-React has a built-in function called `useEffect` that will control _when_ the functions inside are called.
-
 Inside the `useEffect` function, we will add our initial API call to get all the bookmarks.
 
-- Make a `get` request using Axios. `then` when there is a `response`, do something. In our case, we want to update state using hooks by using the `setBookmarks` that was declared at the beginning of the `App` component. The state will be updated to be our array of bookmark objects.
+- Make a `get` request using Axios. `then` when there is a `response`, do something. In our case, we want to update state by using the `setBookmarks` that was declared at the beginning of the `App` component. The state will be updated to be our array of bookmark objects.
 
 **BONUS:** Promises or async/await? Which one should we use? This author prefers to [Use what the docs recommend](https://axios-http.com/docs/api_intro). In this case, Axios uses promises. You will likely find different style guides based on where you are employed. Also, best practices change over time. Learning and practicing the syntax of promises and async/await is a good idea.
 
 **src/Components/Bookmarks.js**
 
 Note: Make sure this code is before the `return` statement
-
-`useEffect` takes two arguments. The first is a callback. The second is an array. The callback takes in the code to execute. The array is the dependency array: this is where you store variables that `useEffect` should watch. When there are changes to these variables, the component should be rerendered.
 
 Let's add `useEffect` to the component. Update the line that imports `useState`
 
@@ -282,4 +276,4 @@ module.exports = [
 
 ## NEXT:
 
-[The Rest of the Routes](./README2.md)
+[The Rest of the Routes](./rest_of_the_routes.md)
