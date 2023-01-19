@@ -28,7 +28,6 @@ node_modules
 - `git add -A`
 - `git commit -m 'first commit'`
 
-
 - `touch server.js`
 - `npm init -y` (this will automatically say yes to all the npm default settings - this is fine for tutorials, small test builds, etc.)
 - `touch app.js .env`
@@ -418,7 +417,3 @@ How can you test this route?
 
 - `git add -A`
 - `git commit -m 'index route complete'`.
-
-## Lab time!
-
-[Link to Lab](https://github.com/9-2-pursuit/lab-express-sql-seed-read)
