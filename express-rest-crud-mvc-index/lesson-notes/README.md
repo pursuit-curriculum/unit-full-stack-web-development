@@ -13,7 +13,7 @@ We are going to be building this app over several sessions, so let's make sure w
 - `touch .gitignore` (tell git which files to ignore)
 - `touch app.js`
 - `touch .env`
-- `npm install express dotenv nodemon`
+- `npm install express dotenv`
 - go into `package.json` and change the start script to say `"start": "nodemon server.js"`
 
 **.gitignore**
