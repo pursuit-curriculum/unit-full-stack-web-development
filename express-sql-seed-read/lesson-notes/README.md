@@ -10,10 +10,6 @@ You will gain the best understanding if you try to type everything out. Even tho
 - `git status` to make sure you are not already in a `git` repository
 - `mkdir bookmarks`
 - `cd bookmarks`
-
-- `mkdir back-end`
-- `cd back-end`
-
 - `touch .gitignore`
 
 **.gitignore**
