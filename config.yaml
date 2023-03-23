@@ -8,11 +8,11 @@ sequence:
       elements:
         - kind: deck
         - kind: recording
-    - name: Bootstrap CSS
-      pursuit_path: bootstrap-css
-      kind: lesson
-      activity: ~
-      starter: bootstrap-css
+#     - name: Bootstrap CSS
+#       pursuit_path: bootstrap-css
+#       kind: lesson
+#       activity: ~
+#       starter: bootstrap-css
     - name: Install PostgreSQL
       elements:
         - kind: guide
