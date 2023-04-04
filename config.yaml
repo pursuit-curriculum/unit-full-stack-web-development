@@ -72,7 +72,7 @@ sequence:
       pursuit_path: budgeting-app
       kind: project
       activity: repository
-      points_possible: 10
+      points_possible: 100
     - name: Server Deployment
       elements:
         - kind: guide
@@ -144,16 +144,16 @@ sequence:
       pursuit_path: app-planning-wireframes
       kind: lesson
       activity: repository
-    - name: Snack-a-Log Pair Project
+    - name: Single Resource Pair Project
       pursuit_path: snack-a-log
       kind: project
       activity: repository
-      points_possible: 40
+      points_possible: 100
     - name: Full-Stack Portfolio Project
       pursuit_path: full-stack-portfolio
       kind: project
       activity: repository
-      points_possible: 47
+      points_possible: 100
     - name: End of Module Reflection
       elements:
         - kind: deck
