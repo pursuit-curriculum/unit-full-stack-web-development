@@ -8,11 +8,11 @@ sequence:
       elements:
         - kind: deck
         - kind: recording
-#     - name: Bootstrap CSS
-#       pursuit_path: bootstrap-css
-#       kind: lesson
-#       activity: ~
-#       starter: bootstrap-css
+    #     - name: Bootstrap CSS
+    #       pursuit_path: bootstrap-css
+    #       kind: lesson
+    #       activity: ~
+    #       starter: bootstrap-css
     - name: Install PostgreSQL
       elements:
         - kind: guide
@@ -24,21 +24,21 @@ sequence:
       kind: lesson
       activity: canvas_text
       activity_description: "<h2>Watch the Following Videos</h2>
-      <p>Watch the following videos. Then, write a paragraph or two that answers the questions below the video.</p>
-      <ol>
-      <li><a href='https://www.khanacademy.org/computing/ap-computer-science-principles/the-internet/introducing-the-internet/v/what-is-the-internet?modal=1'>What is the Internet? </a></li>
-      <li><a href='https://www.youtube.com/watch?v=7_LPdttKXPc'>How the Internet Works in 5 Minutes </a></li>
-      </ol>
-      <ul>
-      <li>What is the internet made up of?</li>
-      <li>Why is the internet useful?</li>
-      <li>Is the laptop you are using a server? Why or why not?</li>
-      <li>What is the difference between a client and a server?</li>
-      <li>What is the purpose of a database?</li>
-      <li>What components of an HTTP request are required? Which are optional?</li>
-      <li>What components of an HTTP response are required? Which are optional?</li>
-      </ul>
-      <p>Do not spend more than 30 - 45 minutes on this Lab.</p>"
+        <p>Watch the following videos. Then, write a paragraph or two that answers the questions below the video.</p>
+        <ol>
+        <li><a href='https://www.khanacademy.org/computing/ap-computer-science-principles/the-internet/introducing-the-internet/v/what-is-the-internet?modal=1'>What is the Internet? </a></li>
+        <li><a href='https://www.youtube.com/watch?v=7_LPdttKXPc'>How the Internet Works in 5 Minutes </a></li>
+        </ol>
+        <ul>
+        <li>What is the internet made up of?</li>
+        <li>Why is the internet useful?</li>
+        <li>Is the laptop you are using a server? Why or why not?</li>
+        <li>What is the difference between a client and a server?</li>
+        <li>What is the purpose of a database?</li>
+        <li>What components of an HTTP request are required? Which are optional?</li>
+        <li>What components of an HTTP response are required? Which are optional?</li>
+        </ul>
+        <p>Do not spend more than 30 - 45 minutes on this Lab.</p>"
     - name: Introduction to Express Response
       pursuit_path: intro-to-express-response
       kind: lesson
@@ -153,7 +153,11 @@ sequence:
       pursuit_path: full-stack-portfolio
       kind: project
       activity: repository
-      points_possible: 100
+      points_possible: 80
+    - name: Full-Stack Portfolio Presentation
+      pursuit_path: full-stack-portfolio
+      kind: task
+      points_possible: 20
     - name: End of Module Reflection
       elements:
         - kind: deck
