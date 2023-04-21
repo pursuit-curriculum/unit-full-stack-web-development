@@ -148,7 +148,11 @@ sequence:
       pursuit_path: single-resource
       kind: project
       activity: repository
-      points_possible: 100
+      points_possible: 80
+    - name: Single Resource Pair Project
+      pursuit_path: single-resource
+      kind: task
+      points_possible: 20
     - name: Full-Stack Portfolio Project
       pursuit_path: full-stack-portfolio
       kind: project
