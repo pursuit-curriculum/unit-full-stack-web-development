@@ -159,8 +159,8 @@ sequence:
       activity: repository
       points_possible: 80
     - name: Full-Stack Portfolio Presentation
-      pursuit_path: full-stack-portfolio
-      kind: task
+      pursuit_path: full-stack-portfolio-presentation
+      kind: project
       points_possible: 20
     - name: End of Module Reflection
       elements:
