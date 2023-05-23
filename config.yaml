@@ -149,8 +149,8 @@ sequence:
       kind: project
       activity: repository
       points_possible: 80
-    - name: Single Resource Pair Project Presentation
-      pursuit_path: single-resource-presentation
+    - name: Single Resource Pair Project Teamwork
+      pursuit_path: single-resource-teamwork
       kind: project
       points_possible: 20
     - name: Full-Stack Portfolio Project
