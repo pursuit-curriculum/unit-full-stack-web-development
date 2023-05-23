@@ -144,7 +144,7 @@ sequence:
       pursuit_path: app-planning-wireframes
       kind: lesson
       activity: repository
-    - name: Single Resource Pair Project
+    - name: Single Resource Pair
       pursuit_path: single-resource
       kind: project
       activity: repository
@@ -153,7 +153,7 @@ sequence:
       pursuit_path: single-resource-teamwork
       kind: project
       points_possible: 20
-    - name: Full-Stack Portfolio Project
+    - name: Full-Stack Portfolio
       pursuit_path: full-stack-portfolio
       kind: project
       activity: repository
