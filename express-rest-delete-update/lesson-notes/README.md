@@ -66,6 +66,8 @@ Here is an example JSON object to test with Postman:
 
 ## Delete
 
+- Return to your `bookmarks` app. (If your app is not working, you may clone down [the previous complete build and work from there](https://github.com/pursuit-curriculum-resources/bookmarks-express-demo/tree/middleware)).
+
 | Action  |      URL       | HTTP Verb |    CRUD    |    Description    |
 | :-----: | :------------: | :-------: | :--------: | :---------------: |
 | Destroy | /bookmarks/:id |  DELETE   | **D**elete | Delete a bookmark |
@@ -76,11 +78,14 @@ Here is an example JSON object to test with Postman:
 
 ```js
 // DELETE
-bookmarks.delete("/:indexArray", (req, res) => {
-  const deletedBookmark = bookmarkArray.splice(req.params.indexArray, 1);
-  res.status(200).json(deletedBookmark);
+bookmarks.delete("/:arrayIndex", (req, res) => {
+  const { arrayIndex } = req.params;
+  const deletedBookmark = bookmarksArray.splice(arrayIndex, 1);
+  res.status(200).json(deletedBookmark[0]);
 });
 ```
+
+- Why return `deletedBookMark[0]` instead of `deletedBookmark`?
 
 ### TEST WITH POSTMAN
 
@@ -94,18 +99,16 @@ Add some error handling.
 
 ```js
 // DELETE
-bookmarks.delete("/:indexArray", (req, res) => {
-  const { indexArray } = req.params;
-  if (bookmarkArray[arrayIndex]) {
-    const deletedBookMark = bookmarkArray.splice(indexArray, 1);
+bookmarks.delete("/:arrayIndex", (req, res) => {
+  const { arrayIndex } = req.params;
+  if (bookmarksArray[arrayIndex]) {
+    const deletedBookMark = bookmarksArray.splice(arrayIndex, 1);
     res.status(200).json(deletedBookMark[0]);
   } else {
     res.status(404).json({ error: "Not Found" });
   }
 });
 ```
-
-- Why return `deletedBookMark[0]` instead of `deletedBookmark`?
 
 ## Update
 
@@ -118,9 +121,9 @@ We will take the array position of the item we want to update. We will set the v
 ```js
 // UPDATE
 bookmarks.put("/:arrayIndex", (req, res) => {
-  const { indexArray } = req.params;
-  bookmarkArray[arrayIndex] = req.body;
-  res.status(200).json(bookmarkArray[arrayIndex]);
+  const { arrayIndex } = req.params;
+  bookmarksArray[arrayIndex] = req.body;
+  res.status(200).json(bookmarksArray[arrayIndex]);
 });
 ```
 
@@ -129,10 +132,10 @@ Let's also make sure that the user enters a valid URL again. Let's reuse the fun
 ```js
 // UPDATE
 bookmarks.put("/:arrayIndex", validateURL, async (req, res) => {
-  const { indexArray } = req.params;
-  if (bookmarkArray[arrayIndex]) {
-    bookmarkArray[arrayIndex] = req.body;
-    res.status(200).json(bookmarkArray[arrayIndex]);
+  const { arrayIndex } = req.params;
+  if (bookmarksArray[arrayIndex]) {
+    bookmarksArray[arrayIndex] = req.body;
+    res.status(200).json(bookmarksArray[arrayIndex]);
   } else {
     res.status(404).json({ error: "Not Found" });
   }
@@ -151,3 +154,7 @@ bookmarks.put("/:arrayIndex", validateURL, async (req, res) => {
 An easy thing to test is to add many exclamation points at the end of the `name`.
 
 ![Postman Update](../assets/postman-update.png)
+
+## Resources
+
+[Finished build](https://github.com/pursuit-curriculum-resources/bookmarks-express-demo/tree/update-delete)

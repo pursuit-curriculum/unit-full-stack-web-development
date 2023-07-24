@@ -57,9 +57,9 @@ How would you continue to build out the routes if the following events happened?
 
 Today we'll build the `show` and `create` routes. Note we've already made the `index` route.
 
-- Return to your `bookmarks` app.
+- Return to your `bookmarks` app. (If your app is not working, you may clone down [the previous complete build and work from there](https://github.com/pursuit-curriculum-resources/bookmarks-express-demo)).
 
-- Make sure you are on the same directory level as your `package.json` (`ls` to check).
+- Make sure you are on the same directory level as your `package.json` (`ls` to check) to start your app.
 
 - Check `/` and `/bookmarks` routes to confirm your app is still working as expected.
 
@@ -92,8 +92,8 @@ bookmarks.get("/:arrayIndex", (req, res) => {
 // controllers/bookmarksController.js
 // SHOW
 bookmarks.get("/:arrayIndex", (req, res) => {
-  if (bookmarkArray[req.params.arrayIndex]) {
-    res.json(bookmarkArray[req.params.arrayIndex]);
+  if (bookmarksArray[req.params.arrayIndex]) {
+    res.json(bookmarksArray[req.params.arrayIndex]);
   } else {
     res.status(404).json({ error: "Not Found" });
   }
@@ -123,7 +123,7 @@ Let's add a route to take the data from the request body and push it onto the `b
 // CREATE
 bookmarks.post("/", (req, res) => {
   bookmarksArray.push(req.body);
-  res.json(bookmarkArray[bookmarkArray.length - 1]);
+  res.json(bookmarksArray[bookmarksArray.length - 1]);
 });
 ```
 
@@ -163,7 +163,7 @@ Before moving on, break down the cURL command.
 
 - What is `POST`? Why do you need it?
 
-- Can you type `localhost:3003/bookmarks` or must you type `http://localhost:3003/localhost`?
+- Can you type `localhost:3003/bookmarks` or must you type `http://localhost:3003/`?
 
 - Why do the keys and values of the data need to be wrapped in double quotes?
 
@@ -237,7 +237,7 @@ Add this function to create a new bookmark:
 // CREATE
 bookmarks.post("/", validateURL, (req, res) => {
   bookmarksArray.push(req.body);
-  res.json(bookmarkArray[bookmarkArray.length - 1]);
+  res.json(bookmarksArray[bookmarksArray.length - 1]);
 });
 ```
 
@@ -348,3 +348,7 @@ req.body.url.match(/https?:\/\//);
 [learn more about regular expressions](https://regexone.com/)
 
 </details>
+
+## Resource
+
+[Completed class build](https://github.com/pursuit-curriculum-resources/bookmarks-express-demo/tree/middleware)

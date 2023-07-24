@@ -22,8 +22,8 @@ We are going to be building this app over several sessions, so let's make sure w
 - `touch .gitignore` (tell git which files to ignore)
 - `touch app.js`
 - `touch .env`
-- `npm install express dotenv`
-- go into `package.json` and change the start script to say `"start": "nodemon server.js"`
+- `npm install express@4 dotenv@16`
+- go into `package.json` and change the start script to say `"start": "nodemon server.js"` if you are installing nodemon locally.
 
 **.gitignore**
 
@@ -155,7 +155,7 @@ bookmarks.get("/", (req, res) => {
 module.exports = bookmarks;
 ```
 
-We are using `res.json` instead of `res.send`, since we are sending `json` instead of a simple string.
+We are using `res.json()` instead of `res.send()`, since we are sending JSON instead of a simple string.
 
 In `app.js` we have to connect our controllers for `bookmarks`.
 
@@ -197,3 +197,7 @@ app.get("*", (req, res) => {
   res.status(404).json({ error: "Page not found" });
 });
 ```
+
+## Resource
+
+[Completed Build](https://github.com/pursuit-curriculum-resources/bookmarks-express-demo)
