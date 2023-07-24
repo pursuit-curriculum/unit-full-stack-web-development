@@ -1,10 +1,19 @@
 # Express CRUD/MVC
 
+## Learning Objectives
+
+By the end of this lesson, you should be able to:
+
+- Describe the purpose of the MVC architecture.
+- Create a controller and a static model in an Express server.
+- Use Express Router to manage Express routes.
+- Add a custom status code.
+
 ## Getting Started
 
-We are going to be building this app over several sessions, so let's make sure we put it on GitHub and commit often!
+We are going to be building this app over several sessions, so let's make sure we push it on GitHub and commit often!
 
-- navigate to your Desktop or other convenient folder
+- Navigate to your Desktop or other convenient folder
 - `git status` to make sure you are not already in a `git` repository
 - `mkdir bookmarks`
 - `cd bookmarks`
@@ -68,7 +77,7 @@ Test that your app works: http://localhost:3003
 
 ## Demonstrating the Working Application
 
-[Demo on YouTube](https://youtu.be/-FrpZpGk82c) - We will be working with an app called Postman in order to be able to make all of our requests. By the end of this multi-day build, your app will allow you to:
+[Demo on YouTube](https://youtu.be/-FrpZpGk82c) - We will be working with an app called Postman in order to be able to make all of the requests. By the end of this multi-day build, your app will allow you to:
 
 - See a list (array) of all the bookmarks (**R**ead: `index`)
 - See a single bookmark (**R**ead: `show`)
@@ -163,7 +172,7 @@ app.use("/bookmarks", bookmarksController);
 
 Now, we should be able to go to http://localhost:3003/bookmarks and see our JSON
 
-## Error Handling
+## Adding custom status codes
 
 Let's add a 404 route. It should be below all the other routes.
 
@@ -178,9 +187,9 @@ app.get("*", (req, res) => {
 
 Test it http://localhost:3003/nothing_here
 
-When we open up our Chrome Dev Tools and go to the `Network` tab, we can see that this file loads with an http status of [304](https://http.cat/304) or [200](https://http.cat/200)
+Open up our Chrome Dev Tools and go to the `Network`, notice that the status code is not 404.
 
-But because this is a 404 [page not found](https://http.cat/404), we should make sure we are sending through the correct status code.
+Add the code to create the correct status code for this route:
 
 ```js
 // 404 PAGE

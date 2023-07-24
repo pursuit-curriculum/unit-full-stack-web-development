@@ -1,6 +1,6 @@
 # Express CRUD/MVC
 
-## Intro
+## Introduction
 
 Let's take a moment to think about a website like Etsy. Etsy has thousands of shops and millions of products.
 
@@ -8,7 +8,7 @@ When a shop owner decides to sell a new product, they enter the data about the l
 
 How is this happening? Etsy doesn't have a bunch of devs sitting around at the ready to hand roll a new web page. Instead, the developers build an HTML template and then, based on the data provided **embed** (insert) the data into the HTML
 
-Let's look at an example - this is some data provided by an Etsy shop owner through an online form:
+Let's look at an example - imagine this is some data provided by an Etsy shop owner through an online form:
 
 ![](./assets/form.png)
 
@@ -48,35 +48,60 @@ And then, it gets rendered in the browser:
 
 There are four main things to do with data: **C**reate, **R**ead, **U**pdate, and **D**elete. In the above case, a user created some data and then read the newly created data. We can imagine, at some point, that the user may want to update the price or delete the item altogether.
 
-We're going to be building a webpage bookmarks app. It will be a very simple app that will teach the fundamentals of building an API with express. Later, we'll add a react front-end to consume the API. Finally, we'll learn about databases and integrate a database into our simple app.
+First, you'll build a back-end application with Express with full CRUD actions on a single data model. Like the third-party APIs you've been working with, you'll send and get JSON. Later, you'll build a front-end application to consume the API.
 
-Once we have our fundamentals down, we can start building more complex apps with real-world applications.
+The focus will be fundamentals first, and as your skills build, you will learn to create more complex apps with more real-world features.
+
+## Learning Objectives
+
+By the end of this lesson, you should be able to:
+
+- Describe the purpose of the MVC architecture.
+- Create a controller and a static model in an Express server.
+- Use Express Router to manage Express routes.
+- Add a custom status code.
 
 ## Software Architecture: MVC
 
-The apps we are building in class are tiny. Even with our small apps, getting lost in our code can be very easy. Where did we create a particular function? What file is displaying what we see in the browser? Organizing and maintaining code is quite challenging!
+The apps you are building in class are tiny. Even with small apps, getting lost in code can be very easy. Where did you create a particular function? What file is displaying what you see in the browser? Organizing and maintaining code is quite challenging!
 
-Our problems are a microcosm of an app that is years old that has had tens or possibly hundreds of developers work on it. Therefore, developers who are far more experienced have worked on creating conventions, frameworks, styles, and patterns that are easy to maintain, collaborate and reuse.
+Our problems are a microcosm of an app that is years old that has had tens or possibly hundreds of developers work on it. Therefore, developers who are far more experienced have worked on creating conventions, frameworks, styles, and patterns that are easy to maintain, collaborate, and reuse.
+
+Many patterns and best practices will make more sense as you gain experience.
 
 **Bonus:** [Read more on software architecture](https://en.wikipedia.org/wiki/Software_architecture)
 
-We will loosely follow a prevalent software design pattern called [MVC](https://en.wikipedia.org/wiki/Model–view–controller): Model-View-Controller.
+In class, you will loosely follow a prevalent software design pattern called [MVC](https://en.wikipedia.org/wiki/Model–view–controller): Model-View-Controller.
 
 Following this pattern allows developers to separate the concerns of the data, the view, and the controller.
 
-A common metaphor for this is a restaurant. Imagine a customer sitting down and interacting with the menu and dishes (views). A chef in the back takes orders and makes food (models). Finally, a server goes between the two (controller).
+A common metaphor for this is a restaurant. Imagine a customer sitting down and interacting with the menu (views). A chef in the back takes orders and makes food (models). Finally, a server goes between the two (controller).
 
 Everyone in the restaurant has a clear idea of what their responsibility is. Otherwise, the restaurant likely would fail. Imagine if the customers could go in the back and start cooking or the servers stopped ringing up orders!
 
 Even though there is a typical pattern for a restaurant, there are many variations, like buffets, drive-throughs, and more. A pattern is a recommendation, not a rule.
 
-So let's get back to our application. We are going to have a place for our models (data), our views (what users will see in the browser), and the controllers (logic between the two).
+In terms of code, you will have a folder called `models` and a folder called `controllers`. While it is possible to have a `views` folder (and many applications use this folder) and build HTML templates, your applications will serve JSON, and a separate front-end app will be created to consume the API you've built.
 
-In terms of code, we will have a folder called `models` and a folder called `controllers`. While it is possible to have a `views` folder (and many applications use this folder), we will serve our views not from inside our app but with a separate React app.
+## Views
 
-**NOTE:** With ExpressJS, you can name your files and folders whatever you want. If you want to call your `controllers` folder `asdf` and your `models` folder `batman` - you can. However, no one will understand how your code is organized with names that don't make sense/are not semantic.
+Views are the front-end component and what the client sees and interacts with. For this application, you will only be sending data and later, build a separate application to create the views.
 
-Because ExpressJS is unopinionated, you will likely see various names for different files. For example, when it comes to controllers, you may notice:
+## Models
+
+Models will contain the code that interacts with the database. For now, it will store arrays of objects. Later you'll learn to connect a database and build out the code to interact with the database.
+
+## Controllers
+
+The controllers "control" how the views (client app) and models (data) interact. For example, if you have a user log in, you would only want them to be able to edit their account information and you would also not want them to see someone else's account information.
+
+Some other examples are that you may want your user to be able to create, read, update and delete posts on a social media post. Or maybe, you are building an interface for a weather station. In which case you don't want to allow editing or deleting of the data that is incoming.
+
+Controllers handle the logic for the application and are the go-between from the client to the database.
+
+> **NOTE:** With Express, you can name your files and folders whatever you would like. If you want to call your `controllers` folder `asdf` and your `models` folder `batman` - you can. However, no one will understand how your code is organized with names that don't make sense/are not semantic.
+
+Because Express is unopinionated, you will likely see various names for different files. For example, when it comes to controllers, you may notice:
 
 - birdController.js
 - birdsController.js
@@ -85,6 +110,106 @@ Because ExpressJS is unopinionated, you will likely see various names for differ
 - birds-controllers.js
 - birds.controller.js
 
-When you join a company, they will have chosen a naming strategy, and you should follow it. Within your work your naming should be consistent within each project.
+When you join a company, they will have chosen a naming strategy, which you should follow. Within your work your naming should be consistent within each project.
 
-As this curriculum is being built and improved, it can be evident that it was initially created without consensus on naming conventions. The curriculum is slowly being updated to follow conventions. By building before planning and agreeing as a company, this curriculum generated something called `technical debt` (choosing to deliver work ASAP and deciding to fix things later), where every individual contributing chose the style they liked. Any project will typically have some technical debt. However, over time, technical debt makes things harder to maintain and can generate a lot of additional work. Notice your own experience using the materials here and think about how the consistency would likely improve your experience, then try to carry this knowledge with you into your future projects.
+## Controllers in terms of code
+
+Each resource (users, colors, lamps, tickets) within an application should have its own models file and its own controllers file.
+
+A controllers file will contain the routes specific for that resource.
+
+First one must import Express into the file in order to be able to use it.
+
+Then the `router` must be configured. The router is what will allow you to create groups of associated routes that are relative to the base route.
+
+You can name the variable for `express.Router()` `router`, or you can use the name of the resource. Using the resource name can be helpful in reading and understanding the code.
+
+```js
+const express = require("express");
+const colors = express.Router();
+const colorsArray = require("../models/color.js");
+
+colors.get("/", (req, res) => {
+  res.json(colorsArray);
+});
+
+module.exports = colors;
+```
+
+Notice that the relative path is `/`. Because this is in a controller, you'll take steps to access this route not at the base route of `localhost/3000` (typically the landing or home page goes there) but rather at `localhost:/3000/colors`. To set this up, follow the steps below.
+
+Next, the colors resource code would be imported into the main file `app.js`.
+
+```js
+const colorsController = require("./controllers/colorsController.js");
+```
+
+And then configured. This `app.use()` function takes in a string which will be the URL path for the resource, and then the routes are the second argument.
+
+```js
+app.use("/colors", colorsController);
+```
+
+To put it all together, all of the routes written in the `colorsController` file will be accessed through a base url of
+
+http://localhost:3003/colors
+
+## Custom status codes
+
+What happens on a website when you try to access a view that doesn't exist? Typically, you get a 404 error message.
+
+You can create your own catchall route with express. To do this, you will use a `wildcard` symbol `*`, then you would follow with creating the view or message you would want to send to the user.
+
+Like dynamic routes, it is important that this route goes below the other routes.
+
+```js
+// 404 Page not found
+app.get("*", (req, res) => {
+  res.json({ error: "Page not found" });
+});
+```
+
+When you open up Chrome Dev Tools and go to the `Network` tab, you can see that this file loads with an http status of [304](https://http.cat/304) or [200](https://http.cat/200)
+
+But because this is a 404 [page not found](https://http.cat/404), you should make sure we are sending through the correct status code.
+
+```js
+// 404 Page not found
+app.get("*", (req, res) => {
+  res.status(404).json({ error: "Page not found" });
+});
+```
+
+## Completed build
+
+[Colors DEMO MVC](https://github.com/pursuit-curriculum-resources/pre-reading-express-demo/tree/mvc)
+
+Notice, this code is on a different branch than `main`.
+
+To download and use this demo:
+
+### Option 1: just clone
+
+- Clone the repo to your machine
+- `cd pre-reading-express-demo`
+- `npm install` (install dependencies)
+- `git checkout -b mvc` (create a new branch and switch to it)
+- `git pull origin mvc` (bring in the code on the `mvc` branch)
+
+> **Pros**: Fast, easy, familiar
+
+> **Cons**: You won't be able to make changes and push them to GitHub
+
+### Option 2: fork and clone
+
+- Fork the repository
+- Clone your fork to your machine
+- `cd pre-reading-express-demo`
+- `npm install` (install dependencies)
+- `git checkout -b mvc` (create a new branch and switch to it)
+- `git remote add upstream https://github.com/pursuit-curriculum-resources/pre-reading-express-demo/tree/main` (create a new reference to GitHub called `upstream` and set it to the original repository)
+- `git pull upstream mvc` (bring in the code from the original repository on the `mvc` branch)
+
+> **Pros**: You can modify your version and push it to GitHub, you will practice using git and GitHub in a new way.
+
+> **Cons**: Extra steps, requires learning Git and GitHub in a new way.

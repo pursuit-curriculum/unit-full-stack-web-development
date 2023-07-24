@@ -64,17 +64,18 @@ sequence:
       pursuit_path: express-connect-react
       kind: lesson
       activity: ~ # continue previous lab
-    - name: Budgeting App
-      pursuit_path: budgeting-app
-      kind: project
-      activity: repository
-      points_possible: 100
     - name: Server Deployment
       elements:
         - kind: guide
           pursuit_path: deployment
           pursuit_subpath: render-express-postgres
         - kind: recording
+    - name: Budgeting App
+      pursuit_path: budgeting-app
+      kind: project
+      activity: repository
+      points_possible: 100
+
   Databases:
     - name: Intro to Databases & SQL
       pursuit_path: intro-to-sql

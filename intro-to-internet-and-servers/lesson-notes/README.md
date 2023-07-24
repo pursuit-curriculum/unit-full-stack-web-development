@@ -1,3 +1,17 @@
+# Introduction to the Internet and Servers
+
+## Learning Objectives
+
+By the end of this lesson, you should be able to:
+
+- Define clients, servers, and databases.
+- Define the basic components of the internet.
+- Describe the request-response cycle.
+- Identify the key components of an HTTP request.
+- Identify the key components of an HTTP response.
+
+---
+
 ## Guiding Questions
 
 - What is a computer network and why is it important?

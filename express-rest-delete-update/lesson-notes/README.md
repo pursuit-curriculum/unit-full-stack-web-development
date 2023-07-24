@@ -1,8 +1,23 @@
 # Express RESTful Routes: Update & Delete
 
-## POSTMAN
+# Express RESTful Routes: Update & Delete
+
+## Learning Objectives
+
+By the end of this lesson, you should be able to:
+
+- Make requests to a locally running server via Postman.
+- Build a complete RESTful API that responds to a valid request with appropriate messages and status codes.
+
+---
+
+## Postman
+
+- What is Postman?
 
 ## Test Current Routes
+
+- Why is it important to test your routes before building a front-end application?
 
 |  #  |   Action   |      URL       | HTTP Verb |    CRUD    |                Description                 |
 | :-: | :--------: | :------------: | :-------: | :--------: | :----------------------------------------: |
@@ -10,32 +25,23 @@
 |  2  | **Index**  |   /bookmarks   |    GET    |  **R**ead  |   Get a list (or index) of all bookmarks   |
 |  3  |  **Show**  | /bookmarks/:id |    GET    |  **R**ead  | Get an individual view (show one bookmark) |
 
-## Index
-
-![Get all bookmarks](../assets/postman-index.png)
-
-- Set the option to `GET`.
-- Enter the URL for your bookmarks URL for the index (e.g., http://localhost:3003/bookmarks).
-- Press `SEND`.
-
-Below, you should see the response.
-
-## Show One
-
-- Set the option to `GET`.
-- Enter the URL for your bookmarks URL for one bookmark (e.g., http://localhost:3003/bookmarks/1).
-- Press `SEND`.
-
 ## Create
 
 ![Create bookmark](../assets/postman-create.png)
 
-- Update the option to `POST`.
-- Change the URL back to http://localhost:3003/bookmarks.
-- Choose `body`.
-- Choose `raw`.
-- Select `JSON`.
-- In the text area, create a proper JSON object (double quotes around all the key and value pairs, no trailing commas ).
+- Why do you need to update the option to POST?
+
+- What is the base URL to make the correct POST request for creating a new bookmark?
+
+- What does choosing `body` do in Postman?
+
+- What does choosing `raw` do in Postman?
+
+- Why do you need to select `JSON`?
+
+- Compare and contrast what you've done to set up this Postman request to the cURL request you made previously.
+
+Here is an example JSON object to test with Postman:
 
 ```js
 {
@@ -46,7 +52,17 @@ Below, you should see the response.
 }
 ```
 
-Press send. Our API works by returning us to the GET route, and we should see all our bookmarks, including our newest one, at the bottom. **Thought question:** how could we update our API to show the newest item as the first item in the array?
+- How does the API work? What is the response of a successful POST request?
+
+- Could you redirect back to the `index` route?
+
+- Can you think of any apps you use where you create something new and get back the new item?
+
+- Can you think of any apps you use where you create something new and see the index route?
+
+- Is one response type better than the other?
+
+- How could we update our API to show the newest item as the first item in the array?
 
 ## Delete
 
@@ -54,9 +70,9 @@ Press send. Our API works by returning us to the GET route, and we should see al
 | :-----: | :------------: | :-------: | :--------: | :---------------: |
 | Destroy | /bookmarks/:id |  DELETE   | **D**elete | Delete a bookmark |
 
-Let's add delete functionality. Again, this functionality will only be available to us via form. So we'll use Postman to test it.
+- If you wanted to test this route in the browser, how could you do it?
 
-We will use the index position of the array item and splice out the deleted item, which will remove the item at that array position. Then, we will send the deleted bookmark back.
+- What does splice do in the following code block?
 
 ```js
 // DELETE
@@ -72,21 +88,24 @@ bookmarks.delete("/:indexArray", (req, res) => {
 - Change the URL back to http://localhost:3003/bookmarks/0
 - Send
 
-You should see the updated bookmarks array without the item that was in array position 0
+Add some error handling.
 
-Let's add some error handling.
+- What does the following error handling do?
 
 ```js
 // DELETE
 bookmarks.delete("/:indexArray", (req, res) => {
-  if (bookmarkArray[req.params.arrayIndex]) {
-    const deletedBookMark = bookmarkArray.splice(req.params.indexArray, 1);
-    res.status(200).json(deletedBookMark);
+  const { indexArray } = req.params;
+  if (bookmarkArray[arrayIndex]) {
+    const deletedBookMark = bookmarkArray.splice(indexArray, 1);
+    res.status(200).json(deletedBookMark[0]);
   } else {
     res.status(404).json({ error: "Not Found" });
   }
 });
 ```
+
+- Why return `deletedBookMark[0]` instead of `deletedBookmark`?
 
 ## Update
 
@@ -99,8 +118,9 @@ We will take the array position of the item we want to update. We will set the v
 ```js
 // UPDATE
 bookmarks.put("/:arrayIndex", (req, res) => {
-  bookmarkArray[req.params.arrayIndex] = req.body;
-  res.status(200).json(bookmarkArray[req.params.arrayIndex]);
+  const { indexArray } = req.params;
+  bookmarkArray[arrayIndex] = req.body;
+  res.status(200).json(bookmarkArray[arrayIndex]);
 });
 ```
 
@@ -109,9 +129,10 @@ Let's also make sure that the user enters a valid URL again. Let's reuse the fun
 ```js
 // UPDATE
 bookmarks.put("/:arrayIndex", validateURL, async (req, res) => {
-  if (bookmarkArray[req.params.arrayIndex]) {
-    bookmarkArray[req.params.arrayIndex] = req.body;
-    res.status(200).json(bookmarkArray[req.params.arrayIndex]);
+  const { indexArray } = req.params;
+  if (bookmarkArray[arrayIndex]) {
+    bookmarkArray[arrayIndex] = req.body;
+    res.status(200).json(bookmarkArray[arrayIndex]);
   } else {
     res.status(404).json({ error: "Not Found" });
   }
@@ -130,14 +151,3 @@ bookmarks.put("/:arrayIndex", validateURL, async (req, res) => {
 An easy thing to test is to add many exclamation points at the end of the `name`.
 
 ![Postman Update](../assets/postman-update.png)
-
-## Summary
-
-You did it!
-
-You built your first API with ExpressJS!
-You have a simple app that lets users keep track of their favorite websites. Users can create, read, update and delete bookmarks.
-
-Unfortunately, asking users to make updates using Postman isn't going to give your app any wow factor.
-
-For some wow factor, we'll need to build a front end.

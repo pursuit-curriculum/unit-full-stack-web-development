@@ -1,8 +1,22 @@
 # Intro to the Internet and Servers
 
+## Introduction
+
 Typically, when software engineers begin learning about the internet, they start with the front end of a website and spend less time focusing on the back end. In this unit, you will focus on back-end and full-stack web development.
 
 The back end of an application is made up of servers and databases. Without a robust back-end application, a front-end application is only capable of statically displaying information. While it can be interactive for a user, it cannot store data or handle unknown requests. In this lesson, you will learn how these two sides of applications interact with one another.
+
+## Learning Objectives
+
+By the end of this lesson, you should be able to:
+
+- Define clients, servers, and databases.
+- Define the basic components of the internet.
+- Describe the request-response cycle.
+- Identify the key components of an HTTP request.
+- Identify the key components of an HTTP response.
+
+---
 
 ## Components of the internet
 
