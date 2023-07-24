@@ -114,9 +114,15 @@ When you join a company, they will have chosen a naming strategy, which you shou
 
 ## Controllers in terms of code
 
+You may read or code along. To code along, you can continue the build from the last pre-reading.
+
 Each resource (users, colors, lamps, tickets) within an application should have its own models file and its own controllers file.
 
 A controllers file will contain the routes specific for that resource.
+
+- Confirm you are in the same director as `package.json` before typing the following commands:
+- `mkdir controllers`
+- `touch controllers/colorsController.js`
 
 First one must import Express into the file in order to be able to use it.
 
@@ -141,6 +147,8 @@ Notice that the relative path is `/`. Because this is in a controller, you'll ta
 Next, the colors resource code would be imported into the main file `app.js`.
 
 ```js
+// app.js
+// ROUTES
 const colorsController = require("./controllers/colorsController.js");
 ```
 
@@ -149,6 +157,8 @@ And then configured. This `app.use()` function takes in a string which will be t
 ```js
 app.use("/colors", colorsController);
 ```
+
+You can now remove the routes in `app.js` that use `/colors` as you're rebuilding them in the `colorsController.js` file.
 
 To put it all together, all of the routes written in the `colorsController` file will be accessed through a base url of
 

@@ -102,8 +102,8 @@ You can improve the user experience by adding some error handling.
 // SHOW
 colors.get("/:arrayIndex", (req, res) => {
   const { arrayIndex } = req.params;
-  if (bookmarkArray[arrayIndex]) {
-    res.json(bookmarkArray[arrayIndex]);
+  if (colorsArray[arrayIndex]) {
+    res.json(colorsArray[arrayIndex]);
   } else {
     res.status(404).json({ error: "Not Found" });
   }
@@ -213,7 +213,7 @@ Next, you must convert that incoming data into a usable JSON object. Express has
 
 <details><summary>Or, if you have the latest version of cURL you can type a somewhat shorter command:</summary>
 
-- `curl --json '{"name":"AV Club", "url": "https://www.avclub.com"}' -X POST http://localhost:3003/bookmarks`
+- `curl --json '{"name":"fuchsia"}' -X POST http://localhost:3003/colorss`
 
 - What is the same with this command? What is different?
   For more info on the [--json flag](https://daniel.haxx.se/blog/2022/02/02/curl-dash-dash-json/)
@@ -237,7 +237,7 @@ Since you always want to parse any incoming JSON data, you should put this funct
 const app = express();
 
 // MIDDLEWARE
-app.use(express.json); // parse incoming middleware
+app.use(express.json()); // parse incoming middleware
 
 // ROUTES
 // Home Page
@@ -280,7 +280,7 @@ app.get("/", (req, res) => {
 });
 
 // MIDDLEWARE
-app.use(express.json); // parse incoming middleware
+app.use(express.json()); // parse incoming middleware
 ```
 
 ## Middleware
@@ -320,7 +320,7 @@ app.use((req, res, next) => {
 
 Notice, it does not use a return statement, nor does it send a response in this case. If you use `return` instead of `next` your application will never send a response.
 
-Here is another example that can change the flow of the response:
+Here is another example. This one can change the flow of the response:
 
 ```js
 app.use((req, res, next) => {
@@ -381,7 +381,7 @@ Allows adding new color:
 You can also write a named callback function instead of an anonymous callback.
 
 ```js
-const checkForColorKey = (req, res, next) => {
+function checkForColorKey = (req, res, next) => {
   if (req.body.hasOwnProperty("name")) {
     next();
   } else {
@@ -399,6 +399,10 @@ colors.post("/", checkForColorKey, (req, res) => {
   res.json(colorsArray[colorsArray.length - 1]);
 });
 ```
+
+Error:
+
+- `curl -H "Content-Type: application/json" -X POST -d '{"html_color_name": "papayawhip"}' http://localhost:3333/colors/\?apikey\=4321`
 
 ## Reference app
 

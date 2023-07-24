@@ -80,7 +80,7 @@ We will use the index position of the array item and splice out the deleted item
 // DELETE
 colors.delete("/:arrayIndex", (req, res) => {
   const { arrayIndex } = req.params;
-  const deletedBookmark = colorArray.splice(req.params.indexArray, 1);
+  const deletedBookmark = colorsArray.splice(req.params.indexArray, 1);
   res.status(200).json(deletedBookmark[0]);
 });
 ```
@@ -100,8 +100,8 @@ Add some error handling.
 colors.delete("/:indexArray", (req, res) => {
   const { indexArray } = req.params;
   if (colorsArray[indexArray]) {
-    const deletedBookMark = colorsArray.splice(indexArray, 1);
-    res.status(200).json(deletedBookMark[0]);
+    const deletedColor = colorsArray.splice(indexArray, 1);
+    res.status(200).json(deletedColor[0]);
   } else {
     res.status(404).json({ error: "Not Found" });
   }
@@ -135,8 +135,8 @@ You will take the array position of the item you want to update. You will set th
 // UPDATE
 colors.put("/:arrayIndex", (req, res) => {
   const { arrayIndex } = req.params;
-  colorArray[arrayIndex] = req.body;
-  res.status(200).json(colorArray[arrayIndex]);
+  colorsArray[arrayIndex] = req.body;
+  res.status(200).json(colorsArray[arrayIndex]);
 });
 ```
 
@@ -144,10 +144,10 @@ You can reuse the middleware functionality to check that the updated value has a
 
 ```js
 // UPDATE
-colors.put("/:arrayIndex", (req, res) => {
+colors.put("/:arrayIndex", checkForColorKey, (req, res) => {
   const { arrayIndex } = req.params;
-  colorArray[arrayIndex] = req.body;
-  res.status(200).json(colorArray[arrayIndex]);
+  colorsArray[arrayIndex] = req.body;
+  res.status(200).json(colorsArray[arrayIndex]);
 });
 ```
 

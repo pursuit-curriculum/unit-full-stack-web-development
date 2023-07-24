@@ -70,11 +70,13 @@ By the end of this lesson, you should be able to:
 
 ## Quick Review
 
+You may read or code along. To code along, you may use your code from the previous pre-reading or start fresh.
+
 - Express is a code library hosted on npm and written in JavaScript.
 - Express is a framework for building a web server.
-- Type `npm init` to initialize a folder as an npm project.
+- In a new folder, type `npm init` to initialize a folder as an npm project.
 - Add npm packages by typing `npm install <package-name> `, e.g., `npm install express@4` or `npm install nodemon@2 --save-dev`
-- Use the `require()` function to bring in the Express code so that you can use it
+- Use the `require()` function to bring in the Express code so that you can use it to a file named something like `app.js`
 - Add `app.listen(PORT)` to turn on the server. By default, it will listen to http://localhost. When you work on your computer, you must pick a port. Usually, server ports are in the numeric range of 3000 - 9000. When you host your projects on the web, the port will be automatically configured for you.
 
 You will add more complexity to this setup so that you can start bringing some more best practices into your app.
@@ -121,6 +123,8 @@ console.log(process.env.PORT);
 ## Separating concerns
 
 You will be adding unit testing with Jest (or similar testing suite) for subsequent assignments. To set it up correctly, you have to set up the server in one file and the routes and other logic in other files.
+
+You may need to refactor your basic Express app, if you have begun to build it.
 
 ### Set Up app.js
 
@@ -180,6 +184,9 @@ Data modeling is a technique for defining business requirements for a database. 
 
 Within this application there will only be one data model or resource. However, in a professional application there will be tens or possibly hundreds.
 
+Remember, you need to leave your server running. To open a new Terminal tab, you can press <kbd>command</kbd> <kbd>t</kbd>
+
+- Confirm you are in the same director as `package.json` before typing the following commands:
 - `mkdir models`
 - `touch models/color.js`
 
@@ -271,6 +278,8 @@ You can make this code easier to read by using object destructuring.
 
 ```js
 // ROUTES
+
+// Show one color
 app.get("/colors/:index", (req, res) => {
   const { index } = req.params;
   res.send(colors[index]);
@@ -282,6 +291,7 @@ app.get("/colors/:index", (req, res) => {
 You can only have one response for every request: This is a rule of the http protocol. You'll get an error in the terminal if you try to send multiple responses.
 
 ```js
+// A route with an error
 app.get("/colors/oops/:index", (req, res) => {
   const { index } = req.params;
   res.send(colors[index]);
@@ -293,12 +303,13 @@ app.get("/colors/oops/:index", (req, res) => {
 You can, however, have multiple statements if you use `if` statements or other program logic correctly:
 
 ```js
+// Show one color, with error handling
 app.get("/colors/:index", (req, res) => {
   const { index } = req.params;
   if (colors[index]) {
     res.send(colors[index]);
   } else {
-    res.send("cannot find any colors at this index: " + index);
+    res.send("Cannot find any colors at this index: " + index);
   }
 });
 ```
@@ -330,9 +341,14 @@ If you want to get to `/colors` - you'll always hit the `/:prices` route because
 Here is a code example, building on the app you have so far:
 
 ```javascript
+// Show one color
 app.get("/colors/:index", (req, res) => {
-  //:index can be anything, even cool
-  res.send(colors[req.params.index]);
+  const { index } = req.params;
+  if (colors[index]) {
+    res.send(colors[index]);
+  } else {
+    res.send("Cannot find any colors at this index: " + index);
+  }
 });
 
 // This will never be reached
@@ -360,6 +376,7 @@ app.get("/colors/cool", (req, res) => {
  `);
 });
 
+// Show one color
 app.get("/colors/:index", (req, res) => {
   const { index } = req.params;
   if (colors[index]) {
