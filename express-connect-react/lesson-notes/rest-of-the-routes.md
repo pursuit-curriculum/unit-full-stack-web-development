@@ -36,22 +36,14 @@ Let's request one bookmark from our API from the show page.
 At the top:
 
 ```js
-import axios from "axios";
-```
-
-```js
-const API = process.env.REACT_APP_API_URL;
+const API = import.meta.env.VITE_API_URL;
 ```
 
 We are also using `useParams` from react-router-dom. This will allow us to use the URL parameters (in our app, this will be the index position of the array)
 
 Our function for Show will be very similar. However, we'll add an error message if the particular bookmark cannot be found. We'll go to `/not-found`, an invalid index position that will trigger the 404 route. It still could use even better UI/UX, but this will do for our small build. As a challenge during lab, you can work on making this an even more excellent experience.
 
-Remember, the `.then()` structure takes a callback.
-
-First, it starts with a promise. The Axios library functions `get`, `post`, `put`, `delete` (etc.) are all functions that return promises.
-
-*Reminder:* A promise is a function that allows you to _WAIT_ for a response and _THEN_ do something. The .`then()` function takes a callback, and within that callback, you can write code that should run AFTER the first function has been fulfilled (usually by returning a value).
+_Reminder:_ A promise is a function that allows you to _WAIT_ for a response and _THEN_ do something. The .`then()` function takes a callback, and within that callback, you can write code that should run AFTER the first function has been fulfilled (usually by returning a value).
 
 If you pass an argument into `.then()`, it is the return value from the previous function.
 
@@ -85,14 +77,14 @@ Let's fetch one bookmark based on the index position. If the index position is i
 
 ```js
 useEffect(() => {
-  axios.get(`${API}/bookmarks/${index}`).then((response) => {
+  fetch(`${API}/bookmarks/${index}`).then((response) => {
     setBookmark(response.data);
   });
 }, [index]);
 ```
 
 ```js
-import { Link, useParams, withRouter, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 ```
 
 Inside the `BookmarkDetails` function
@@ -103,10 +95,12 @@ let navigate = useNavigate();
 
 ```js
 useEffect(() => {
-  axios
-    .get(`${API}/bookmarks/${index}`)
+  fetch(`${API}/bookmarks/${index}`)
     .then((response) => {
-      setBookmark(response.data);
+      return response.json();
+    })
+    .then((responseJSON) => {
+      setBookmark(responseJSON);
     })
     .catch(() => {
       navigate("/not-found");
@@ -136,16 +130,10 @@ When we think of our users, they want to create a bookmark and then want to see 
 
 **src/BookmarkNewForm.js**
 
-Add Axios for a fetch request.
-
-```js
-import axios from "axios";
-```
-
 Add the URL for the API
 
 ```js
-const API = process.env.REACT_APP_API_URL;
+const API = import.meta.env.VITE_API_URL;
 ```
 
 Add `useNavigate` so that it navigates back to the index page when a new bookmark is created.
@@ -162,17 +150,32 @@ First, we must prevent the default. When the form does not have the attributes o
 
 After that, we want to write some functionality to make a POST request and send the form data to our backend. THEN, once the request is complete, we want to navigate the user back to the Index page so they can see that their new bookmark has been added.
 
-Put it all together
+It is critical
+
+- Set the method to POST (by default fetch requests are type GET)
+- To set the headers to have a `Content-Type` of `application/json` - Convert the bookmark object coming from the form is converted into a string.
+
+Put it all together:
 
 ```js
-const addBookmark = (newBookmark) => {
- axios
- .post(`${API}/bookmarks`, newBookmark)
- .then(
- () => {
- navigate(`/bookmarks`);
- }
- .catch((c) => console.error("catch", c));
+const addBookmark = () => {
+  fetch(`${API}/bookmarks`, {
+    method: "POST",
+    body: JSON.stringify(bookmark),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(() => {
+      navigate(`/bookmarks`);
+    })
+    .catch((error) => console.error("catch", error));
+};
+
+// Make sure to call addBookmark in handleSubmit
+const handleSubmit = (event) => {
+  event.preventDefault();
+  addBookmark();
 };
 ```
 
@@ -187,9 +190,8 @@ The edit form is very similar to the create form. However, for a better user exp
 At the top:
 
 ```js
-import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom";
-const API = process.env.REACT_APP_API_URL;
+const API = import.meta.env.VITE_API_URL;
 
 // inside BookmarkEditForm function
 const navigate = useNavigate();
@@ -197,12 +199,14 @@ const navigate = useNavigate();
 
 ```js
 useEffect(() => {
-  axios
-    .get(`${API}/bookmarks/${index}`)
+  fetch(`${API}/bookmarks/${index}`)
     .then((response) => {
-      setBookmark(response.data);
+      return response.json();
     })
-    .catch((e) => console.error(e));
+    .then((responseJSON) => {
+      setBookmark(responseJSON);
+    })
+    .catch((error) => console.error(error));
 }, [index]);
 ```
 
@@ -218,13 +222,17 @@ Let's add the functionality to set a PUT request and update our API. Then we'll 
 
 ```js
 const updateBookmark = () => {
-  axios
-    .put(`${API}/bookmarks/${index}`, bookmark)
-    .then((response) => {
-      setBookmark(response.data);
+  fetch(`${API}/bookmarks/${index}`, {
+    method: "PUT",
+    body: JSON.stringify(bookmark),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(() => {
       navigate(`/bookmarks/${index}`);
     })
-    .catch((c) => console.warn("catch", c));
+    .catch((error) => console.error("catch", error));
 };
 ```
 
@@ -245,8 +253,7 @@ For delete, we can just add the functionality on the show page. No separate page
 
 ```js
 const handleDelete = () => {
-  axios
-    .delete(`${API}/bookmarks/${index}`)
+  fetch(`${API}/bookmarks/${index}`, { method: "DELETE" })
     .then(() => {
       navigate(`/bookmarks`);
     })
@@ -257,3 +264,5 @@ const handleDelete = () => {
 ## Summary
 
 We have created a full CRUD full-stack application using an express backend and a create-react-app front end. We utilized all 7 RESTful routes.
+
+[See the complete build here](https://github.com/pursuit-curriculum-resources/starter-express-connect-react/tree/solution)

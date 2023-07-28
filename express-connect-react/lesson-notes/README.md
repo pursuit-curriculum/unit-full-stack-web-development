@@ -1,9 +1,24 @@
+# Express Connect React
+
+## Learning Outcomes
+
+By the end of this lesson, you should be able to:
+
+- Be able to connect a React application to an Express back-end API.
+- Be able to describe all 7 RESTful views.
+- Be able to set a base URL that can be easily updated, depending on the local environment, and describe why it is important to do so.
+- Be able to describe why an easily updated URL is useful
+- Be able to view an index route with data from the express API.
+- Be able to describe what CORS is and why the default is to block cross-origin requests.
+
+---
+
 ## Getting Started
 
-- Go to your bookmarks app and get it started with `nodemon`.
+- Go to your bookmarks app and get it started.
 - Open a new tab in terminal <kbd>command</kbd> <kbd>t</kbd>, do not shut down your bookmarks app
 - Note: if you end up having a lot of extra data from testing, restart your express API (restart nodemon)
-- Fork the starter code in your class GitHub Organization called [starter-express-connect-react]().
+- Fork the starter code in your class GitHub Organization called [starter-express-connect-react](https://github.com/pursuit-curriculum-resources/starter-express-connect-react).
 - `git clone` the forked repository.
 - `cd` to the directory where you cloned it.
 - `npm install` to install dependencies already included in the `package.json`.
@@ -12,12 +27,12 @@
 **.env** (Details below)
 
 ```
-REACT_APP_API_URL=http://localhost:3003
+VITE_API_URL=http://localhost:3003
 ```
 
 (or whatever port your bookmarks API is on)
 
-- `npm start`
+- Start your React app
 
 ### Landing Page/Index
 
@@ -54,12 +69,12 @@ We would rather have the correct URL depending on our situation set, and we woul
 
 There are a few ways to do this, depending on the goals (amount of safety, other app features). As you build different apps, you may see different approaches.
 
-We are going to use create-react-app's way of setting up these variables.
+We are going to use Vite's way of setting up these variables.
 
 - Create a `.env` on the same level as `package.json`.
-- Start all variable names with `REACT_APP_`.
-- `REACT_APP_API_URL` or `REACT_APP_MY_VAR` are acceptable names.
-- `React_App_My_Var` is NOT going to work.
+- Start all variable names with `VITE_`.
+- `VITE_API_URL` or `VITE_MY_VAR` are acceptable names.
+- `Vite_My_Var` is NOT going to work.
 
 We should have done this as part of our setup earlier.
 
@@ -68,7 +83,7 @@ We should have done this as part of our setup earlier.
 At the top:
 
 ```js
-const API = process.env.REACT_APP_API_URL;
+const API = import.meta.env.VITE_API_URL;
 ```
 
 Confirm it is working
@@ -80,19 +95,6 @@ console.log(API);
 Remove this console log once you have confirmed the value.
 
 ## Getting Data from the API
-
-### Adding Axios
-
-- open another tab in the terminal for your create-react-app so you can keep your react app running.
-- `npm install axios`
-
-**src/Components/Bookmarks.js**
-
-At the top :
-
-```js
-import axios from "axios";
-```
 
 Inside the `Bookmarks` function, add `setBookmarks` so we can update the state when `bookmarks` changes.
 
@@ -108,9 +110,7 @@ If we made the API call first, the DOM was not fully loaded, and the state was u
 
 Inside the `useEffect` function, we will add our initial API call to get all the bookmarks.
 
-- Make a `get` request using Axios. `then` when there is a `response`, do something. In our case, we want to update state by using the `setBookmarks` that was declared at the beginning of the `App` component. The state will be updated to be our array of bookmark objects.
-
-**BONUS:** Promises or async/await? Which one should we use? This author prefers to [Use what the docs recommend](https://axios-http.com/docs/api_intro). In this case, Axios uses promises. You will likely find different style guides based on where you are employed. Also, best practices change over time. Learning and practicing the syntax of promises and async/await is a good idea.
+- Make a `GET` request using fetch. `then` when there is a `response`, do something. In our case, we want to update state by using the `setBookmarks` that was declared at the beginning of the `App` component. The state will be updated to be our array of bookmark objects.
 
 **src/Components/Bookmarks.js**
 
@@ -130,7 +130,7 @@ Let's make a get request.
 
 ```js
 useEffect(() => {
-  axios.get(`${API}/bookmarks`);
+  fetch(`${API}/bookmarks`);
 }, []);
 ```
 
@@ -163,28 +163,39 @@ Try to build from the outside-in, instead of left to right. Add the callback.
 
 ```js
 useEffect(() => {
-  axios.get(`${API}/bookmarks`).then(() => {});
+  fetch(`${API}/bookmarks`).then(() => {});
 }, []);
 ```
 
-The thing we are waiting on is the response. The response has a lot of extra information. We only need the bookmarks data. Compare and contrast the info given in the two console logs:
+The thing we are waiting on is the response. The response comes in as has a lot of extra information. We only need the bookmarks data. Compare and contrast the info given in the two console logs:
 
 ```js
 useEffect(() => {
-  axios.get(`${API}/bookmarks`).then((response) => {
-    console.log(response);
-    console.log(response.data);
+  fetch(`${API}/bookmarks`).then((response) => {
+    console.log(response.body);
   });
 }, []);
 ```
 
-We want to set the `bookmarks` in our component as response data.
+When you look at the response body here, you will see it is of type `ReadableStream`. It must be converted to JSON.
 
 ```js
 useEffect(() => {
-  axios.get(`${API}/bookmarks`).then((response) => {
-    setBookmarks(response.data);
+  fetch(`${API}/bookmarks`).then((response) => {
+    console.log(response.json());
   });
+}, []);
+```
+
+Next you must return the value and _then_ set state:
+
+```js
+useEffect(() => {
+  fetch(`${API}/bookmarks`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((responseJSON) => setBookmarks(responseJSON));
 }, []);
 ```
 
@@ -192,10 +203,12 @@ Add error handling:
 
 ```js
 useEffect(() => {
-  axios
-    .get(`${API}/bookmarks`)
-    .then((response) => setBookmarks(response.data))
-    .catch((e) => console.error("catch", e));
+  fetch(`${API}/bookmarks`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((responseJSON) => setBookmarks(responseJSON))
+    .catch((error) => console.error(error));
 }, []);
 ```
 
@@ -213,7 +226,7 @@ We must go to our express API to set up this allowance.
 
 **terminal**
 
-- `npm install cors`
+- `npm install cors@2`
 
 **app.js**
 Near the top
@@ -277,3 +290,5 @@ module.exports = [
 ## NEXT:
 
 [The Rest of the Routes](./rest-of-the-routes.md)
+
+[Reference Back-end](https://github.com/pursuit-curriculum-resources/bookmarks-express-demo/tree/connect-react)
