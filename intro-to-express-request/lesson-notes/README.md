@@ -44,7 +44,7 @@ node_modules
 
 - Why and when do to start file/folder names with a `.`?
 
-- Why is it important the version number when installing packages for class?
+- Why is it important to include the version number when installing packages for a class or tutorial?
 
 ### Set Up App
 
@@ -92,7 +92,9 @@ Get the app running with `nodemon server.js` and go to http://localhost:3333
 
 - Why is the variable named `PORT` and not `port`?
 
-What is the function of each file. Why is it important to make different files?
+- What is the function of each file?
+
+- Why is it important to make different files?
 
 - `.env`
 - `app.js`
@@ -181,7 +183,7 @@ app.get("/rocks/oops/:index", (req, res) => {
 });
 ```
 
-It is possible to have multiple statements as part of the route's logic:
+Is it possible to have multiple statements as part of the route's logic?
 
 ```js
 app.get("/rocks/:index", (req, res) => {

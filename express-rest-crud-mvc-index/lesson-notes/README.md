@@ -100,7 +100,7 @@ We can open a new tab in terminal, so we can keep nodemon running while we add t
 - `mkdir models`
 - `touch models/bookmark.js`
 
-and then copy paste this into
+and then copy paste this into:
 
 **bookmark.js**
 
@@ -133,7 +133,11 @@ module.exports = [
 
 With our simple app, making folders with single files seems a bit over-engineered. However, it will be worth it, because our goal is to build good organizational habits.
 
-Our controllers are going to handle the routes. It's quite common to make a separate file and group similar controllers together. Express makes it easy to set it up.
+- What are controllers?
+
+- How are controllers organized?
+
+- How should you organize controllers if you are following an MVC pattern?
 
 All of our routes related to our bookmarks are going to be starting with `/bookmarks`. We are going to name our `express.Router()` variable `bookmarks` to help us remember that this is base of the route. Let's code to understand it better:
 
@@ -173,6 +177,8 @@ app.use("/bookmarks", bookmarksController);
 Now, we should be able to go to http://localhost:3003/bookmarks and see our JSON
 
 ## Adding custom status codes
+
+- What is the purpose of a 404 route?
 
 Let's add a 404 route. It should be below all the other routes.
 

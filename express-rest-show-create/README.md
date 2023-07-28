@@ -191,7 +191,7 @@ colors.post("/", (req, res) => {
 
 ![req.body is undefined](./assets/req.body-is-undefined.png)
 
-When you check [the documentation](https://expressjs.com/en/4x/api.html#req.body), you'll learn that, by default, it is undefined and populated when you use body-paring middleware.
+When you check [the documentation](https://expressjs.com/en/4x/api.html#req.body), you'll learn that, by default, `req.body` is undefined and populated when you use body-paring middleware.
 
 ## Body Parser
 
@@ -203,7 +203,7 @@ So how can you determine what format the data you are trying to send is and conv
 
 Firstly, you should include the data type you are sending when you request. So you'll need to update your cURL command by adding a flag `-H` for headers where you can specify the data type. By default, some header properties are always sent through. Adding the -H command will allow you to overwrite or add new values.
 
-- `curl -H "Content-Type: application/json" -X POST -d blanchedalmond' http://localhost:3333/colors`
+- `curl -H "Content-Type: application/json" -X POST -d 'blanchedalmond' http://localhost:3333/colors`
 
 Next, update the data to be in proper JSON format. It must be an object, and each key and value must be wrapped in double quotes. Notice that the entire JSON object must be wrapped in single quotes.
 
@@ -340,7 +340,7 @@ http://localhost:3333/colors?apikey=1234
 
 ### Limiting routes
 
-Adding API key authentication globally completely limits access to your entire app to anyone who does not have an API key. This is not a good user experience. Have you ever tried to go to a website but can't see any pages unless you create an account and log in? How does it feel to find a website like that?
+Adding API key authentication globally completely limits access to your entire app to anyone who does not have an API key. This is not a good user experience. Have you ever tried to go to a website but can't see any pages unless you create an account and log in? How does it feel to find a website like that? A better experience is to allow visitors to see some of the website, but limit what they can do until they create an account.
 
 You can limit requiring the key to the POST route in two ways.
 
@@ -357,6 +357,7 @@ colors.use((req, res, next) => {
   }
 });
 
+// This should be the last route in the file
 // CREATE
 colors.post("/", (req, res) => {
   colorsArray.push(req.body);

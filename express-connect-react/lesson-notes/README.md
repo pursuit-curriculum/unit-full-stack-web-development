@@ -30,7 +30,7 @@ By the end of this lesson, you should be able to:
 VITE_API_URL=http://localhost:3003
 ```
 
-(or whatever port your bookmarks API is on)
+(or whichever port your bookmarks API is on)
 
 - Start your React app
 
@@ -57,26 +57,9 @@ We can also go to the following:
 - http://localhost:3000/bookmarks/1 to see an empty show page
 - http://localhost:3000/bookmarks/1/edit to see an empty edit page
 
-We can do so using `axios` much like we did use third-party APIs.
+We can do so using `fetch` much like we did use third-party APIs.
 
 ## Setting Up the App to Make Requests
-
-### The Base URL
-
-Before we get started, we have to think about a problem we will have. If we hard code `http://localhost:3003` into our react app, when we change it to be hosted online, we would have to go into our app and change every single instance of `http://localhost:3003`. Further, if we decide to host our app on another service, we would have to go in and change it again. If we are working on our app locally (usually described as a development environment) and having it available online (usually described as a production environment), we would spend a lot of time switching the URLs back and forth.
-
-We would rather have the correct URL depending on our situation set, and we would like to include it in one place, so we only have to update it in one place if it changes.
-
-There are a few ways to do this, depending on the goals (amount of safety, other app features). As you build different apps, you may see different approaches.
-
-We are going to use Vite's way of setting up these variables.
-
-- Create a `.env` on the same level as `package.json`.
-- Start all variable names with `VITE_`.
-- `VITE_API_URL` or `VITE_MY_VAR` are acceptable names.
-- `Vite_My_Var` is NOT going to work.
-
-We should have done this as part of our setup earlier.
 
 **src/Components/Bookmarks.js**
 
@@ -104,29 +87,11 @@ const [bookmarks, setBookmarks] = useState([]);
 
 ### Loading the Bookmarks Index on Page Load
 
-With React, we sometimes have to think about _when_ things happen. For us, we want to make an API call to get our data AFTER the component has been fully loaded (mounted in the DOM) and then update the state.
-
-If we made the API call first, the DOM was not fully loaded, and the state was updated first, we would risk not seeing our data, even though the API call was successful.
-
-Inside the `useEffect` function, we will add our initial API call to get all the bookmarks.
-
-- Make a `GET` request using fetch. `then` when there is a `response`, do something. In our case, we want to update state by using the `setBookmarks` that was declared at the beginning of the `App` component. The state will be updated to be our array of bookmark objects.
+- How can you set up your code so that the bookmarks load on page-load?
 
 **src/Components/Bookmarks.js**
 
-Note: Make sure this code is before the `return` statement
-
-Let's add `useEffect` to the component. Update the line that imports `useState`
-
-```js
-import { useState, useEffect } from "react";
-```
-
-```js
-useEffect(() => {}, []);
-```
-
-Let's make a get request.
+Add `useEffect` to the component. Update the line that imports `useState`
 
 ```js
 useEffect(() => {
@@ -136,28 +101,14 @@ useEffect(() => {
 
 Once the request is complete, `then`, what should happen?
 
-`.then()` takes two arguments. Both callback functions
-
-```js
-.then(()=> {}, ()=>{})
-```
-
-The first is executed when the promise is fulfilled (in our case, a successful response from the server).
-
-The second is executed if the promise is rejected (in our case, there is some error with our fetch request).
-
-We can, instead, add a `.catch()` - this will be the final error handling of our fetch request.
-
-**BONUS** [Take the time to compare and contrast](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)
-
-While we don't need error handling for our app to work, it is conducive to debugging and writing code that would notify users that something has gone wrong.
+If there is an error, how can you handle it?
 
 ```js
 .then((response)=> {})
 .catch((error)=> {})
 ```
 
-Let's put it together with `useEffect` and `axios`
+Let's put it together with `useEffect` and `fetch`.
 
 Try to build from the outside-in, instead of left to right. Add the callback.
 
@@ -167,7 +118,7 @@ useEffect(() => {
 }, []);
 ```
 
-The thing we are waiting on is the response. The response comes in as has a lot of extra information. We only need the bookmarks data. Compare and contrast the info given in the two console logs:
+First console log the incoming response:
 
 ```js
 useEffect(() => {
@@ -216,13 +167,11 @@ useEffect(() => {
 
 ![](../assets/cors-error.png)
 
-Our React app is making a request from a different origin than where our API is running. This is a great security feature! By default, requests coming from other origins are not allowed.
+- What does this error mean?
 
-However, we want to allow our React app to make requests to our API.
+- What needs to be done to fix it?
 
-We must go to our express API to set up this allowance.
-
-#### Express API
+### Express API
 
 **terminal**
 

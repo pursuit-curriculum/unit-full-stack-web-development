@@ -70,7 +70,7 @@ By the end of this lesson, you should be able to:
 
 ## Quick Review
 
-You may read or code along. To code along, you may use your code from the previous pre-reading or start fresh.
+You may read or code along. To code along, you may use your code from the previous pre-reading or start fresh. The code along begins in the `Separating concerns` section.
 
 - Express is a code library hosted on npm and written in JavaScript.
 - Express is a framework for building a web server.
@@ -124,7 +124,15 @@ console.log(process.env.PORT);
 
 You will be adding unit testing with Jest (or similar testing suite) for subsequent assignments. To set it up correctly, you have to set up the server in one file and the routes and other logic in other files.
 
-You may need to refactor your basic Express app, if you have begun to build it.
+To code along, you can use your previous pre-reading Express app. You may need to refactor this Express app, if you have begun to build it. Alternatively, set up a new app for practice and review.
+
+## Getting started
+
+- `touch .gitignore` (and set it up)
+- `npm init`
+- `npm i express`
+- `touch .env` (make sure you are on the same level as `package.json`)
+- `npm i dotenv@16`
 
 ### Set Up app.js
 

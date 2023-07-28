@@ -1,4 +1,4 @@
-# npm & Express Response
+# Express Response
 
 ## Learning Objectives
 
@@ -41,6 +41,10 @@ app.get("/", (request, response) => {
 ![Request response code](../assets/request-response-code.png)
 
 - How can you run your application so that it automatically updates when you make changes to your code?
+
+- What is `nodemon`, how do you install it?
+
+- How do you use `nodemon`?
 
 - Why is it important to always shut down your server?
 

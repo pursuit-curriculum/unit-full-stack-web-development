@@ -1,4 +1,4 @@
-# npm & Express Response
+# Express Response
 
 ## Introduction
 
@@ -31,7 +31,7 @@ By the end of this lesson, you should be able to:
 
 Take a moment to look through [the documentation](https://expressjs.com). This documentation may be difficult to use if you are new to servers. You can utilize this documentation better as you gain more knowledge and experience.
 
-Instead, you can start by looking at the [quickstart guide available on npm](https://www.npmjs.com/package/express). The following code-along will guide you to build a basic Express server. You can read or code along.
+Instead, you can start by looking at the [quickstart guide available on npm](https://www.npmjs.com/package/express). You can read or code along.
 
 ### Project set up
 
@@ -135,7 +135,7 @@ You need to access local host for this server. Everyone's computer has a default
 
 http://localhost:3003
 
-**SUCCESS**: Do you see `Hello World` appear in the browser? Then you've successfully written your first express server!
+**SUCCESS**: Do you see `Hello World` appear in the browser? Then you've successfully written your first Express server!
 
 > **Note**: You are using the `http` protocol. http is designed to send HTML, which is the datatype string. As you build your applications, it is essential to remember this, especially if you are working with other data types, such as numbers, because you will need to convert them into and out of strings.
 
@@ -191,9 +191,13 @@ In terminal run
 
 The `-g` means install this package globally.
 
-- Your computer may deny you access to make this change. You can try again by running
+- Your computer may deny you access to make this change. You can try again by running:
 
-- `sudo !!` This will run the last command you typed with `sudo` in front of it. `sudo` means `super user do`. It is a very powerful command. It can override a lot of safety settings on your computer. You should only use it if you know **EXACTLY** what you are doing. Improper use can turn your MacBook into a brick that can only be fixed by taking it to Apple (they have the technology to recover your computer back to factory state, you may lose all your unsaved work).
+- `sudo !!`
+
+This command will run the last command you typed with `sudo` in front of it.
+
+`sudo` means `super user do`. It is a very powerful command. It can override a lot of safety settings on your computer. You should only use it if you know **EXACTLY** what you are doing. Improper use can turn your MacBook into a brick that can only be fixed by taking it to Apple (they have the technology to recover your computer back to factory state, but you may lose all your work that was not backed up).
 
 Your computer will likely ask you for your computer login password. The UI is not great - when you type, there is no feedback on how many characters you have typed. Press enter when you've entered your password. If you've gotten your password wrong, rerun the above terminal command by pressing the up arrow.
 

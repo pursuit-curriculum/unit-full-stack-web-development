@@ -69,7 +69,7 @@ Our problems are a microcosm of an app that is years old that has had tens or po
 
 Many patterns and best practices will make more sense as you gain experience.
 
-**Bonus:** [Read more on software architecture](https://en.wikipedia.org/wiki/Software_architecture)
+**Bonus:** [Read more on software architecture](https://en.wikipedia.org/wiki/Software_architecture).
 
 In class, you will loosely follow a prevalent software design pattern called [MVC](https://en.wikipedia.org/wiki/Model–view–controller): Model-View-Controller.
 

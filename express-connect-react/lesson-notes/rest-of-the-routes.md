@@ -14,12 +14,12 @@ So far, we have added functionality to our React app to complete requests and ge
 
 Let's get the Show page, New, and Edit forms working.
 
-|  #  | Action |         URL         | HTTP Verb |   CRUD   |              Description               |
-| :-: | :----: | :-----------------: | :-------: | :------: | :------------------------------------: |
-|  1  | Index  |     /bookmarks      |    GET    | **R**ead | Get a list (or index) of all bookmarks |
-|  2  |  Show  |   /bookmarks/:id    |    GET    | **R**ead | Get an individual view (show one log)  |
-|  3  |  New   |   /bookmarks/new    |    GET    | **R**ead | Get a list (or index) of all bookmarks |
-|  4  |  Edit  | /bookmarks/:id/edit |    GET    | **R**ead | Get an individual view (show one log)  |
+|  #  | Action |         URL         | HTTP Verb |   CRUD   |                Description                 |
+| :-: | :----: | :-----------------: | :-------: | :------: | :----------------------------------------: |
+|  1  | Index  |     /bookmarks      |    GET    | **R**ead |   Get a list (or index) of all bookmarks   |
+|  2  |  Show  |   /bookmarks/:id    |    GET    | **R**ead | Get an individual view (show one bookmark) |
+|  3  |  New   |   /bookmarks/new    |    GET    | **R**ead |   Get a list (or index) of all bookmarks   |
+|  4  |  Edit  | /bookmarks/:id/edit |    GET    | **R**ead | Get an individual view (show one bookmark) |
 
 ### Loading a Bookmark on Page Load (Show Page)
 
