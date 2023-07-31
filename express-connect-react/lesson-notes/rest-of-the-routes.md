@@ -10,16 +10,17 @@
 
 ## Continue
 
-So far, we have added functionality to our React app to complete requests and get responses for Index.
+So far, we have added functionality to our React app to complete requests and get responses for the Index resource.
 
-Let's get the Show page, New, and Edit forms working.
+Let's get the Show page, New, Edit forms working and a delete button.
 
-|  #  | Action |         URL         | HTTP Verb |   CRUD   |                Description                 |
-| :-: | :----: | :-----------------: | :-------: | :------: | :----------------------------------------: |
-|  1  | Index  |     /bookmarks      |    GET    | **R**ead |   Get a list (or index) of all bookmarks   |
-|  2  |  Show  |   /bookmarks/:id    |    GET    | **R**ead | Get an individual view (show one bookmark) |
-|  3  |  New   |   /bookmarks/new    |    GET    | **R**ead |   Get a list (or index) of all bookmarks   |
-|  4  |  Edit  | /bookmarks/:id/edit |    GET    | **R**ead | Get an individual view (show one bookmark) |
+|  #  | Action |         URL         | HTTP Verb |    CRUD    |                Description                 |
+| :-: | :----: | :-----------------: | :-------: | :--------: | :----------------------------------------: |
+|  1  | Index  |     /bookmarks      |    GET    |  **R**ead  |   Get a list (or index) of all bookmarks   |
+|  2  |  Show  |   /bookmarks/:id    |    GET    |  **R**ead  | Get an individual view (show one bookmark) |
+|  3  |  New   |   /bookmarks/new    |    GET    |  **R**ead  |   Get a list (or index) of all bookmarks   |
+|  4  |  Edit  | /bookmarks/:id/edit |    GET    |  **R**ead  | Get an individual view (show one bookmark) |
+|  5  | Delete |   /bookmarks/:id    |  DELETE   | **D**elete | Get an individual view (show one bookmark) |
 
 ### Loading a Bookmark on Page Load (Show Page)
 
@@ -39,43 +40,27 @@ At the top:
 const API = import.meta.env.VITE_API_URL;
 ```
 
-We are also using `useParams` from react-router-dom. This will allow us to use the URL parameters (in our app, this will be the index position of the array)
-
-Our function for Show will be very similar. However, we'll add an error message if the particular bookmark cannot be found. We'll go to `/not-found`, an invalid index position that will trigger the 404 route. It still could use even better UI/UX, but this will do for our small build. As a challenge during lab, you can work on making this an even more excellent experience.
-
-_Reminder:_ A promise is a function that allows you to _WAIT_ for a response and _THEN_ do something. The .`then()` function takes a callback, and within that callback, you can write code that should run AFTER the first function has been fulfilled (usually by returning a value).
-
-If you pass an argument into `.then()`, it is the return value from the previous function.
-
-Sometimes, things go wrong (for example, your server needs to be running). In that case, we add a `.catch()` function to deal with possible errors.
-
-```js
-.catch(()=>{})
-```
-
-Additionally, if the function only has one line of code, the curly braces can be skipped, and the code can be shortened to:
-
-```js
-.then(response => response.data)
-```
-
-However, this style is very limiting. We can't add any extra lines of code easily. So we'll write out the request in a longer format that is easier to maintain.
-
-### Add a Way to Update State
-
-**src/Components/BookmarkDetails.js**
+- What does the React Router Dom function `userParams` do?
+- How will we incorporate URL params into the Show route?
+- How can you create a 404 view in React using React Router?
 
 Inside the `BookmarkDetails` function, update the line of code to be:
 
 ```js
+// src/Components/BookmarkDetails.js
+// Inside the function
 const [bookmark, setBookmark] = useState([]);
 ```
 
-Add useNavigate so we can use the browser's [useNavigate api](https://reactrouter.com/docs/en/v6/api#navigation)
+Add useNavigate so we can use the browser's forward and back buttons. [useNavigate api](https://reactrouter.com/docs/en/v6/api#navigation).
 
 Let's fetch one bookmark based on the index position. If the index position is invalid or not found, it will trigger the error callback, in which case, we will send the users to the 404 page.
 
+Set up a request on page load:
+
 ```js
+// src/Components/BookmarkDetails.js
+// Inside the function
 useEffect(() => {
   fetch(`${API}/bookmarks/${index}`).then((response) => {
     setBookmark(response.data);
@@ -83,15 +68,23 @@ useEffect(() => {
 }, [index]);
 ```
 
+Import `useNavigate`.
+
 ```js
+// src/Components/BookmarkDetails.js
+// At the top
 import { Link, useParams, useNavigate } from "react-router-dom";
 ```
 
-Inside the `BookmarkDetails` function
+Configure `useNavigate`.
 
 ```js
+// src/Components/BookmarkDetails.js
+// Inside the function
 let navigate = useNavigate();
 ```
+
+Navigate to the 404 view, if a bookmark is not found.
 
 ```js
 useEffect(() => {
@@ -122,23 +115,21 @@ useEffect(() => {
 
 When we think of our users, they want to create a bookmark and then want to see the success that their bookmark has been created. So the flow will be:
 
-- A user fills out the create form
-- Presses the submit button
-- Submit sends a post request to the express API
-- Upon successful request, we'll redirect the user back to the index view, where they will see their bookmark added as the last item
-- If there is an error, there will be a message in the console (again, during lab time, you can build a component/use conditional rendering to provide a better user experience, we won't do this in the interest of time)
-
-**src/BookmarkNewForm.js**
-
-Add the URL for the API
+- A user fills out the create form.
+- Presses the submit button.
+- Submit sends a POST request to the express API.
+- Upon successful request, redirect the user back to the index view, where they will see their bookmark added as the last item.
+- If there is an error, there will be a message in the console (again, during lab time, you can build a component/use conditional rendering to provide a better user experience, we won't do this now in the interest of time).
 
 ```js
+// src/BookmarkNewForm.jsx
 const API = import.meta.env.VITE_API_URL;
 ```
 
 Add `useNavigate` so that it navigates back to the index page when a new bookmark is created.
 
 ```js
+// src/BookmarkNewForm.jsx
 import { useNavigate } from "react-router-dom";
 
 const navigate = useNavigate();
@@ -146,18 +137,29 @@ const navigate = useNavigate();
 
 There is a function `handleSubmit`. This is the function that gets called when the form is submitted.
 
-First, we must prevent the default. When the form does not have the attributes of `action` and `method`, it will default to refreshing the page.
+- Why does `event.preventDefault()` need to be called?
+- Why not use a regular button with an `onClick()` event?
+- What is the default behavior of a form that does not have an `action` and `method` attributes set?
+- Why is there a generic `handleSubmit` function?
+- Is there a case where you might want to reuse the form in the future?
 
-After that, we want to write some functionality to make a POST request and send the form data to our backend. THEN, once the request is complete, we want to navigate the user back to the Index page so they can see that their new bookmark has been added.
+- How do you set the method to POST with `fetch()`?
+- What is the default action of `fetch()`
+- When making a `POST` request do you have to set headers?
+- What kind of data (URL encoded, JSON, XML ...) will you send to the back-end?
+- How can you "inform" the back-end of the type of data you will send?
+- Can you send a JavaScript object?
+- If you can't send an objet, what kind of datatype can you send?
+- How can you convert a JavaScript object into the correct datatype?
 
-It is critical
-
-- Set the method to POST (by default fetch requests are type GET)
-- To set the headers to have a `Content-Type` of `application/json` - Convert the bookmark object coming from the form is converted into a string.
+- Imagine being a user, what would you expect would happen after a successful submission?
+- How can you build the app to give the user some feedback?
+- In the interest of time, you will only log an error. However, what is the experience for the user like if their POST request does not go through? What would make a better experience for a user that doesn't know to open dev tools and look through errors?
 
 Put it all together:
 
 ```js
+// src/Components/BookmarkNewForm.jsx
 const addBookmark = () => {
   fetch(`${API}/bookmarks`, {
     method: "POST",
@@ -185,19 +187,22 @@ const handleSubmit = (event) => {
 
 The edit form is very similar to the create form. However, for a better user experience, it should be pre-filled with the values rather than requiring the user to type everything from scratch.
 
-**src/Components/BookmarkEditForm.js**
-
+]
 At the top:
 
 ```js
+// src/Components/BookmarkEditForm.js
 import { useParams, Link, useNavigate } from "react-router-dom";
 const API = import.meta.env.VITE_API_URL;
+```
 
+```js
 // inside BookmarkEditForm function
 const navigate = useNavigate();
 ```
 
 ```js
+// inside BookmarkEditForm function
 useEffect(() => {
   fetch(`${API}/bookmarks/${index}`)
     .then((response) => {
@@ -218,7 +223,7 @@ Now, your form should be pre-loaded with the bookmark data.
 
 </details>
 
-Let's add the functionality to set a PUT request and update our API. Then we'll have the user return to the show page of the item they updated.
+Add the functionality to set a PUT request and update our API. Then we'll have the user return to the show page of the item they updated.
 
 ```js
 const updateBookmark = () => {
@@ -236,7 +241,7 @@ const updateBookmark = () => {
 };
 ```
 
-Call updateBookmark inside `handleSubmit`
+Call updateBookmark inside `handleSubmit()`
 
 ```js
 const handleSubmit = (event) => {
@@ -244,6 +249,8 @@ const handleSubmit = (event) => {
   updateBookmark();
 };
 ```
+
+- The new and edit forms are very similar. If you are ready for a challenge you can try to use one form component for both actions.
 
 ## Adding Delete Functionality
 

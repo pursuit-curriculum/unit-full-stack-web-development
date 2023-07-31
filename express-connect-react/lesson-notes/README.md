@@ -32,7 +32,7 @@ VITE_API_URL=http://localhost:3003
 
 (or whichever port your bookmarks API is on)
 
-- Start your React app
+- Start the React app in a different terminal tab.
 
 ### Landing Page/Index
 
@@ -69,7 +69,7 @@ At the top:
 const API = import.meta.env.VITE_API_URL;
 ```
 
-Confirm it is working
+Confirm it is working:
 
 ```js
 console.log(API);
@@ -91,7 +91,7 @@ const [bookmarks, setBookmarks] = useState([]);
 
 **src/Components/Bookmarks.js**
 
-Add `useEffect` to the component. Update the line that imports `useState`
+Add `useEffect` to the component. Update the line that imports `useState`.
 
 ```js
 useEffect(() => {
@@ -108,7 +108,7 @@ If there is an error, how can you handle it?
 .catch((error)=> {})
 ```
 
-Let's put it together with `useEffect` and `fetch`.
+Put it together with `useEffect` and `fetch`.
 
 Try to build from the outside-in, instead of left to right. Add the callback.
 
@@ -173,20 +173,23 @@ useEffect(() => {
 
 ### Express API
 
-**terminal**
+**Terminal**, make sure you are in the directory with the Express backend and on the same level as the `package.json`.
 
 - `npm install cors@2`
 
-**app.js**
-Near the top
+Require it:
 
 ```js
+// app.js
+// Near the top
 const cors = require("cors");
 ```
 
-**near `app.use(express.json())`**
+Configure it:
 
 ```js
+// app.js
+// Near the app.use(express.json())
 app.use(cors());
 ```
 
