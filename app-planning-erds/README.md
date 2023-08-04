@@ -1,10 +1,17 @@
-## ERD (Entity Relationship Diagram)
+# ERD (Entity Relationship Diagram)
 
 So far, you've been mostly working one or two data models, also known as entities. For example, bookmarks and users. However, when building a production level app there are tens, possibly hundreds of data models and their relationships can be very complex.
 
 In order to design and debug, the ability to draw out the entities and how they relate to one and other becomes a crucial tool.
 
-**Note:** When designing a business case, the data required is often referred to as an entity (for example, users, products etc.) - this tends to be less technical and more big picture-focused. This is in contrast to a data model, which gives the specifics required for the database, this will give exact column names, data types and other details for developers to build out the actual code. In our case of learning the basics, you may see entity and data model used interchangeably.
+> **Note**: When designing a business case, the data required is often referred to as an entity (for example, users, products etc.) - this tends to be less technical and more big picture-focused. This is in contrast to a data model, which gives the specifics required for the database, this will give exact column names, data types and other details for developers to build out the actual code. In our case of learning the basics, you may see entity and data model used interchangeably.
+
+## Lesson Objectives
+
+- Describe the purpose of an ERD and how it helps in planning applications.
+- Describe what an entity is and how it relates to business and technical requirements.
+- Create an ERD for an application when given a business case.
+- Given an ERD, identify the relationships between different entities and how that may influence the table schema.
 
 ### Entity relationships
 

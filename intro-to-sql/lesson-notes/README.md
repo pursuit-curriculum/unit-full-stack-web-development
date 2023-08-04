@@ -1,64 +1,62 @@
-## Getting Started
+# Intro to Databases/SQL Part 1
 
-You should have already downloaded PostgreSQL at the start of this course. [Pursuit Core Environment Set Up](https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/fundamentals/local_environment/README.md#postgresql)
+## Lesson Objectives
 
-It should already be running, and you should see an icon of an elephant in your Mac's bar.
+- Define databases and their role in a full-stack app
+- Introduction to PostgreSQL
+- Set up and drop (delete) a (sub) database
+- Create a table, set columns, and drop the table
+- **C**reate a row and put it into the table (insert data)
+- **R**ead from the table (query data)
+- **U**pdate from the table
+- **D**elete from the table
+- Bonus: Limit, Sorting, and Aggregation
 
-![](../assets/postgres-app-icon.png)
+## Introduction
 
-If you don't see it, but you've installed it, use `spotlight` <kbd>command</kbd> <kbd>spacebar</kbd> to search and load it.
+- What is a Database?
 
-![](../assets/spotlight-postgres.png)
+### Getting Started
 
-You can configure PostgreSQL to always load on startup and stop/start your server from the icon.
+You should have already downloaded PostgreSQL at the start of this course. [Pursuit Core Environment Set Up](https://github.com/pursuit-curriculum-resources/guide-computer-setup/tree/main/postgresql)
 
-![](../assets/postgres-icon-details.png)
+The application should already be running. You should be able to enter the Postgres shell by typing:
 
-Today, we're going to use the PostgreSQL shell in the terminal. To launch it, go _anywhere_ in the terminal and type.
-
-- `psql`
-
-![](../assets/launch-psql.png)
+- `psql` anywhere in Terminal.
 
 ## SQL Syntax
 
-Even though keywords in SQL are not case-sensitive, the convention is to capitalize them.
+Which is the correct convention for SQL keywords?
 
 ```sql
--- correct
+-- first
 SELECT * FROM bookmarks;
 
--- incorrect
+-- second
 select * from bookmarks;
 ```
+
+Will you get an error if you don't capitalize correctly?
 
 **Note:** Comments start with two dashes `--`
 
 ## SQL's Big GOTCHAS
 
-Postgres in the terminal gives you some cues, but they can be hard to spot as a new user.
-
-A prompt ready to go is preceded by `=#`.
+- What status does the following prompt let you know?
 
 ![](../assets/prompt-ready.png)
 
-Semi-colons are required to end your statement. If you forget your semi-colon, the prompt will drop to the following line and appear as a `-#`.
+- What status does the following prompt let you know?
 
 ![](../assets/prompt-forgot-semi-colon.png)
 
-To fix this, add a semi-colon and press <kbd>return<kbd>
+- How can you fix this prompt back to a ready state?
 
-![](../assets/enter-semi-colon-to-end-statement.png)
-
-Another thing that can happen is that you get a lot of rows of data back, and you may not want to scroll through them all. To `q`uit that view, press `q`.
-
-You'll see a colon that will let you know there is more data, which you can use the down arrow to scroll through or press `q` to get your prompt back.
+- How do you quit out of a view with lots of data?
 
 ![](../assets/q-out-of-view.png)
 
 ## Create a Database
-
-PostgreSQL is a Database. When you run the application, you can create `sub-databases` that allow you to work on different projects. For example, you may have one for your bookmarks app, one for your budgeting app, and more. These sub-databases are most often referred to as `databases`, and you use the keyword `databases` to create them.
 
 Let's create a database and then drop (delete) it. Then we'll create a new one, connect it, and use it for the rest of this lesson.
 
@@ -81,20 +79,14 @@ CREATE DATABASE lesson_db;
 
 ## Data types
 
-As we've been using Express and creating our data as arrays inside objects, we could play it fast and loose with datatypes. We could enter `4` as `4` (a number) or `'4'` - a string. JavaScript didn't care.
+Here are some of the most common datatyes for PostgreSQL. Define what each one is
 
-PostgreSQL is more strict and expects the correct data types in the columns we will create. Here are some of the most common ones
-
-1. int - whole number
-1. decimal - float/decimal
-1. bool - boolean
-1. varchar(n) - small text
-1. text - large text
-1. timestamp - date
-
-### Extra Reading
-
-[Hello, My Name is Mr. Null](https://www.wired.com/2015/11/null/)
+1. `INT`
+1. `DECIMAL`
+1. `BOOL`
+1. `VARCHAR(n) `
+1. `TEXT`
+1. `TIMESTAMP`
 
 ## Create a Table
 
@@ -115,14 +107,14 @@ DROP TABLE foo;
 -- 'houses' table has an id column `serial`, a number that increases with each addition, and columns for address, city, state, price, and boolean properties for pool and for_sale.
 
 CREATE TABLE
- Houses
+ homes
  ( id serial, address TEXT NOT NULL, city TEXT, st varchar(2), price INT, pool BOOLEAN DEFAULT false, for_sale BOOLEAN);
 
 -- show description of columns for the table houses
-\d houses;
+\d homes;
 ```
 
-Additionally, we are adding an `id` - an id is a helpful field. All of our data is subject to change. The hotel name can change, and there can be a typo that needs fixing. An id is a unique identifier for each row. The keyword [serial](https://www.postgresql.org/docs/9.2/datatype-numeric.html) provides us with this functionality of increasing the id number automatically.
+- What is the purpose of the `id` field?
 
 ![](../assets/create-and-see-table.png)
 
@@ -133,6 +125,9 @@ You can make changes to the table you've created.
 **IMPORTANT:** You cannot roll back changes or undo deletes with a PostgreSQL database. When working in production, be sure to have backup systems in place.
 
 ```sql
+-- rename a table
+ALTER TABLE homes RENAME TO houses;
+
 -- add a test string column
 ALTER TABLE houses ADD COLUMN test TEXT;
 
@@ -142,8 +137,6 @@ ALTER TABLE houses DROP COLUMN test;
 -- rename a column
 ALTER TABLE houses RENAME st TO state;
 
--- rename a table
-ALTER TABLE Houses RENAME TO houses;
 ```
 
 See the columns in the house's table again.
@@ -163,19 +156,15 @@ VALUES
 ('99 Sunnyside Drive', TRUE, 100, 'NY', 'Springfield', true);
 ```
 
-**Success** will look something like
+- How can you see the data in your table?
 
-```SQL
-INSERT 0 1
-```
-
-We can see our data by doing a query. The `*` (star) means show all the columns.
+- What does the `*` (star) mean?
 
 ```SQL
 SELECT * FROM houses;
 ```
 
-You don't have to enter all the fields (only the required ones)
+Create a new row:
 
 ```SQL
 INSERT INTO
@@ -189,8 +178,6 @@ Remember, you can use the `up` arrow to scroll to previous commands to run.
 ```SQL
 SELECT * FROM houses;
 ```
-
-Again to see the new entry.
 
 Let's add some more houses (copy-paste from the notes into your terminal):
 
@@ -264,13 +251,15 @@ SELECT * FROM houses WHERE pool IS NOT NULL;
 
 ## Update a Row
 
+Use the keyword `UPDATE` to update one or more rows.
+
 ```SQL
 UPDATE houses SET pool = TRUE WHERE id = 7;
 ```
 
 Typically actions like creating a new item or updating and deleting an item don't return any rows.
 
-However, sometimes we want to see the changes we made. We can add a `RETURNING` statement. This saves us from making a follow-up query if we want that data.
+However, sometimes we want to see the changes we made. We can add a `RETURNING` statement. This saves us from making a follow-up query if we want to use the data immediately.
 
 ```SQL
 UPDATE houses SET for_sale = TRUE WHERE id = 9 RETURNING *;
@@ -282,23 +271,17 @@ UPDATE houses SET for_sale = TRUE WHERE id = 9 RETURNING *;
 DELETE FROM houses WHERE id = 1;
 ```
 
+> **NOTE**: DANGER! Forgetting the `WHERE` clause for Update or DELETE can cause every single row to update/delete.
+
 ## Delete Many Rows and See the Address
 
 ```SQL
 DELETE FROM houses WHERE pool = false RETURNING address, state;
 ```
 
-## Quit PostgreSQL Shell
+## Limit
 
-To quit `psql`, type `\q`.
-
-## BONUS
-
-### Limit
-
-Our data set is very tiny right now. If we were to imagine a shopping site, we usually don't want to load hundreds or thousands of products simultaneously. It would be very slow and typically unnecessary.
-
-We can limit how many rows we get back.
+Imagine the database had 10,000 entries. What is the benefit of a `LIMIT` clause?
 
 ```SQL
 -- select all rows from the house's table, but show only the first row
@@ -307,7 +290,9 @@ SELECT * FROM houses LIMIT 1;
 
 ### Offset
 
-If we were to imagine pagination for our store, we would also want to offset (start at a later row) the responses on upcoming pages.
+Imagine this data was (again 10,000+ rows big) and being used for a real estate website. What would be the benefit of using the `OFFSET` and `LIMIT` clauses?
+
+- When you visit a website that has a lot of items, does it typically load all the items at once? Why or why not?
 
 ```SQL
 -- For comparison to the next one
@@ -319,7 +304,7 @@ SELECT * FROM houses LIMIT 1 OFFSET 1;
 
 ### Sorting
 
-It's essential not to rely on the order you put things in the database as a form of sorting. When you need to sort your data, do so with specific SQL commands.
+If you want to sort your data you should rely on `ORDER BY` and not the order you think the rows are in. Why?
 
 ```sql
 -- select all rows from the houses table, order by name alphabetically
@@ -335,15 +320,25 @@ SELECT * FROM houses ORDER BY price ASC;
 SELECT * FROM houses ORDER BY price DESC;
 ```
 
-### Combination
+## Combination
+
+Of the following statements, which is a valid order?
 
 ```SQL
 SELECT address, city, state FROM houses ORDER BY city, state ASC LIMIT 2 OFFSET 2;
 ```
 
-## SUPER BONUS
+```SQL
+ ORDER BY city, state ASC LIMIT 2 OFFSET 2 SELECT address, city, state FROM houses;
+```
 
-### Counts and Aggregation
+```SQL
+SELECT address, city, state FROM houses state ASC LIMIT 2 OFFSET 2 ORDER BY city;
+```
+
+What kind of messages do you get when you create statements that are out of order?
+
+## Counts and Aggregation
 
 ```sql
 -- show the total number of houses.
@@ -364,7 +359,11 @@ SELECT AVG(price), for_sale FROM houses GROUP BY for_sale;
 -- show the MIN price of houses.
 SELECT MIN(price) FROM houses;
 
--- divide all rows into groups by for_sale. Show the MIN of the price of each group. Also, show the for_sale of each group
+-- divide all rows into groups by for_sale. Show the MIN of the price of each group. Also, show the for_sale of each group.
 SELECT MAX(price), for_sale FROM houses GROUP BY for_sale;
 
 ```
+
+## Quit PostgreSQL Shell
+
+To quit `psql`, type `\q`.
