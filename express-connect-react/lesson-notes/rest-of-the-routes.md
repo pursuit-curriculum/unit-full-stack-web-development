@@ -40,7 +40,7 @@ At the top:
 const API = import.meta.env.VITE_API_URL;
 ```
 
-- What does the React Router Dom function `userParams` do?
+- What does the react-router-dom function `userParams` do?
 - How will we incorporate URL params into the Show route?
 - How can you create a 404 view in React using React Router?
 

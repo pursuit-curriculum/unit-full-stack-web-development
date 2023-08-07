@@ -4,7 +4,7 @@
 
 You now have a nicely working back-end API that uses Express to serve JSON with full CRUD. Unfortunately, asking users to use Postman or cURL to be able to use your app isn't the best user experience for non-developers. You need to build a front-end.
 
-> **Note**: This lesson is designed to span two lesson blocks rather than the usual one. A good stopping point is after completing the Index route, then completing the rest in the follow-up lesson. Check in with your instructor to be sure.
+> **Note**: This lesson is designed to span two lesson blocks rather than the usual one. A good stopping point is after completing the Index route, then completing the rest in the follow-up lesson. Check in with your instructor to be sure this will be the split they are planning.
 
 ## Learning Outcomes
 
@@ -21,7 +21,7 @@ By the end of this lesson, you should be able to:
 
 ## The Seven RESTful Routes
 
-The seven RESTful routes are the classic example of a RESTful pattern. Before front-end applications like React became more standard, servers handled creating HTML views for a website. That means that there are two additional views: `New`, which is a view with a form for users to fill out and submit `Create` requests, and `Edit`, which is a view with a form for users to fill out and submit an `Update` requests. And specific routes like `Create`, `Delete` and `Update` don't have views, so there is nothing to build on the front-end for them.
+The seven RESTful routes are the classic example of a RESTful pattern. Before front-end applications like React became more standard, servers handled creating HTML views for a website. That means that there are two additional views: `New`, which is a view with a form for users to fill out and submit `POST` requests, and `Edit`, which is a view with a form for users to fill out and submit `PUT` requests. And specific routes like `Create`, `Delete` and `Update` don't have views, so there is nothing to build on the front-end for them.
 
 While this pattern is classic, and you will follow it exactly for learning fundamentals, you will see many variations in the wild. These variations are built to meet an application's specific needs and improve user experience.
 
@@ -52,7 +52,7 @@ Do you notice any patterns with the front-end routes?
 
 <details><summary>Answer</summary>
 
-All the front-end routes are views, and all require GET requests to allow a user to read data.
+All the front-end routes are views, and all require GET requests to allow a user to read data or access a form.
 
 There are no POST, PUT, or DELETE routes that have views.
 
@@ -69,7 +69,7 @@ A [React App with starter code is available for this code along](https://github.
 - Additional components will be in the `src/Components` folder.
 - The API calls are the only parts of the app that need to be built.
 
-While the `Pages` components will be very lean and likely have one component, you could imagine that each view would be far more complex for a professional application.
+While the `Pages` components will be very lean and likely have one component, you could imagine each view would be far more complex for a professional application.
 
 ### The Base URL
 
@@ -184,15 +184,15 @@ Go to the Express API to set up this allowance.
 
 ## CORS
 
-So far, you've been building simple apps to learn the basics. One topic that has not been addressed is protecting your applications from hackers and other malicious or unauthorized usage of your applications.
+So far, you've been building simple apps to learn the basics of building full-stack applications. One topic that has not been addressed is protecting your applications from hackers and other malicious or unauthorized usage of your applications.
 
-An example of this is imagine you have been working on a banking application - let's call it Bank-A. In it, you have security measures like passwords. Bank-A contains many sensitive information: name, address, social security number, bank account numbers, and more. A malicious actor could make a website Bank-B that looks like Bank-A. If a user mistakenly goes to Bank-B, they can enter their login information into Bank-B. Bank-B can then create a login request to Bank-A, capture all the information, and make additional requests to transfer money or delete accounts.
+An example of this is imagine you have been working on a banking application - let's call it Bank-A. In it, you have security measures like passwords. Bank-A contains a lot of sensitive information: name, address, social security number, bank account numbers, and more. A malicious actor could make a website called Bank-B that looks like Bank-A. If a user mistakenly goes to Bank-B, they can enter their login information into Bank-B. Bank-B can then use the user input, create a login request to Bank-A, capture all the information, and make additional requests to transfer money or delete accounts.
 
-One way to prevent this is to build in an extra request that comes before each request. This request is typically referred to as a [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request). This preflight request checks several things, including the server origin against the client origin. If the origins are different, the actual request is rejected.
+One way to prevent this is to build in an extra request before each request. This request is typically referred to as a [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request). This preflight request checks several things, including the server origin against the client origin. If the origins are different, the actual request is rejected.
 
-In this case, Bank-A will automatically reject any requests from Bank-B because the origin is different than expected. This cross-origin blocking is called [`Cross-Origin Resource Sharing` or CORS for short](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
+In this case, when preflight checks are set up, Bank-A will automatically reject any requests from Bank-B because the origin is different than expected. This automatic cross-origin blocking is called [`Cross-Origin Resource Sharing` or CORS for short](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
-Suppose you have a situation where you have two different applications (like React and Express), and you need to allow Cross-Origin requests. In that case, you can set up your server to accept these requests from specific origins using the npm package `cors`.
+Suppose you have a situation where you have two different applications (like React and Express), and you need to allow Cross-Origin requests just between these two applications. In that case, you can set up your server to accept these requests from specific origins using the npm package `cors`.
 
 ### Add CORS to your Express API
 
@@ -216,11 +216,13 @@ Configure it:
 app.use(cors());
 ```
 
-This will allow ANY app at any origin to request your API. Since you are just building a sample app and not hosting it online, you don't have to worry about restricting it. Later, when your app is deployed to the cloud, you would want to be more thoughtful about how to allow/restrict access properly.
+This configuration (`cors()` function without arguments) will allow ANY app at any origin to request your API. Since you are just building a sample app and not hosting it online, you don't have to worry about restricting it. Later, when your app is deployed to the cloud, you would want to be more thoughtful about how to allow/restrict access properly.
 
 > **Note**: Also, confirm you do not have a function that blocks the POST route unless there is an `apikey` from the previous build. You may remove or comment on this function for this demo.
 
 ## Show
+
+Review the four views you are building. This section will demonstrate the show view.
 
 |  #  | Action |       URL        | HTTP Verb |   CRUD   |               Description               |
 | :-: | :----: | :--------------: | :-------: | :------: | :-------------------------------------: |
@@ -229,19 +231,19 @@ This will allow ANY app at any origin to request your API. Since you are just bu
 |  3  |  New   |   /colors/new    |    GET    | **R**ead |   Get a list (or index) of all colors   |
 |  4  |  Edit  | /colors/:id/edit |    GET    | **R**ead | Get an individual view (show one color) |
 
-You must request one color from the API from the show page. To get one color, you must request it by a specific parameter. When using a database, you would typically use the object's id. However, in this simple example, you can use the index position.
+You must request one color from the API from the show page. To get one color, you must request it by a specific parameter. When using a database, you would typically use the object's id. However, in this simple example, you can use the index position of the array of objects stored in the server.
 
 You would build a link to each item's show route on the index page.
 
 Then would use `useParams` from react-router-dom. This will allow you to access and use the URL parameters of the view to get the data for the specific color.
 
-Imagine you click on the color `cornsilk`, which has an array position of 2. The URL would be `/colors/{index}`. You will use React Router's `Link` component.
+Imagine you click on the color `cornsilk`, which has an array position of 2. The URL would be coded as `/colors/{index}`. When the link is generated, it will be `/colors/2`. You will use React Router's `Link` component to navigate to the show view.
 
 ```js
 <Link to={`/colors/${index}`}>{color.name}</Link>
 ```
 
-The fetch request for the show view will be similar to the index request. However, you'll add an error message if the particular color cannot be found. It will go to `/not-found`, an invalid index position that will trigger the 404 route. It still could use even better UI/UX, but this will do for this small build. As a challenge during lab, you can work on making this an even more excellent experience.
+The fetch request for the show view will be similar to the index request. However, you'll add an error message if the particular color cannot be found. It will go to `/not-found`, an invalid index position that will trigger the 404 route. It still could use even better UI/UX, which will be sufficient for this small build. As a challenge during lab, you can work on making this an even more excellent experience.
 
 > **Note**: A promise is a function that allows you to _WAIT_ for a response and _THEN_ do something. The .`then()` function takes a callback, and within that callback, you can write code that should run AFTER the first function has been fulfilled (usually by returning a value).
 
@@ -264,13 +266,13 @@ useEffect(() => {
 }, [index, navigate]);
 ```
 
-Notice that there are three buttons: back, edit, and delete. You'll build out, edit and delete shortly.
+Notice that this view also has three buttons: back, edit, and delete. You'll build-out edit and delete shortly.
 
-A user can use the back button in the browser. Why would you want to include a specific button that goes 'back'?
+A user can use the back button in the browser. Why would you want to include a specific " back " button?
 
 ## New
 
-When you think of your users, they want to create a color and then want to see the success that their color has been created. So the flow will be:
+When you think of your users, when they want to create a color, they also want to see the success that their color has been created. So the flow will be:
 
 - A user fills out the create form.
 - Presses the submit button.
@@ -278,21 +280,20 @@ When you think of your users, they want to create a color and then want to see t
 - Upon successful request, redirect the user back to the index view, where they will see their color added as the last item.
 - If there is an error, there will be a message in the console (again, during lab time, you can build a component/use conditional rendering to provide a better user experience, you won't do this now in the interest of time).
 
-There is a function `handleSubmit`. This is the function that gets called when the form is submitted.
+There is a function `handleSubmit()`. This is the function that gets called when the form is submitted.
 
 You can design inputs and other form elements without a form element with React. However, it is vital to use a form element for web accessibility and best practices. Forms allow for things like tabbing across fields and using the enter key as an alternative to a click event on a button. For people who use screen readers, even more functionality is built to allow them to use the app.
 
-As an aside, Domino's Pizza was sued for not having an accessible website and lost the case. They must now make their [website accessible](https://www.cnbc.com/2019/10/07/dominos-supreme-court.html).
-
 Back to building the form: first, you must prevent the default. When the form does not have the attributes of `action` and `method`, it will default to refreshing the page.
 
-After that, you want to write some functionality to make a POST request and send the form data to the back-end. Then, once the request is complete, you want to navigate the user back to the Index page so they can see that their new color has been added.
+After setting `preventDefault()`, you want to write some functionality to make a POST request and send the form data to the back-end. Then, once the request is complete, you want to navigate the user back to the Index page so they can see that their new color has been added.
 
 It is critical to:
 
 - Set the method to POST (by default, fetch requests are type GET).
-- Set the headers to a key-value of `Content-Type` of `application/json`.
+- Set the headers to a key value of `Content-Type` of `application/json`.
 - Convert the color object from the form to a string.
+- Redirect the user back to the index view where they can see their newly created color.
 
 Put it all together:
 
@@ -322,7 +323,7 @@ const handleSubmit = (event) => {
 
 ## Edit
 
-You'll find the Edit view to be very similar to the New view. Two key differences are that the form should be pre-loaded with data from the item to be edited, and the action taken upon form submission will be a PUT request rather than a POST request.
+You'll find the Edit view very similar to the New view. Two key differences are that the form should be pre-loaded with data from the item to be edited, and the action taken upon form submission will be a PUT request rather than a POST request.
 
 For now, you will have a separate new and edit form, but if you are looking to challenge yourself, you can work on creating one form that works for both routes.
 
@@ -366,3 +367,7 @@ const handleDelete = () => {
 ```
 
 [See the completed build](https://github.com/pursuit-curriculum-resources/pre-reading-connect-react-demo/tree/solution)
+
+## Extra Reading
+
+Domino's Pizza was sued for not having an accessible website and lost the case. They must now make their [website accessible](https://www.cnbc.com/2019/10/07/dominos-supreme-court.html). Building accessible websites is integral to building professional applications.

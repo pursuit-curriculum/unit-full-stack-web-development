@@ -16,23 +16,24 @@ By the end of this lesson, you should be able to:
 ## Getting Started
 
 - Go to your bookmarks app and get it started.
-- Open a new tab in terminal <kbd>command</kbd> <kbd>t</kbd>, do not shut down your bookmarks app
-- Note: if you end up having a lot of extra data from testing, restart your express API (restart nodemon)
+- Open a new tab in terminal <kbd>command</kbd> <kbd>t</kbd>, do not shut down your bookmarks app.
+- Note: if you end up having a lot of extra data from testing, restart your express API (restart nodemon).
 - Fork the starter code in your class GitHub Organization called [starter-express-connect-react](https://github.com/pursuit-curriculum-resources/starter-express-connect-react).
 - `git clone` the forked repository.
 - `cd` to the directory where you cloned it.
 - `npm install` to install dependencies already included in the `package.json`.
 - `touch .env`.
 
-**.env** (Details below)
+Add the back-end URL to the React app's .env file:
 
 ```
+# .env
 VITE_API_URL=http://localhost:3003
+
+# Or whichever port your bookmarks API is on
 ```
 
-(or whichever port your bookmarks API is on)
-
-- Start the React app in a different terminal tab.
+- Start the React app
 
 ### Landing Page/Index
 
@@ -54,10 +55,10 @@ We can see that we have a view for our index page. But we need to connect this a
 
 We can also go to the following:
 
-- http://localhost:3000/bookmarks/1 to see an empty show page
-- http://localhost:3000/bookmarks/1/edit to see an empty edit page
+- http://localhost:5173/bookmarks/1 to see an empty show page
+- http://localhost:5173/bookmarks/1/edit to see an empty edit page
 
-We can do so using `fetch` much like we did use third-party APIs.
+To get the data from the back-end API, we can use The [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) much like we did when using third-party APIs with our React apps.
 
 ## Setting Up the App to Make Requests
 
@@ -69,7 +70,7 @@ At the top:
 const API = import.meta.env.VITE_API_URL;
 ```
 
-Confirm it is working:
+Confirm it is able to get the environmental variable value:
 
 ```js
 console.log(API);
@@ -99,9 +100,9 @@ useEffect(() => {
 }, []);
 ```
 
-Once the request is complete, `then`, what should happen?
+- Once the request is complete, `then`, what should happen?
 
-If there is an error, how can you handle it?
+- If there is an error, how can you handle it?
 
 ```js
 .then((response)=> {})
