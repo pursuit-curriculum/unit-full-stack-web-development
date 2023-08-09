@@ -174,7 +174,7 @@ useEffect(() => {
 
 ### Express API
 
-**Terminal**, make sure you are in the directory with the Express backend and on the same level as the `package.json`.
+**Go to your Terminal**, make sure you are in the directory with the Express backend and on the same level as the `package.json`.
 
 - `npm install cors@2`
 

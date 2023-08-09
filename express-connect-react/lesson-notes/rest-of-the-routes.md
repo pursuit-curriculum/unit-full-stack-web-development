@@ -187,7 +187,6 @@ const handleSubmit = (event) => {
 
 The edit form is very similar to the create form. However, for a better user experience, it should be pre-filled with the values rather than requiring the user to type everything from scratch.
 
-]
 At the top:
 
 ```js

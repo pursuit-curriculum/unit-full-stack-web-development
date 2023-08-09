@@ -8,8 +8,8 @@ By the end of this lesson, you should be able to:
 - Describe what a resource is and how it relates to internet applications.
 - Make requests with query parameters and URL queries to a locally running server via the browser.
 - Identify common errors that occur in building Express routes.
-  - Common error: Two responses
-  - Common error: Place routes in the correct order
+- Common error: Two responses
+- Common error: Place routes in the correct order
 - Access request parameters in an Express route.
 - Access query parameters in an Express route.
 - Access important data from the request object.
@@ -24,7 +24,7 @@ By the end of this lesson, you should be able to:
 
 - How do you add the Express package?
 
-- When you start your Express server, what address do you need to go to in the browser?
+- When you start your Express server, what address must you visit in the browser?
 
 ## Start coding
 
@@ -44,7 +44,7 @@ node_modules
 
 - Why and when do to start file/folder names with a `.`?
 
-- Why is it important to include the version number when installing packages for a class or tutorial?
+- Why must the version be included when installing packages for a class or tutorial?
 
 ### Set Up App
 
@@ -94,11 +94,12 @@ Get the app running with `nodemon server.js` and go to http://localhost:3333
 
 - What is the function of each file?
 
-- Why is it important to make different files?
-
+- `package.json`
 - `.env`
 - `app.js`
 - `server.js`
+
+- Why is it important to make different files?
 
 ## Mocking data
 
@@ -109,7 +110,7 @@ Get the app running with `nodemon server.js` and go to http://localhost:3333
 
 - What are data models?
 
-- Why do you need to assign it to `module.exports`?
+- Why must you assign it to `module.exports`?
 
 **models/rock.js**
 
@@ -156,7 +157,7 @@ http://localhost:3333/rocks
 
 ### Showing each rock
 
-Create a dynamic route and use the index position to access a specific rock.
+Create a dynamic route and access a specific rock using the index position.
 
 ```js
 // ROUTES
@@ -172,14 +173,14 @@ http://localhost:3333/rocks/1
 
 ## A Common Error
 
-You can only have one response for every request: This is the rule of the http protocol. If you try to send multiple responses, you'll get an error in the terminal.
+You can only have one response for every request: This is the rule of the http protocol. You'll get an error in the terminal if you try to send multiple responses.
 
 ```js
 app.get("/rocks/oops/:index", (req, res) => {
   const { index } = req.params;
   res.send(rocks[index]);
   // error cannot send more than one response!
-  res.send("this is the index: " + index);
+  res.send("This is the index: " + index);
 });
 ```
 
@@ -204,13 +205,14 @@ http://localhost:3333/rocks/not_a_valid_index_position
 
 ## Place routes in the correct order
 
+- What is a static route?
 - What is a dynamic route?
 
 First, demonstrate what happens when the dynamic route comes first:
 
 ```javascript
 app.get("/rocks/:index", (req, res) => {
-  //:index can be anything, even awesome
+  // :index can be anything, even awesome
   res.send(rocks[req.params.index]);
 });
 
@@ -228,7 +230,7 @@ Now, reorder them so that more specific routes come before less specific routes 
 ```javascript
 app.get("/rocks/awesome", (req, res) => {
   res.send(`
- <h1>rocks are awesome!</h1>
+ <h1> Rocks are awesome!</h1>
  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pyrite_-_Huanzala_mine%2C_Huallanca%2C_Bolognesi%2C_Ancash%2C_Peru.jpg/260px-Pyrite_-_Huanzala_mine%2C_Huallanca%2C_Bolognesi%2C_Ancash%2C_Peru.jpg" >
  `);
 });
@@ -258,7 +260,7 @@ app.get("/question/:firstName/:lastName", (req, res) => {
 http://localhost:3333/question/David/Bowie
 
 - Try other first names and last names
-- Can you have special characters like `.` or an empty space?
+- Can you have special characters like `.` or a space?
 
 ## Query Strings
 
@@ -298,10 +300,24 @@ app.get("/calculator/:operator", (req, res) => {
   if (req.params.operator === "add") {
     sum = Number(num1) + Number(num2);
   }
-  res.send("sum is " + sum);
+  res.send(sum);
+});
+```
+
+- Why did you get an error with the response?
+- How can you correct the error?
+
+```js
+app.get("/calculator/:operator", (req, res) => {
+  const { num1, num2 } = req.query;
+  let sum = 0;
+  if (req.params.operator === "add") {
+    sum = Number(num1) + Number(num2);
+  }
+  res.send("" + sum);
 });
 ```
 
 **Bonus**
 
-Can you figure out how to add the functionality of `subtract`, `multiple`, and `divide` ?
+Can you figure out how to add the functionality of `subtract`, `multiple`, and `divide`?

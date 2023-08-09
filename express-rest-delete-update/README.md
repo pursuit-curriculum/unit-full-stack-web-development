@@ -15,7 +15,7 @@ Even though the command line is powerful and you can do amazing things like this
 
 So, some developers built a GUI (Graphical User Interface) to allow developers to test their back-ends called Postman.
 
-If you haven't already, [download Postman](https://www.postman.com/downloads/)
+If you haven't already, [download Postman](https://www.postman.com/downloads/).
 
 Once you open the app, it will ask you to log in. However, looking carefully, you can find a `skip` option in tiny letters.
 
@@ -172,6 +172,6 @@ You built your first single-model full CRUD RESTful API with Express!
 
 You have a simple app that stores HTML color names. Users can create, read, update, and delete colors.
 
-Unfortunately, asking users to make updates using Postman isn't give your app any wow factor.
+Unfortunately, asking users to make updates using Postman isn't giving your app any wow factor.
 
 For some wow factor, you'll need to build a front-end.

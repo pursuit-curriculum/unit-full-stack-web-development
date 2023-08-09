@@ -4,11 +4,9 @@
 
 Thus far, you've built applications for the client side of the internet. Today you'll begin learning how to make servers that take requests from the client and generate responses.
 
-Recall that when you created forms and had a user send data, it was only stored temporarily. Back-ends (with databases) will let you store data in a persistent way.
+Recall that when you created forms and had a user send data, it was only stored temporarily. Back-ends (with databases) will let you persistently store data. You've also used third-party APIs. Now, you'll be able to learn how to build your own API.
 
-You've also used third-party APIs. Now, you'll be able to learn how to build your own API.
-
-Servers are computers that run specific software. The servers are always on; they constantly listen for requests and respond.
+Remember, servers are computers that run specific software. The servers are always on; they constantly listen for requests and respond.
 
 ![client server, request response](./assets/client-server.png)
 
@@ -29,14 +27,12 @@ By the end of this lesson, you should be able to:
 
 ## Getting Started with Express
 
-Take a moment to look through [the documentation](https://expressjs.com). This documentation may be difficult to use if you are new to servers. You can utilize this documentation better as you gain more knowledge and experience.
-
-Instead, you can start by looking at the [quickstart guide available on npm](https://www.npmjs.com/package/express). You can read or code along.
+Take a moment to look through [the documentation](https://expressjs.com). This documentation may be difficult to use if you are new to servers. You can utilize this documentation better as you gain more knowledge and experience. Instead, you can start by looking at the [quickstart guide available on npm](https://www.npmjs.com/package/express). You can read or code along.
 
 ### Project set up
 
 - Navigate to your Desktop or another convenient folder.
-- `git status to make sure you are not already in a `git` repository.
+- `git status` to ensure you are not already in a `git` repository.
 - `mkdir intro-to-express`
 - `cd intro-to-express`
 - `touch .gitignore`
@@ -82,7 +78,7 @@ app.get("/", (request, response) => {
 });
 ```
 
-Finally, turn on our app to always listen to requests. This example will use port 3003. You can typically use any port between 3000 and 9999, as other apps are not using them on your computer. This port will be automatically configured for you when you put your app online, which is why you don't have to type it in the browser's URL when you visit your usual web sites.
+Finally, turn on our app to always listen to requests. This example will use port 3003. You can typically use any port between 3000 and 9999 as long as other apps are not using them on your computer. When you put your app online, this port will be automatically configured for you, so you don't have to type it in the browser's URL when you visit your usual websites.
 
 ```js
 const express = require("express");
@@ -101,9 +97,7 @@ Start this app in the terminal:
 node app.js
 ```
 
-This time, you'll notice that the terminal app now hangs. The cursor will be in place, and you won't get a new line prompt.
-
-This means the Express app is running and listening for requests on port 3003.
+This time, you'll notice that the terminal app now hangs. The cursor will be in place, and you won't get a new line prompt. This means the Express app is running and listening for requests on port 3003.
 
 To cancel it, you have to press <kbd>control</kbd> <kbd>c</kbd>
 
@@ -131,13 +125,13 @@ Neato! But how do you make a request?
 
 ![](./assets/welcome-mat.jpg)
 
-You need to access local host for this server. Everyone's computer has a default IP address of `127.0.0.1`, but that's a bit annoying to put in the URL. You can instead type `localhost` in the browser's URL bar and go there.
+You need to access `localhost` for this server. Everyone's computer has a default IP address of `127.0.0.1`, but that's a bit annoying to put in the URL. You can instead type `localhost` in the browser's URL bar and go there.
 
 http://localhost:3003
 
 **SUCCESS**: Do you see `Hello World` appear in the browser? Then you've successfully written your first Express server!
 
-> **Note**: You are using the `http` protocol. http is designed to send HTML, which is the datatype string. As you build your applications, it is essential to remember this, especially if you are working with other data types, such as numbers, because you will need to convert them into and out of strings.
+> **Note**: You are using the http protocol. http sends HTML, which is the datatype string. As you build your applications, it is essential to remember this, especially if you are working with other data types, such as numbers, because you will need to convert them into and out of strings.
 
 ## Common Errors
 
@@ -145,7 +139,7 @@ http://localhost:3003
 
 ![](./assets/broken-package-json.png)
 
-Fix this by going into the `package.json` and ensuring your JSON is valid.
+Fix this by entering the `package.json` and ensuring your JSON is valid.
 
 You can use [an online JSON Validator to check if you get stuck](https://jsonlint.com/?code=).
 
@@ -173,17 +167,15 @@ app.get("/", (request, response) => {
 
 When you refresh the browser, nothing changes.
 
-You need to go to the terminal, press <kbd>control</kbd> <kbd>c</kbd>, then type `node app.js` every single time you make a change.
-
-This isn't a good workflow.
+You need to go to the terminal, press <kbd>control</kbd> <kbd>c</kbd>, then type `node app.js` every single time you make a change. This isn't a good workflow.
 
 So you will install a new package called `nodemon` (short for node monitor - how you pronounce it is up for debate). Nodemon is going to monitor your app for changes to files. When it detects that you've made a change and saved it, it will automatically restart your server for you.
 
-One more thing. You can install `nodemon` globally to work with every Node app, or you can install it as a dev dependency for each Express project. Each strategy has pros and cons, so setting up both will be shown here.
+One more thing. You can install `nodemon` globally to work with every Node app or install it as a dev dependency for each Express project. Each strategy has pros and cons, and your instructor may prefer one approach over the other. Therefore setup for both approaches will be shown here.
 
 ### Globally install nodemon
 
-Since you will want this for every Express app, you can install nodemon globally so you can use it without having to install it every single time.
+Since you will want this for every Express app, you can install nodemon globally to use it without having to install it every single time.
 
 In terminal run
 
@@ -193,11 +185,9 @@ The `-g` means install this package globally.
 
 - Your computer may deny you access to make this change. You can try again by running:
 
-- `sudo !!`
+- `sudo !!` - This command will run the last command you typed with `sudo` in front of it.
 
-This command will run the last command you typed with `sudo` in front of it.
-
-`sudo` means `super user do`. It is a very powerful command. It can override a lot of safety settings on your computer. You should only use it if you know **EXACTLY** what you are doing. Improper use can turn your MacBook into a brick that can only be fixed by taking it to Apple (they have the technology to recover your computer back to factory state, but you may lose all your work that was not backed up).
+> **Note**: `sudo` means `super user do`. It is a very powerful command. It can override a lot of safety settings on your computer. You should only use it if you know **EXACTLY** what you are doing. Improper use can turn your MacBook into a brick that can only be fixed by taking it to Apple (they have the technology to recover your computer back to factory state, but you may lose all your work that was not backed up).
 
 Your computer will likely ask you for your computer login password. The UI is not great - when you type, there is no feedback on how many characters you have typed. Press enter when you've entered your password. If you've gotten your password wrong, rerun the above terminal command by pressing the up arrow.
 
@@ -217,7 +207,7 @@ Now you can type just `nodemon` and start your server!
 
 ## Install nodemon and run as a dev dependency
 
-Alternatively, if you do not want to install nodemon globally, add it as a dev dependency and update your `package.json`. It is essential to save it as a dev dependency because only developers only. It will not be used to run your app if you end up deploying it to the web.
+Alternatively, if you do not want to install nodemon globally, add it as a dev dependency and update your `package.json`. It is essential to save it as a dev dependency because only developers need it to build an application. It will not be used to run your app if you end up deploying it to the web.
 
 `npm install nodemon@2 --save-dev`
 
@@ -225,9 +215,8 @@ Then in `package.json`
 
 ```json
  "scripts": {
- "test": "echo \"Error: no test specified\" && exit 1",
- "dev" : "nodemon app.js"
- },
+ "dev": "nodemon app.js"
+ }
 ```
 
 Then, to run your app, type:
@@ -255,27 +244,23 @@ app.listen(3003, () => {
 });
 ```
 
+To access this next route, you will go to http://localhost:3003/universe
+
 ## grep and kill nodemon
 
 Suppose you don't cancel out of your server properly before putting your computer to sleep or try to run nodemon on the same port multiple times. In that case, you may have `nodemon` running amok in your background processes.
 
-You can restart your whole computer, or you can kill the process.
+You have two options: you can restart your whole computer, or you can kill the process.
 
-First, you must find the process.
+To kill the process, first, you must find the process. To do so, you'll run the command `ps` (short for process status) and the flag `-A` (all).
 
-To do so, we'll run the command `ps` (short for process status) and the flag `-A` (all).
-
-We will then use pipe `|` to use `grep` (global regular expression print) to search for `nodemon` specifically.
-
-First, run
+You will then use pipe `|` to use `grep` (global regular expression print) to search for `nodemon` specifically.
 
 - `ps -A | grep nodemon`
 
 ![](../assets/ps-grep.png)
 
-On the left, you will see the process number. In this case, it is `26625`.
-
-Now you can kill the process by typing.
+On the left, you will see the process number. In this case, it is `26625`. Now you can kill the process by typing:
 
 - `kill 26625`
 
@@ -283,5 +268,4 @@ Get into good habits of gracefully exiting out of programs to avoid taking extra
 
 ### An aside about newer JS syntax
 
-You may have seen other JavaScript applications use
-`import` and `export`. This unit will use CommonJS (`require` and `module.exports`) for back-end applications and ESM modules `import` and `export` for the front-end applications, as you will likely see both on the job or when you look at coding examples.
+You may have seen other JavaScript applications use `import` and `export`. This unit will use CommonJS (`require` and `module.exports`) for back-end applications and ESM modules `import` and `export` for the front-end applications. Express 4.x and several other packages you'll be using in this unit are still set up as CommonJS modules (Summer 2023). It would take extra configuration to get them up and running. For ease of learning, you will stick with CommonJS. Additionally, you will likely see both CommonJS and ESM modules on the job or when you look at coding examples. Therefore having experience with both will probably be beneficial.

@@ -28,6 +28,8 @@ By the end of this lesson, you should be able to:
 
 - As a class, build a basic express server based on the pre-reading or [npm documentation](https://www.npmjs.com/package/express)
 
+- Did you build it exactly as the documentation showed it? Or did you change anything like syntax or variable names?
+
 - Identify the role of each argument within the express route's callback function:
 
 ```js
@@ -42,7 +44,7 @@ app.get("/", (request, response) => {
 
 - How can you run your application so that it automatically updates when you make changes to your code?
 
-- What is `nodemon`, how do you install it?
+- What is `nodemon`? How do you install it?
 
 - How do you use `nodemon`?
 
@@ -50,6 +52,8 @@ app.get("/", (request, response) => {
 
 - How can you add additional routes?
 
+- What must you type in the browser URL to access the new routes?
+
 - What is the data type of the response body?
 
-- If you lose control of your server and it runs in the background, what can you do to stop it?
+- If you lose control of your server and it runs in the background, how can you stop it?

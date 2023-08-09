@@ -43,7 +43,7 @@ There are many databases. A common type is a relational database, which stores d
 
 While a Google sheet can hold hundreds or thousands of records, it isn't meant to hold millions or billions of records (think about a database that contains all the user data of FaceBook). Additionally, you can relate different tables (sheets), allowing you to do powerful things with data. You'll get to see this in action in the next lesson.
 
-You'll be working with PostgreSQL (a successor to a database called `ingres`), an open-source RDBMS (relational database management system) created at the University of California Berkeley. It started being built in 1982.
+You'll be working with [PostgreSQL](https://www.postgresql.org/docs/current/intro-whatis.html) (a successor to a database called `ingres`), an open-source RDBMS (relational database management system) created at the University of California Berkeley. It started being built in 1982. You can access the [official documentation here](https://www.postgresql.org/docs/current/index.html)
 
 The [skeuomorphic representation of a database](https://en.wikipedia.org/wiki/Skeuomorph) is a stack of disks:
 

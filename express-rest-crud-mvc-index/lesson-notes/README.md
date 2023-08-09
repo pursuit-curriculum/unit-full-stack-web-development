@@ -135,11 +135,9 @@ With our simple app, making folders with single files seems a bit over-engineere
 
 - What are controllers?
 
-- How are controllers organized?
-
 - How should you organize controllers if you are following an MVC pattern?
 
-All of our routes related to our bookmarks are going to be starting with `/bookmarks`. We are going to name our `express.Router()` variable `bookmarks` to help us remember that this is base of the route. Let's code to understand it better:
+All of our routes related to our bookmarks are going to be starting with `/bookmarks`. We are going to name our `express.Router()` variable `bookmarks` to help us remember that this is base of the route (`http://localhost:3003/bookmarks/`). Let's code to understand it better:
 
 - `ls` - confirm you are in the same directory as `package.json`
 - `mkdir controllers`
@@ -203,6 +201,10 @@ app.get("*", (req, res) => {
   res.status(404).json({ error: "Page not found" });
 });
 ```
+
+- Why is it important to set the correct status code?
+- What datatype is the status code?
+- What is the default status code of your responses when you don't add a status code?
 
 ## Resource
 

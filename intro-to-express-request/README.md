@@ -25,13 +25,11 @@ How would you build this app? Are there developers building a route for every si
 
 Instead, you can use the URL to pass in values and design web applications in a programmatic way.
 
-To the users, the URL looks the same.
+To the users, the URL looks the same. But for the server code, you would write the route as something like:
 
-But for the server code, you would write the route as something like:
+`http://darksky.net/forcast/:location/:timezone/:language`
 
-http://darksky.net/forcast/:location/:timezone/:language?units=metric&date=05312021
-
-In the request, you would be able to get an object that looks like this that comes from the request parameters:
+In the actual request, you would be able to get an object that looks like this that comes from the request parameters:
 
 ```js
 {
@@ -41,7 +39,7 @@ In the request, you would be able to get an object that looks like this that com
 }
 ```
 
-And you would also be able to get a second object that comes from the query strings, which would look like this:
+And you would also be able to get a second object that comes from the query strings (key value pairs that come after the question mark at the end of the URL), which would look like this:
 
 ```js
 {
@@ -68,24 +66,11 @@ By the end of this lesson, you should be able to:
 
 ---
 
-## Quick Review
-
-You may read or code along. To code along, you may use your code from the previous pre-reading or start fresh. The code along begins in the `Separating concerns` section.
-
-- Express is a code library hosted on npm and written in JavaScript.
-- Express is a framework for building a web server.
-- In a new folder, type `npm init` to initialize a folder as an npm project.
-- Add npm packages by typing `npm install <package-name> `, e.g., `npm install express@4` or `npm install nodemon@2 --save-dev`
-- Use the `require()` function to bring in the Express code so that you can use it to a file named something like `app.js`
-- Add `app.listen(PORT)` to turn on the server. By default, it will listen to http://localhost. When you work on your computer, you must pick a port. Usually, server ports are in the numeric range of 3000 - 9000. When you host your projects on the web, the port will be automatically configured for you.
-
-You will add more complexity to this setup so that you can start bringing some more best practices into your app.
-
 ## JavaScript Environments
 
-There are many places (environments) to run JavaScript, for example, in the browser or terminal. Each place is a different environment: Your computer is a different environment than your friend's computer. You both have different usernames, passwords, and other configurations. Therefore, being able to add a file that stores specific information about running the code in the environment it is in is a crucial feature.
+There are many places (environments) to run JavaScript, for example, in the browser or terminal. Each place is a different environment: Your computer is a different environment than your friend's computer. You both have different usernames, passwords, and other configurations. Therefore, being able to add a file that stores specific information about running the code in a specific environment is in is a crucial feature.
 
-Make an environmental variable file and call it `.env`. It should not be tracked by Git, so it is added to the file in the project's `.gitignore`. This will allow each environment to keep its own file, and if there is sensitive information like passwords or API keys, they will also not be shared on GitHub.
+Make an environmental variable file and call it `.env`. It should not be tracked by Git, so it is added to the file in the project's `.gitignore`. This will allow each environment to keep its own file, and if there is sensitive information like passwords or API keys, they will also not be shared on GitHub. Remember, `.gitignore` is not a JavaScript file, so there is no need for quotes, or semi-colons.
 
 Example `.gitignore`:
 
@@ -105,16 +90,15 @@ To use environmental variables, you'll add a new npm package [dotenv](https://ww
 PORT=3333
 ```
 
-> **Note**: The `.env` file is not JavaScript, so don't add semi-colons, quotes, or extra white space.
+> **Note**: The `.env` file is also JavaScript file, so don't add semi-colons, quotes, or extra white space.
 
-When you want to access the values, you will access them through the `process.env` object:
+When you want to access the values, you will access them through the `process.env` object (after requiring and configuring `dotenv`, see below):
 
 ```js
 // The whole process.env object
 console.log(process.env);
 
 // Accessing the value of PORT from the .env file
-// Note: some configuration is required before you will be able to access this variable
 console.log(process.env.PORT);
 ```
 
@@ -122,12 +106,13 @@ console.log(process.env.PORT);
 
 ## Separating concerns
 
-You will be adding unit testing with Jest (or similar testing suite) for subsequent assignments. To set it up correctly, you have to set up the server in one file and the routes and other logic in other files.
-
-To code along, you can use your previous pre-reading Express app. You may need to refactor this Express app, if you have begun to build it. Alternatively, set up a new app for practice and review.
+You will be adding unit testing with Jest (or similar testing suite) for subsequent assignments. To set it up correctly, you have to set up the server in one file and the routes and other logic in other files. The following code examples will demonstrate how to do this.
 
 ## Getting started
 
+You make read or code along. To code along, you can get started with the steps below.
+
+- make a new project folder and `cd` into it
 - `touch .gitignore` (and set it up)
 - `npm init`
 - `npm i express`
@@ -222,7 +207,9 @@ When a request is made to a route that requires data, the data will be retrieved
 
 You can send this mock data to a client based on a request. Typically a list of a particular resource is referred to as an `index` or `index route`.
 
-The URL, data model, and data make up a server resource. [For more in-depth information for best practices for a resource, there is a good summary here.](https://www.ibm.com/docs/en/sva/9.0.7?topic=control-resources)
+The URL, data model, and data make up a server resource. [For more in-depth information for best practices for a resource, there is a good summary here.](https://www.ibm.com/docs/en/sva/9.0.7?topic=control-resources).
+
+You can import the colors array into `app.js` to access the data.
 
 ```js
 // app.js
@@ -258,7 +245,7 @@ Writing a route for each one would be:
 - Tedious
 - Hard to maintain
 
-Instead, you want user input for the color the user wants to see. For now, you'll use the array position and have the user type in the URL. Eventually, you would create a complete web page with links and id numbers for your colors. These routes are _dynamic_.
+Instead, you want user input for the color the user wants to see. For now, you'll use the array position and have the user type in the URL. Eventually, you would create a complete web page with links and id numbers for your colors. These routes are _dynamic_ because they can change based on inputs. This is in contrast to _static_ routes which always stay the same (like a contact page or about page).
 
 Create a request parameter by adding a `:` to distinguish it from a regular, static path.
 
@@ -417,7 +404,7 @@ Another way to get values from the URL is with query strings.
 
 Query strings go at the end of a path and start with a `?`. They are key-value pairs with the syntax of `value=100`.
 
-You can add as many as you like by separating them with an ampersand `&`.
+You can add as many as you like by separating them with an ampersand `&`. You don't need to create a new route for them. The data can still be passed into the base route.
 
 ```js
 app.get("/calculator/:operator", (req, res) => {

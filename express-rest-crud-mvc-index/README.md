@@ -81,7 +81,7 @@ Everyone in the restaurant has a clear idea of what their responsibility is. Oth
 
 Even though there is a typical pattern for a restaurant, there are many variations, like buffets, drive-throughs, and more. A pattern is a recommendation, not a rule.
 
-In terms of code, you will have a folder called `models` and a folder called `controllers`. While it is possible to have a `views` folder (and many applications use this folder) and build HTML templates, your applications will serve JSON, and a separate front-end app will be created to consume the API you've built.
+In terms of code, you will have a folder called `models` and a folder called `controllers`. While it is possible to have a `views` folder (and many applications use this folder) and build HTML templates, your applications will serve JSON, and a separate front-end app will be created to consume and create views for the API you've built.
 
 ## Views
 
@@ -95,7 +95,7 @@ Models will contain the code that interacts with the database. For now, it will 
 
 The controllers "control" how the views (client app) and models (data) interact. For example, if you have a user log in, you would only want them to be able to edit their account information and you would also not want them to see someone else's account information.
 
-Some other examples are that you may want your user to be able to create, read, update and delete posts on a social media post. Or maybe, you are building an interface for a weather station. In which case you don't want to allow editing or deleting of the data that is incoming.
+Some other examples are that you may want your user to be able to create, read, update and delete their posts on a social media post. Or maybe, you are building an interface for a weather station. In which case you don't want to allow editing or deleting of the data that is incoming.
 
 Controllers handle the logic for the application and are the go-between from the client to the database.
 
@@ -124,7 +124,7 @@ A controllers file will contain the routes specific for that resource.
 - `mkdir controllers`
 - `touch controllers/colorsController.js`
 
-First one must import Express into the file in order to be able to use it.
+First one must import Express into the file in order to be able to use the router functionality needed in the controllers file.
 
 Then the `router` must be configured. The router is what will allow you to create groups of associated routes that are relative to the base route.
 
@@ -142,7 +142,7 @@ colors.get("/", (req, res) => {
 module.exports = colors;
 ```
 
-Notice that the relative path is `/`. Because this is in a controller, you'll take steps to access this route not at the base route of `localhost/3000` (typically the landing or home page goes there) but rather at `localhost:/3000/colors`. To set this up, follow the steps below.
+Notice that the relative path is `/`. Because this is in a controller, you'll take steps to access this route not at the base route of `http://localhost:3000` (typically the landing or home page goes there) but rather at `http://localhost:/3000/colors`. To set this up, follow the steps below.
 
 Next, the colors resource code would be imported into the main file `app.js`.
 
@@ -181,7 +181,7 @@ app.get("*", (req, res) => {
 
 When you open up Chrome Dev Tools and go to the `Network` tab, you can see that this file loads with an http status of [304](https://http.cat/304) or [200](https://http.cat/200)
 
-But because this is a 404 [page not found](https://http.cat/404), you should make sure we are sending through the correct status code.
+But because this is a 404 [page not found](https://http.cat/404), you should make sure you are sending through the correct status code.
 
 ```js
 // 404 Page not found

@@ -18,24 +18,24 @@ How would you create the routes? Here are some examples. Think about the followi
 
 - Imagine inheriting a server that has the following routes. Do these routes fit the above principles?
 
-- `/January-Events/20/2019/Snow`
-- `/Snowstorms/Cancellations/Tomorrow`
-- `/Info/Events/Important/inclementWeather`
+  - `/January-Events/20/2019/Snow`
+  - `/Snowstorms/Cancellations/Tomorrow`
+  - `/Info/Events/Important/inclementWeather`
 
-How would you continue to build out the routes if the following events happened?
+- How would you continue to build out the routes if the following events happened?
 
-- December 18, 2018 - early dismissal
-- February 13, 2020 - half day
-- May 4, 2016 - windstorm/county power outage
+  - December 18, 2018 - early dismissal
+  - February 13, 2020 - half day
+  - May 4, 2016 - windstorm/county power outage
 
 - What are the challenges of creating routes for the above scenarios?
 
 - Did you make sure your routes are:
-- Stable
-- Organized
-- Following a simple pattern
-- Easily reorganized code
-- Understandable by creators and users
+  - Stable
+  - Organized
+  - Following a simple pattern
+  - Easily reorganized code
+  - Understandable by creators and users
 
 ### RESTful Routes
 
@@ -163,7 +163,7 @@ Before moving on, break down the cURL command.
 
 - What is `POST`? Why do you need it?
 
-- Can you type `localhost:3003/bookmarks` or must you type `http://localhost:3003/`?
+- Can you type `localhost:3003/bookmarks` or must you type `http://localhost:3003/bookmarks`?
 
 - Why do the keys and values of the data need to be wrapped in double quotes?
 
@@ -179,7 +179,7 @@ After making a POST request, make another GET request:
 
 - What is middleware?
 
-- Why do incoming data need to be parsed?
+- Why does the incoming data need to be parsed?
 
 ```js
 // app.js
@@ -205,7 +205,7 @@ Now we should be able to run our cURL commands and see our new data (don't forge
 
 We should also be able to see this change in our browser. Let's visit http://localhost:3003/bookmarks, and we should see our new bookmark at the bottom of the list.
 
-## Middleware in more depth
+## Custom middleware
 
 In the above example, you used some built-in middleware. You can also build your own.
 
@@ -213,7 +213,7 @@ In the above example, you used some built-in middleware. You can also build your
 // app.js
 app.use((req, res, next) => {
   console.log("This code runs for every request");
-  next();
+  return next();
 });
 ```
 
@@ -249,7 +249,7 @@ const validateURL = (req, res, next) => {
   console.log(
     "This function checks the validity of the URL entered by the user."
   );
-  next();
+  return next();
 };
 ```
 
@@ -257,7 +257,7 @@ Now it should let us complete the POST request.
 
 - What does the `next()` function do?
 
-- What happens if you use `return` instead of `next()`?
+- What happens if you only use `return` instead of `next()`?
 
 - Can middleware return a response?
 
@@ -286,7 +286,7 @@ const validateURL = (req, res, next) => {
   console.log(
     "This function checks the validity of the URL entered by the user."
   );
-  next();
+  return next();
 };
 
 module.exports = { validateURL };
@@ -344,6 +344,11 @@ So it would look like this.
 ```js
 req.body.url.match(/https?:\/\//);
 ```
+
+- The regular expressions starts and ens with a forward slash `/`.
+- Inside the regular expression the exact letters `http` are expected to be matched.
+- The `?` denotes that the previous character, `s` is optional.
+- Since `/` is a special character, it must be escaped. The backslash `\` allows the forward slash `/` to be used as a regular character.
 
 [learn more about regular expressions](https://regexone.com/)
 

@@ -2,9 +2,9 @@
 
 ## Introduction
 
-So far, you've learned a little about the MVC pattern for organizing and maintaining our code. You'll keep building your app with a loose adaptation of this pattern.
+So far, you've learned about the MVC pattern for organizing and maintaining yur code. You'll keep building your app with a loose adaptation of this pattern.
 
-You may encounter other code libraries or frameworks like Ruby on Rails. Ruby on Rails follows a principle of convention over configuration - meaning if you follow the rules of RoR, things will work _automagically_. Express is about thinking about your app needs and organizing it sensibly for what you have built. There is no one true way to organize an Express app, and you have to configure each step. The configuration gives you more control over how to build your app.
+You may encounter other code libraries or frameworks like Ruby on Rails(RoR). Ruby on Rails follows a principle of convention over configuration - meaning if you follow the rules of RoR, things will work _automagically_. Express is about thinking about your app needs and organizing it sensibly on your own. There is no one true way to organize an Express app, and you have to configure each step. The configuration gives you more control over how to build your app.
 
 To fully design your back-end, it's important to learn critical concepts and successful patterns to help you build robust back-ends.
 
@@ -47,11 +47,11 @@ This can be pretty challenging to design on your own. Therefore there are some s
 - Organized routes (easy to find and maintain)
 - Simple patterns(unnecessary complications are removed)
 - Easily reorganized code (design changes to the app require minor refactoring over a complete rewrite)
-- Understandable by creators and users
+- Understandable by creators and users.
 
 ## C.R.U.D. and methods
 
-So far, in your server builds, you have only been making requests to read data. Recall that there are four main things to do with data: **C**reate, **R**ead, **U**pdate, and **D**elete. Each of the four actions has an associated HTTP verb or method:
+So far, in your server builds, you have only been making requests to read data. Recall that there are four main things to do with data: **C**reate, **R**ead, **U**pdate, and **D**elete. Each of the four actions has an associated HTTP verb (also can be referred to as a method):
 
 - `GET` - request to read data
 - `POST` - request to create data
@@ -112,13 +112,21 @@ colors.get("/:arrayIndex", (req, res) => {
 
 What is the URL to access this route?
 
+http://localhost:3333/colors/0
+
+or
+
+http://localhost:3333/colors/1
+
+etc.
+
 ## Create
 
 | Action |   URL   | HTTP Verb |    CRUD    |    Description     |
 | :----: | :-----: | :-------: | :--------: | :----------------: |
 | Create | /colors |   POST    | **C**reate | Create a new color |
 
-Creating new data will use a new HTTP verb: POST. However, the path name in the URL will stay the same as for the index route. Different HTTP verbs create different routes. As you continue to manipulate the array of objects, here you will push the new data into the array.
+Creating new data will use a new HTTP verb: POST. However, the path name in the URL will stay the same as for the index route. Different HTTP verbs create different routes. You can manipulate the data using different routes, here you will push the new data into the array.
 
 You can choose to either show the entire updated array or show only the new item. The response can change depending on the goal of your application.
 
@@ -191,7 +199,7 @@ colors.post("/", (req, res) => {
 
 ![req.body is undefined](./assets/req.body-is-undefined.png)
 
-When you check [the documentation](https://expressjs.com/en/4x/api.html#req.body), you'll learn that, by default, `req.body` is undefined and populated when you use body-paring middleware.
+When you check [the documentation](https://expressjs.com/en/4x/api.html#req.body), you'll learn that, by default, `req.body` is undefined and populated only when you use body-parsing middleware.
 
 ## Body Parser
 
@@ -211,13 +219,6 @@ Next, update the data to be in proper JSON format. It must be an object, and eac
 
 Next, you must convert that incoming data into a usable JSON object. Express has built-in functionality to do this. In the next step, you'll set it up.
 
-<details><summary>Or, if you have the latest version of cURL you can type a somewhat shorter command:</summary>
-
-- `curl --json '{"name":"fuchsia"}' -X POST http://localhost:3003/colorss`
-
-- What is the same with this command? What is different?
-  For more info on the [--json flag](https://daniel.haxx.se/blog/2022/02/02/curl-dash-dash-json/)
-
 </details>
 
 ### Built-in middleware for body-parser
@@ -227,9 +228,9 @@ Express has built-in body-parsing functionality. To parse incoming JSON, you'll 
 
 Where should you put this functionality? Ideally, this function would happen after the request but before the response. Express allows you to create functionality in the middle of requests and responses, and these functions are called `middleware`.
 
-To mount middleware functions in your Express app, you will use the Express function [`app.use()`](https://expressjs.com/en/guide/using-middleware.html), which is a function to set up middleware.
+To mount middleware functions in your Express app, you will use the Express function [`app.use()`](https://expressjs.com/en/guide/using-middleware.html).
 
-Since you always want to parse any incoming JSON data, you should put this function inside `app.js` after configuration but **BEFORE** the routes.
+Since you always want to parse any incoming JSON data, you should put this function inside `app.js` after configuration but **BEFORE** the routes. Remember, the flow of the server when adding and designing your middleware and routes.
 
 ```js
 //app.js
@@ -246,11 +247,11 @@ app.get("/", (req, res) => {
 });
 ```
 
-You should now be able to add a value using the following cURL command successfully.
+You should now be able to add a new color object using the following cURL command successfully.
 
 - `curl -H "Content-Type: application/json" -X POST -d '{"name":"blanchedalmond"}' http://localhost:3333/colors`
 
-You now have a small issue: this new data not a simple string, unlike your model. Take a moment to update your model in `/models/color.js` to be an array of objects:
+You now have a new small issue: this new data not a simple string, unlike your model. Take a moment to update your model in `/models/color.js` to be an array of objects:
 
 ```js
 // /models/color.js
@@ -279,29 +280,30 @@ app.get("/", (req, res) => {
   res.send("Welcome to Colors App");
 });
 
+// body-parsing functionality is below the routes in this example
 // MIDDLEWARE
 app.use(express.json()); // parse incoming middleware
 ```
 
-## Middleware
+## Custom Middleware
 
 For every request, there is a response. Once the response happens, the cycle is complete. However, there is a lot of functionality that is often needed to occur before the cycle is complete.
 
-You just built an example that handles incoming data from requests and parses it into JSON. It was passed in through `app.use()` above all the routes - which means it will be used with all paths. You can however, limit where this additional functionality happens.
+You just built an example that handles incoming data from requests and parses it into JSON. It was passed in through `app.use()` above all the routes - which means it will be used with all paths. You also saw an example where you can limit where this additional functionality happens by simply placing the middleware below the routes.
 
 ### Building your own middleware for multiple routes
 
-Another example is that you might want to check that the request is coming from a user that is logged in. The app will allow the request to flow to the correct route if the user is logged in. But if the user is not logged in, the app could redirect the request to respond with a login page instead.
+Another example for middleware is that you might want to check that the request is coming from a user that is logged in. The app will allow the request to flow to the correct route if the user is logged in. But if the user is not logged in, the app could redirect the request to respond with a login page instead.
 
 Because middleware can change the flow of the request-response cycle, it can be set up slightly differently than a route by including a third callback function called `next()`.
 
 Look at this application-level middleware [from the documentation](https://expressjs.com/en/guide/using-middleware.html). You can use this example to create your middleware.
 
-Middleware has three callbacks, `req()`, `res()` and `next()`. You're already familiar with `req()` and `res()`. `next()` is a function that allows the request to move to the next middleware or route. Therefore, when your code is finished in middleware, you should not use a `return` statement. You should send a response or the function `next()`.
+Middleware has three callbacks, `req()`, `res()` and `next()`. You're already familiar with `req()` and `res()`. `next()` is a function that allows the request to move to the next middleware or to a final route. Therefore, when your code is finished in middleware, you should not use a `return` statement. You should send a response or the function `next()`.
 
 The following middleware example will show every request's method, host, and path.
 
-The following is a simple example, where once the function is complete, it uses the `next()` function to move to the next middleware or route:
+Notice in this simple example, where once the function is complete, it uses the `next()` function to move to the next middleware or route:
 
 Here is the shell:
 
@@ -314,11 +316,11 @@ Here is the functionality:
 ```js
 app.use((req, res, next) => {
   console.log(req.method, req.headers.host, req.path);
-  next();
+  return next();
 });
 ```
 
-Notice, it does not use a return statement, nor does it send a response in this case. If you use `return` instead of `next` your application will never send a response.
+Notice, it uses a return statement. While the return statement is not necessary, return statements are like an express ticket out of a function and thus ensure the current function is complete before moving on to the next one. [Stack overflow example](https://stackoverflow.com/questions/16810449/when-to-use-next-and-return-next-in-node-js)
 
 Here is another example. This one can change the flow of the response:
 
@@ -326,7 +328,7 @@ Here is another example. This one can change the flow of the response:
 app.use((req, res, next) => {
   if (req.query.apikey) {
     // Go to the next matching route
-    next();
+    return next();
   } else {
     // Complete the request-response cycle
     res.send("You must supply an API key");
@@ -351,7 +353,7 @@ First, move the middleware into the `colorsController` right above the `POST` ro
 
 colors.use((req, res, next) => {
   if (req.query.apikey) {
-    next();
+    return next();
   } else {
     res.send("You must supply an API key");
   }
@@ -384,7 +386,7 @@ You can also write a named callback function instead of an anonymous callback.
 ```js
 function checkForColorKey = (req, res, next) => {
   if (req.body.hasOwnProperty("name")) {
-    next();
+   return next();
   } else {
     res.send("You must supply an object with a key of `name`");
   }
@@ -405,6 +407,19 @@ Error:
 
 - `curl -H "Content-Type: application/json" -X POST -d '{"html_color_name": "papayawhip"}' http://localhost:3333/colors/\?apikey\=4321`
 
+Success:
+
+- `curl -H "Content-Type: application/json" -X POST -d '{"name":"lemonchiffon"}' http://localhost:3333/colors\?apikey\=4321`
+
 ## Reference app
 
 See the full build on GitHub [Pre-reading-express-demo branch: middleware](https://github.com/pursuit-curriculum-resources/pre-reading-express-demo/tree/middleware)
+
+<details><summary>Mini-Bonus: More modern cURL command for sending a JSON post request:</summary>
+
+Please note, you must have at least cURL version 7 to be able to run this command. ( use `curl --version` to check you're machine's version).
+
+- `curl --json '{"name":"fuchsia"}' -X POST http://localhost:3003/colorss`
+
+- What is the same with this command? What is different?
+  For more info on the [--json flag](https://daniel.haxx.se/blog/2022/02/02/curl-dash-dash-json/)

@@ -2,9 +2,9 @@
 
 ## Introduction
 
-You now have a nicely working back-end API that uses Express to serve JSON with full CRUD. Unfortunately, asking users to use Postman or cURL to be able to use your app isn't the best user experience for non-developers. You need to build a front-end.
+You now have a nicely working back-end API that uses Express to serve JSON with full CRUD. Unfortunately, asking users to use Postman or cURL to use your app isn't the best user experience for non-developers. You need to build a front-end.
 
-> **Note**: This lesson is designed to span two lesson blocks rather than the usual one. A good stopping point is after completing the Index route, then completing the rest in the follow-up lesson. Check in with your instructor to be sure this will be the split they are planning.
+> **Note**: This lesson is designed to span two lesson blocks rather than the usual one. A good stopping point is after completing the Index route, then completing the rest in the follow-up lesson. Check in with your instructor(s) to be sure this will be the split they are planning.
 
 ## Learning Outcomes
 
@@ -21,7 +21,7 @@ By the end of this lesson, you should be able to:
 
 ## The Seven RESTful Routes
 
-The seven RESTful routes are the classic example of a RESTful pattern. Before front-end applications like React became more standard, servers handled creating HTML views for a website. That means that there are two additional views: `New`, which is a view with a form for users to fill out and submit `POST` requests, and `Edit`, which is a view with a form for users to fill out and submit `PUT` requests. And specific routes like `Create`, `Delete` and `Update` don't have views, so there is nothing to build on the front-end for them.
+The seven RESTful routes are the classic example of a RESTful pattern. Before front-end applications like React became more standard, servers handled creating HTML views for a website. That means that there are two additional views: `New`, which is a view with a form for users to fill out and submit `POST` requests, and `Edit`, which is a view with a form for users to fill out and submit `PUT` requests. And specific routes like `Create`, `Delete` and `Update` don't have views, you will only trigger these routes through form submission or button click.
 
 While this pattern is classic, and you will follow it exactly for learning fundamentals, you will see many variations in the wild. These variations are built to meet an application's specific needs and improve user experience.
 
@@ -73,7 +73,7 @@ While the `Pages` components will be very lean and likely have one component, yo
 
 ### The Base URL
 
-Before you start, you have to think about a problem you will have. If you hard code `http://localhost:3003` into every fetch request of your React app, when you deploy your online, you must change every single instance of `http://localhost:3003`. Further, if you decide to host your app on another service later, you must change it again. And, if you are working on your app locally (usually described as a development environment) and having it available online (usually described as a production environment), you would spend a lot of time switching the URLs back and forth if they are all hard-coded.
+Before you start, you have to think about a problem you will have. If you hard code `http://localhost:3003` into every fetch request of your React app, when you deploy your app online, you must change every single instance of `http://localhost:3003`. Further, if you decide to host your app on another service later, you must change it again. And, if you are working on your app locally (usually described as a development environment) and having it available online (usually described as a production environment), you would spend a lot of time switching the URLs back and forth if they are all hard-coded.
 
 It would be better to set a variable to the correct URL depending on the environment so you only have to update it in one place when it changes.
 
@@ -188,7 +188,7 @@ So far, you've been building simple apps to learn the basics of building full-st
 
 An example of this is imagine you have been working on a banking application - let's call it Bank-A. In it, you have security measures like passwords. Bank-A contains a lot of sensitive information: name, address, social security number, bank account numbers, and more. A malicious actor could make a website called Bank-B that looks like Bank-A. If a user mistakenly goes to Bank-B, they can enter their login information into Bank-B. Bank-B can then use the user input, create a login request to Bank-A, capture all the information, and make additional requests to transfer money or delete accounts.
 
-One way to prevent this is to build in an extra request before each request. This request is typically referred to as a [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request). This preflight request checks several things, including the server origin against the client origin. If the origins are different, the actual request is rejected.
+One way to prevent this is to build in an extra request before each request. This request is typically referred to as a [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request). This preflight request checks several things, including the server origin against the client origin. If the origins are different, the actual request is rejected before it reaches its intended route.
 
 In this case, when preflight checks are set up, Bank-A will automatically reject any requests from Bank-B because the origin is different than expected. This automatic cross-origin blocking is called [`Cross-Origin Resource Sharing` or CORS for short](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
@@ -218,7 +218,7 @@ app.use(cors());
 
 This configuration (`cors()` function without arguments) will allow ANY app at any origin to request your API. Since you are just building a sample app and not hosting it online, you don't have to worry about restricting it. Later, when your app is deployed to the cloud, you would want to be more thoughtful about how to allow/restrict access properly.
 
-> **Note**: Also, confirm you do not have a function that blocks the POST route unless there is an `apikey` from the previous build. You may remove or comment on this function for this demo.
+> **Note**: If you are coding along and are using a previous build of the API, confirm you do not have a function that blocks the POST route unless there is an `apikey`. You may remove or comment on this function for this demo.
 
 ## Show
 
@@ -237,13 +237,13 @@ You would build a link to each item's show route on the index page.
 
 Then would use `useParams` from react-router-dom. This will allow you to access and use the URL parameters of the view to get the data for the specific color.
 
-Imagine you click on the color `cornsilk`, which has an array position of 2. The URL would be coded as `/colors/{index}`. When the link is generated, it will be `/colors/2`. You will use React Router's `Link` component to navigate to the show view.
+Imagine you click on the color `cornsilk`, which has an array position of 2. The URL would be coded to be dynamic `/colors/{index}`. When the link is generated, it will be `/colors/2`. You will use React Router's `Link` component to navigate to the show view.
 
 ```js
 <Link to={`/colors/${index}`}>{color.name}</Link>
 ```
 
-The fetch request for the show view will be similar to the index request. However, you'll add an error message if the particular color cannot be found. It will go to `/not-found`, an invalid index position that will trigger the 404 route. It still could use even better UI/UX, which will be sufficient for this small build. As a challenge during lab, you can work on making this an even more excellent experience.
+The fetch request for the show view will be similar to the index request. However, you'll add an error message if the particular color cannot be found. It will go to `/not-found`, an invalid index position that will trigger the 404 view. It still could use even better UI/UX. As a challenge during lab, you can work on making this an even more excellent experience.
 
 > **Note**: A promise is a function that allows you to _WAIT_ for a response and _THEN_ do something. The .`then()` function takes a callback, and within that callback, you can write code that should run AFTER the first function has been fulfilled (usually by returning a value).
 
@@ -268,7 +268,7 @@ useEffect(() => {
 
 Notice that this view also has three buttons: back, edit, and delete. You'll build-out edit and delete shortly.
 
-A user can use the back button in the browser. Why would you want to include a specific " back " button?
+A user can use the back button in the browser. Why would you want to include a" back " button that is in the browser view?
 
 ## New
 
