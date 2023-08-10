@@ -31,7 +31,9 @@ After this lesson, you should be able to:
 
 ## Introduction
 
-- What is a Database?
+- What is a database?
+- Why do you need to connect a database to a server?
+- What is PostgreSQL?
 
 ### Getting Started
 
@@ -57,7 +59,7 @@ Will you get an error if you don't capitalize correctly?
 
 **Note:** Comments start with two dashes `--`
 
-## SQL's Big GOTCHAS
+## SQL's big syntax gotchas
 
 - What status does the following prompt let you know?
 
@@ -124,7 +126,7 @@ DROP TABLE foo;
 
 ```
 
-Use this table for the rest of the class activity.
+Use the following table for the rest of the class activity.
 
 ```SQL
 
@@ -134,7 +136,7 @@ CREATE TABLE
  homes
  ( id SERIAL PRIMARY KEY, address TEXT NOT NULL, city TEXT, st VARCHAR(2), price INT, pool BOOLEAN DEFAULT false, for_sale BOOLEAN);
 
--- Show description of columns for the table houses
+-- Show description of columns for the table homes
 \d homes;
 ```
 
@@ -150,7 +152,7 @@ CREATE TABLE
 
 - When is it preferable to use `VARCHAR(n)` over `TEXT`?
 
-- What does `DEFAULT`do?
+- What does they keyword `DEFAULT` do?
 
 ### Alter a Table
 
@@ -313,7 +315,13 @@ DELETE FROM houses WHERE id = 1;
 DELETE FROM houses WHERE pool = false RETURNING address, state;
 ```
 
-## Limit
+## Quit PostgreSQL Shell
+
+To quit `psql`, type `\q`.
+
+## Bonus lesson content
+
+### Limit
 
 Imagine the database had 10,000 entries. What is the benefit of a `LIMIT` clause?
 
@@ -354,7 +362,7 @@ SELECT * FROM houses ORDER BY price ASC;
 SELECT * FROM houses ORDER BY price DESC;
 ```
 
-## Combination
+### Combination
 
 Of the following statements, which is a valid order?
 
@@ -372,7 +380,7 @@ SELECT address, city, state FROM houses state ASC LIMIT 2 OFFSET 2 ORDER BY city
 
 What kind of messages do you get when you create statements that are out of order?
 
-## Counts and Aggregation
+### Counts and Aggregation
 
 ```SQL
 -- show the total number of houses.
@@ -397,7 +405,3 @@ SELECT MIN(price) FROM houses;
 SELECT MAX(price), for_sale FROM houses GROUP BY for_sale;
 
 ```
-
-## Quit PostgreSQL Shell
-
-To quit `psql`, type `\q`.

@@ -18,11 +18,11 @@ It's unusual to have just one table in a business application. Typically, there 
 Let's imagine you are designing an application for a new boutique travel travel boutique, where guests will get to work with an agent to book experiences at unique hotels not part of any franchises. What kind of data would you need?
 
 - Hotel
-- name - string
-- city - string
-- state - string
-- rating - integer
-- pets - boolean
+  - name - string
+  - city - string
+  - state - string
+  - rating - integer
+  - pets - boolean
 
 You can image a table like so:
 
@@ -44,10 +44,10 @@ You have a lot of data jammed into one column for each room. It's hard to read. 
 It would be better if there were a separate table for each room.
 
 - Room
-- type - string
-- price - integer
-- number - integer
-- vacant - boolean
+  - type - string
+  - price - integer
+  - number - integer
+  - vacant - boolean
 
 |   name    | price | room_num | vacant |
 | :-------: | :---: | :------: | :----: |
@@ -105,22 +105,22 @@ The id field of the hotel in the rooms table is called a `foreign key` because i
 
 ### Joining tables
 
-Imagine you would like to know which hotels have vacancies. You would need to query the rooms' table and find where vacant is true. Then, you would need to look up the hotels that match. To perform this query, you require information from both tables. You can join the data in SQL using a `join` statement.
+Imagine you would like to know which hotels have vacancies. You would need to query the rooms table and find where vacant is true. Then, you would need to look up the hotels that match. You can make two separate queries and maybe take some notes or copy/paste to put the data together. But there is a better way. You can perform a query that joins information from both tables. To do this, you would use a `join` statement.
 
 There are four main ways to join tables. Additionally, when you put two tables next to each other, one will be on the left and one on the right. Therefore there are references to `left` and `right` when describing joins.
 
 In the following examples, hotels are on the left table, and rooms are on the right table:
 
-- Listing all the hotels and room data. (full join)
-- List all the hotel data and only the room data with an associated hotel. (left join)
-- Listing only the hotel data that has at least one associated room. (right join)
-- Listing only the hotels and rooms that have associations. (inner join)
+- Listing only the hotels and rooms that have associations. (inner join).
+- List all the hotel data and only the room data with an associated hotel. (left join).
+- Listing only the hotel data that has at least one associated room. (right join).
+- Listing all the hotels and room data. (full join).
 
 Here is a simplified visual of the four types of joins.
 
 ![](./assets/sql-join-venn-diagram.png)
 
-**Caveat:** Some people don't like using Venn Diagrams to describe joins as an oversimplified representation of what is happening. That's ok! Venn Diagrams are a great way to get started. When you are ready, you can read something more technical like [this](https://blog.jooq.org/2016/07/05/say-no-to-venn-diagrams-when-explaining-joins/)
+**Caveat:** Some people don't like using Venn Diagrams to describe joins as an oversimplified representation of what is happening. That's ok! Venn Diagrams are a great way to get started. When you are ready, you can read something more technical like [this](https://blog.jooq.org/2016/07/05/say-no-to-venn-diagrams-when-explaining-joins/).
 
 #### Full Outer Join
 
@@ -156,7 +156,7 @@ SELECT * FROM rooms FULL OUTER JOIN hotels ON hotels.id = rooms.hotel_id;
 | 13  | King |   6000    |   001    | false  |   null   | \|  |  4  |                      |            |                      |        |      |
 |     |      |           |          |        |          | \|  |  3  | Grand Budapest Hotel |    null    | Republic of Zubrowka |   5    | null |
 
-Due to the simplicity of your work, there is no compelling reason to put your hotels or rooms on either side besides personal choice. As you learn to build more complex queries where you may be joining three or more tables, there would be a need for more careful thought about the order of how the tables are joined.
+Due to the simplicity of this example, there is no compelling reason to put your hotels or rooms on either side besides personal choice. As you learn to build more complex queries where you may be joining three or more tables, there would be a need for more careful thought about the order of how the tables are joined.
 
 #### Inner Join
 
@@ -224,7 +224,7 @@ CREATE TABLE guests (id SERIAL PRIMARY KEY, name TEXT, pet BOOLEAN);
 
 How can we create a table that allows for this relationship? If we try to add to rooms, we end up with a similar predicament as when we first created our one-to-many relationship, and we would have the same troubles if we tried to tack on the data in some columns to the guests' table.
 
-You'll make a `join` or `look up` table to solve this. This table will have no serial primary key. The room id and the guest id will distinguish the rows. We can also add some additional info, for example, the dates (we will use simple text for demonstration purposes)
+You'll make a `join` or `look up` table to solve this. This table will have no serial primary key. The room id and the guest id will distinguish the rows. We can also add some additional info, for example, the dates (we will use simple text for demonstration purposes).
 
 ```SQL
 CREATE TABLE rooms_guests (room_id INT, guest_id INT, stay_dates TEXT);
@@ -268,7 +268,7 @@ ON
 |   10    |   110    | October 6-12  | \|  | 110 |  Forest Doe  | false | \|  |     |   Queen   | 1200  |   202    | true   | 2        |
 |   11    |   120    | November 6-12 | \|  | 120 | River Miller | true  | \|  | 11  | Penthouse | 10000 |   303    | true   | 1        |
 
-You can keep going and add information from the hotels' table and select the columns and sort the data:
+You can keep going and add information from the hotels table and select the columns and sort the data:
 
 ```SQL
 SELECT
@@ -299,3 +299,33 @@ ORDER BY
 | Winter Jones |  Hotel California  | Penthouse |   June 6-12   |
 
 This type of query, while complex, relays important information in a concise and meaningful way.
+
+Finally, when looking at the above table, there are three columns named `name`. You can create aliases for columns
+
+```SQL
+SELECT
+ guests.name AS guest_name, hotels.name AS hotel_name, rooms.name AS room_name, rooms_guests.stay_dates
+FROM
+ rooms_guests
+JOIN
+ guests
+ON
+ guests.id = rooms_guests.guest_id
+JOIN
+ rooms
+ON
+ rooms.id = rooms_guests.room_id
+JOIN
+ hotels
+ON
+ hotels.id = rooms.hotel_id
+ORDER BY
+ guests.name;
+```
+
+|  guest_name  |     hotel_name     | room_name |  stay_dates   |
+| :----------: | :----------------: | :-------: | :-----------: |
+|  Forest Doe  | The Great Northern |   Queen   | October 6-12  |
+| River Miller |  Hotel California  | Penthouse | November 6-12 |
+| River Miller | The Great Northern |   Twin    |  August 6-12  |
+| Winter Jones |  Hotel California  | Penthouse |   June 6-12   |

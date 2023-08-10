@@ -11,8 +11,6 @@ By the end of this lesson, you should be able to:
 
 ## Getting Started
 
-It's unusual to have just one table in a business application. Typically, there are many tables to represent data in a meaningful way.
-
 Let's imagine you are designing an application for a new boutique travel travel boutique, where guests will get to work with an agent to book experiences at unique hotels not part of any franchises. What kind of data would you need?
 
 **Terminal**
@@ -25,8 +23,8 @@ CREATE DATABASE learn_hotels;
 ```
 
 - Let's create a table for our hotels. We want to be sure our ratings are only between 0 and 5, so we'll add a constraint by checking the values.
-
-**Serial** will make a unique number, increments, and cannot be null. [PRIMARY KEY](https://www.postgresql.org/docs/current/sql-createtable.html) adds additional constraints and rules to be sure we can safely create data with a unique id.
+- What other constraints should you consider?
+- When creating a new application, is it better to be more strict with your data at first or more loose?
 
 Create a table:
 
@@ -129,6 +127,8 @@ SELECT * FROM hotels INNER JOIN rooms ON hotels.id = rooms.hotel_id;
 
 ![](../assets/inner-hotel-room.png)
 
+- Which hotels were excluded?
+- Which rooms were excluded?
 - Can you have null values in some fields with an inner join?
 
 #### Left Join
@@ -143,6 +143,9 @@ SELECT * FROM hotels LEFT JOIN rooms ON hotels.id = rooms.hotel_id;
 
 ![](../assets/left-hotel-room.png)
 
+- Which hotels were excluded?
+- Which rooms were excluded?
+
 #### Right Join
 
 If we do the right join with hotels and rooms, can you hypothesize how many rows we should have?
@@ -153,9 +156,8 @@ SELECT * FROM hotels RIGHT JOIN rooms ON hotels.id = rooms.hotel_id;
 
 ![](../assets/right-hotel-room.png)
 
-**Note:** Total of 16 rows
-
-Now we see that the Grand Budapest Hotel is excluded, but those mystery three rooms with no hotel are now showing up.
+- Which hotels were excluded?
+- Which rooms were excluded?
 
 #### BONUS Complex Queries
 

@@ -1,7 +1,5 @@
 # Many-to-Many Joins
 
-## Many-to-Many
-
 By the end of this lesson, you should be able to:
 
 - Explain how to create and use a many-to-many relationship between two entities.
@@ -9,7 +7,7 @@ By the end of this lesson, you should be able to:
 
 ## Intro
 
-Next up, we can create tables with relationships of many to many. For example, a guest can have (book) many hotel rooms and a hotel room can have (be booked by) many guests.
+Next up, we can create tables with relationships of many-to-many. For example, a guest can have (book) many hotel rooms and a hotel room can have (be booked by) many guests.
 
 Let's make some guests. We imagine we'd have information like a first name, last name, credit card number, email, phone, etc. But to keep things simple for this demonstration, our guests will only have one column for their name and whether or not they are traveling with a pet.
 
