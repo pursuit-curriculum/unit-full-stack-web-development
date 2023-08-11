@@ -23,7 +23,7 @@ Below marks the different parts of the URL:
 
 How would you build this app? Are there developers building a route for every single latitude and longitude? That would seem like it would require a lot of developers to work around the clock, and the code would not be very DRY.
 
-Instead, you can use the URL to pass in values and design web applications in a programmatic way.
+Instead, you can use the URL to pass in values and programmatically design web applications.
 
 To the users, the URL looks the same. But for the server code, you would write the route as something like:
 
@@ -39,7 +39,7 @@ In the actual request, you would be able to get an object that looks like this t
 }
 ```
 
-And you would also be able to get a second object that comes from the query strings (key value pairs that come after the question mark at the end of the URL), which would look like this:
+And you would also be able to get a second object that comes from the query strings (key-value pairs that come after the question mark at the end of the URL), which would look like this:
 
 ```js
 {
@@ -58,8 +58,8 @@ By the end of this lesson, you should be able to:
 - Describe what a resource is and how it relates to internet applications.
 - Make requests with query parameters and URL queries to a locally running server via the browser.
 - Identify common errors that occur in building Express routes.
-  - Common error: Two responses
-  - Common error: Place routes in the correct order
+- Common error: Two responses
+- Common error: Place routes in the correct order
 - Access request parameters in an Express route.
 - Access query parameters in an Express route.
 - Access important data from the request object.
@@ -68,9 +68,9 @@ By the end of this lesson, you should be able to:
 
 ## JavaScript Environments
 
-There are many places (environments) to run JavaScript, for example, in the browser or terminal. Each place is a different environment: Your computer is a different environment than your friend's computer. You both have different usernames, passwords, and other configurations. Therefore, being able to add a file that stores specific information about running the code in a specific environment is in is a crucial feature.
+There are many places (environments) to run JavaScript, for example, in the browser or terminal. Each place is a different environment: Your computer is a different environment than your friend's computer. You both have different usernames, passwords, and other configurations. Therefore, adding a file that stores specific information about running the code in a particular environment is a crucial feature.
 
-Make an environmental variable file and call it `.env`. It should not be tracked by Git, so it is added to the file in the project's `.gitignore`. This will allow each environment to keep its own file, and if there is sensitive information like passwords or API keys, they will also not be shared on GitHub. Remember, `.gitignore` is not a JavaScript file, so there is no need for quotes, or semi-colons.
+Make an environmental variable file and call it `.env`. Git should not track it, so it is added to the file in the project's `.gitignore`. This will allow each environment to keep its own file, and if there is sensitive information like passwords or API keys, they will also not be shared on GitHub. Remember, `.gitignore` is not a JavaScript file, so there is no need for quotes or semi-colons.
 
 Example `.gitignore`:
 
@@ -90,7 +90,7 @@ To use environmental variables, you'll add a new npm package [dotenv](https://ww
 PORT=3333
 ```
 
-> **Note**: The `.env` file is also JavaScript file, so don't add semi-colons, quotes, or extra white space.
+> **Note**: The `.env` file is also a JavaScript file, so don't add semi-colons, quotes, or extra white space.
 
 When you want to access the values, you will access them through the `process.env` object (after requiring and configuring `dotenv`, see below):
 
@@ -106,7 +106,7 @@ console.log(process.env.PORT);
 
 ## Separating concerns
 
-You will be adding unit testing with Jest (or similar testing suite) for subsequent assignments. To set it up correctly, you have to set up the server in one file and the routes and other logic in other files. The following code examples will demonstrate how to do this.
+For subsequent assignments, you will add unit testing with Jest (or a similar testing suite). To set it up correctly, you must set up the server in one file and the routes and other logic in other files. The following code examples will demonstrate how to do this.
 
 ## Getting started
 
@@ -161,9 +161,9 @@ Get the app running with `nodemon server.js` and go to http://localhost:3333
 
 ## Resources
 
-A server's purpose is to maintain resources. For example if you have a website with bicycles and unicycles for sale - each one would be a separate resource.
+A server's purpose is to maintain resources. For example, if you have a website with bicycles and unicycles for sale, each would be a separate resource.
 
-The resources are the combination of the URLs, data models, and data.
+The resources are a combination of URLs, data models, and data.
 
 ## Mocking data
 
@@ -175,11 +175,11 @@ The shape of the data (the key/value pairs and how they are organized(flat, nest
 
 Data modeling is a technique for defining business requirements for a database. Because of this, you will follow the naming convention and put your mock data in a folder called `models`. For now, you can make a simple array of colors.
 
-Within this application there will only be one data model or resource. However, in a professional application there will be tens or possibly hundreds.
+Within this application, there will only be one data model or resource. However, there will be tens or hundreds in a professional application.
 
 Remember, you need to leave your server running. To open a new Terminal tab, you can press <kbd>command</kbd> <kbd>t</kbd>
 
-- Confirm you are in the same director as `package.json` before typing the following commands:
+- Confirm you are in the same directory as `package.json` before typing the following commands:
 - `mkdir models`
 - `touch models/color.js`
 
@@ -207,9 +207,9 @@ When a request is made to a route that requires data, the data will be retrieved
 
 You can send this mock data to a client based on a request. Typically a list of a particular resource is referred to as an `index` or `index route`.
 
-The URL, data model, and data make up a server resource. [For more in-depth information for best practices for a resource, there is a good summary here.](https://www.ibm.com/docs/en/sva/9.0.7?topic=control-resources).
+The URL, data model, and data make up a server resource. [For more in-depth information on best practices for a resource, there is a good summary here.](https://www.ibm.com/docs/en/sva/9.0.7?topic=control-resources).
 
-You can import the colors array into `app.js` to access the data.
+To access the data, you can import the colors array into `app.js`.
 
 ```js
 // app.js
@@ -238,14 +238,14 @@ http://localhost:3333/colors
 
 ## A route for one color
 
-There are six colors available. You could create a route for each color. Six is very doable. But what if this store is a huge success, and you end up having hundreds or thousands of colors?
+There are six colors available. You could create a route for each color. Six is very doable. But what if this store is a huge success, and you have hundreds or thousands of colors?
 
 Writing a route for each one would be:
 
 - Tedious
 - Hard to maintain
 
-Instead, you want user input for the color the user wants to see. For now, you'll use the array position and have the user type in the URL. Eventually, you would create a complete web page with links and id numbers for your colors. These routes are _dynamic_ because they can change based on inputs. This is in contrast to _static_ routes which always stay the same (like a contact page or about page).
+Instead, you want user input for the color the user wants to see. You'll now use the array position and have the user type in the URL. Eventually, you would create a complete web page with links and id numbers for your colors. These routes are _dynamic_ because they can change based on inputs. This contrasts with _static_ routes, which always stay the same (like a contact page or about page).
 
 Create a request parameter by adding a `:` to distinguish it from a regular, static path.
 
@@ -329,9 +329,9 @@ Therefore, if you have these routes in this order in your `server.js`:
 If you want to get to `/colors` - you'll always hit the `/:prices` route because the URL parameter will accept _any_ string. It doesn't know that `colors` is something specific to look for.
 
 - To fix this, put the more specific routes first
-  - `/colors`
-  - `/:prices`
-    Now, from top to bottom, the more specific route `/colors` will be triggered when the URL has `/colors`; if it doesn't match `/colors`, it will go to the following route.
+- `/colors`
+- `/:prices`
+  Now, from top to bottom, the more specific route `/colors` will be triggered when the URL has `/colors`; if it doesn't match `/colors`, it will go to the following route.
 
 Here is a code example, building on the app you have so far:
 
@@ -352,7 +352,7 @@ app.get("/colors/cool", (req, res) => {
  <body
  style="background: linear-gradient(to bottom, ${colors[0]} 16%, ${colors[1]} 32%, ${colors[2]} 48%, ${colors[3]} 64%, ${colors[4]} 80%, ${colors[5]} 100%)"
  >
-  <h1>Colors are cool!</h1>
+ <h1>Colors are cool!</h1>
  </body>
  `);
 });
@@ -366,7 +366,7 @@ app.get("/colors/cool", (req, res) => {
  <body
  style="background: linear-gradient(to bottom, ${colors[0]} 16%, ${colors[1]} 32%, ${colors[2]} 48%, ${colors[3]} 64%, ${colors[4]} 80%, ${colors[5]} 100%)"
  >
-  <h1>Colors are cool!</h1>
+ <h1>Colors are cool!</h1>
  </body>
  `);
 });
@@ -417,7 +417,7 @@ app.get("/calculator/:operator", (req, res) => {
 
 http://localhost:3333/calculator/add?num1=5&num2=4
 
-Uh oh! The sum is 54 instead of 9. Remember, incoming requests always come in as strings, therefore they must be converted to numbers.
+Uh oh! The sum is 54 instead of 9. Remember, incoming requests always come in as strings. Therefore they must be converted to numbers.
 
 ```js
 app.get("/calculator/:operator", (req, res) => {
@@ -444,7 +444,7 @@ app.get("/calculator/:operator", (req, res) => {
 
 ## Reference code:
 
-[See full code here](https://github.com/pursuit-curriculum-resources/pre-reading-express-demo)
+[See complete code here](https://github.com/pursuit-curriculum-resources/pre-reading-express-demo)
 
 App.js:
 
