@@ -22,11 +22,10 @@ If we were to access it by array position, it would be at array position `1`. We
 
 ## Delete
 
-**queries/bookmarks.js**
-
 Create an async arrow function and be sure to include it in `module.exports`
 
 ```js
+// queries/bookmarks.js
 const deleteBookmark = async (id) => {
   try {
   } catch (error) {
@@ -56,10 +55,10 @@ const deleteBookmark = async (id) => {
 };
 ```
 
-**controllers/bookmarkController.js**
 Import the function
 
 ```js
+// controllers/bookmarkController.js
 const {
   getAllBookmarks,
   getBookmark,
@@ -68,7 +67,7 @@ const {
 } = require("../queries/bookmarks");
 ```
 
-Create the delete route and test it with Postman
+Create the delete route and test it with Postman.
 
 Remember to have selected:
 
@@ -109,7 +108,7 @@ bookmarks.delete("/:id", async (req, res) => {
 });
 ```
 
-Test it with Postman
+Test it with Postman.
 
 Remember to have:
 
@@ -122,6 +121,7 @@ Remember to have:
 Create an async arrow function and be sure to include it in `module.exports`
 
 ```js
+// queries/bookmarks.js
 const updateBookmark = async (id, bookmark) => {
   try {
   } catch (error) {
@@ -154,10 +154,10 @@ const updateBookmark = async (id, bookmark) => {
 };
 ```
 
-**controllers/bookmarkController.js**
 Import the function
 
 ```js
+// controllers/bookmarkController.js
 const {
   getAllBookmarks,
   getBookmark,
@@ -186,7 +186,7 @@ bookmarks.put("/:id", async (req, res) => {
 });
 ```
 
-Test it and remember to have:
+Test it and remember to have the following:
 
 - route PUT /bookmarks/:id
 
@@ -213,6 +213,7 @@ We checked for one more thing the first time we built this app.
 We checked if the URL provided starts with `http` or `https`.
 
 ```js
+// validations/checkBookmarks.js
 const validateURL = (req, res, next) => {
   if (
     req.body.url.substring(0, 7) === "http://" ||
@@ -235,3 +236,7 @@ Please take a few minutes to add this validation as middleware to the create and
 
 - `git add -A`
 - `git commit -m 'update and delete complete'`.
+
+## Reference
+
+[Reference build](https://github.com/pursuit-curriculum-resources/express-sql-seed-read-demo/tree/update-delete)

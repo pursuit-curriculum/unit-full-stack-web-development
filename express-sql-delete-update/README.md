@@ -2,11 +2,11 @@
 
 ## Learning Objectives
 
-- Create a model file connected to a database that can update a specific row in a table, and remove a specific row from a table.
+- Create a model file connected to a database that can update a specific row in a table and remove a particular row from a table.
 - Handle asynchronous errors within a controller file and respond from the server appropriately.
 - Use asynchronous code within a controller file to respond to client requests with persisted data.
 
-Continue previous lesson.
+Continue the previous lesson.
 
 ## Delete
 
@@ -55,7 +55,7 @@ const {
 } = require("../queries/color");
 ```
 
-Create the delete route and test it with Postman
+Create the delete route and test it with Postman.
 
 Remember to have selected:
 
@@ -97,7 +97,7 @@ colors.delete("/:id", async (req, res) => {
 });
 ```
 
-Test it with Postman
+Test it with Postman.
 
 Remember to have:
 
@@ -131,7 +131,7 @@ Add the query:
 const updateColor = async (id, color) => {
   try {
     const updatedColor = await db.one(
-      "UPDATE colors SET name=$1,  is_favorite=$2 where id=$3 RETURNING *",
+      "UPDATE colors SET name=$1, is_favorite=$2 where id=$3 RETURNING *",
       [color.name, color.is_favorite, id]
     );
     return updatedColor;
@@ -173,14 +173,13 @@ colors.put("/:id", async (req, res) => {
 });
 ```
 
-Test it and remember to have:
+Test it and remember to have the following:
 
 - route PUT /colors/:id
 
 ```js
 {
- "name":"Weather",
- "url": "https://darksky.net/",
+ "name":"floralwhite",
  "is_favorite": "true"
 }
 ```

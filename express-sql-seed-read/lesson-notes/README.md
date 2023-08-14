@@ -6,15 +6,14 @@ You will gain the best understanding if you try to type everything out. Even tho
 
 ## Getting Started
 
-- navigate to your Desktop or another convenient folder
+- Navigate to your Desktop or another convenient folder
 - `git status` to make sure you are not already in a `git` repository
-- `mkdir bookmarks`
-- `cd bookmarks`
+- `mkdir pg-bookmarks-api`
+- `cd pg-bookmarks-api`
 - `touch .gitignore`
 
-**.gitignore**
-
 ```
+# .gitignore
 node_modules
 .env
 .DS_Store
@@ -23,9 +22,8 @@ node_modules
 - `git init`
 - `git add -A`
 - `git commit -m 'first commit'`
-
 - `touch server.js`
-- `npm init -y` (this will automatically say yes to all the npm default settings - this is fine for tutorials, small test builds, etc.)
+- `npm init -y`
 - `touch app.js .env`
 - `npm install express dotenv cors`
 
@@ -37,19 +35,17 @@ node_modules
 
 - What did the above steps do? Try to put it in your own words. It's essential to learn to talk about code.
 
-**.env**
-
 ```
+# .env
 PORT=3003
 ```
 
 **Review Questions:**
 
-- What do this file and setup do?
-
-**app.js**
+- What does the `.env` file and setup do?
 
 ```js
+// app.js
 // DEPENDENCIES
 const cors = require("cors");
 const express = require("express");
@@ -72,7 +68,7 @@ module.exports = app;
 
 **Review Questions:**
 
-- What do this file and setup do?
+- What do the `app.js` file and setup do?
 - What is middleware?
 - What does `app.use(cors())` do?
 - What does `app.use(express.json())` set up?
@@ -81,9 +77,8 @@ module.exports = app;
 - What is `res` short for?
 - What is `module.exports`? What does it do?
 
-**server.js**
-
 ```js
+// server.js
 // DEPENDENCIES
 const app = require("./app.js");
 
@@ -93,7 +88,7 @@ const PORT = process.env.PORT;
 
 // LISTEN
 app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+  console.log(`💻 Listening on port ${PORT} 🔖`);
 });
 ```
 
@@ -101,8 +96,8 @@ Test that your app works: http://localhost:3003
 
 **Review Questions:**
 
-- What do this file and setup do?
-- What is `app`? What does it do?
+- What do the `server` file and setup do?
+- What is `app`? What does it do in this file?
 
 ## Bookmarks Controller
 
@@ -111,11 +106,10 @@ Use <kbd>control</kbd> <kbd>shift</kbd> <kbd>`</kbd> to open a new terminal tab 
 **Terminal**
 
 - `mkdir controllers`
-- `touch controllers/bookmarkController.js`
-
-**controllers/bookmarksController.js**
+- `touch controllers/bookmarksController.js`
 
 ```js
+// controllers/bookmarksController.js
 const express = require("express");
 const bookmarks = express.Router();
 
@@ -129,15 +123,14 @@ module.exports = bookmarks;
 
 **Review Questions:**
 
-- What is the URL one needs to go to to see this message?
+- What URL must one go to to see this message?
 - Why doesn't it work yet?
 - Why don't we see a 404 message, either?
 
-**app.js**
-
 ```js
+// app.js
 // Bookmarks ROUTES
-const bookmarksController = require("./controllers/bookmarkController.js");
+const bookmarksController = require("./controllers/bookmarksController.js");
 app.use("/bookmarks", bookmarksController);
 
 // 404 PAGE
@@ -148,9 +141,8 @@ app.get("*", (req, res) => {
 
 Now try: http://localhost:3003/bookmarks
 
-Why did we name our route `/bookmarks`? Is there a reason we name our route(s) this way?
-
-What would happen if we put this code ABOVE the middleware setup?
+- Why did we name our route `/bookmarks`? Is there a reason we name our route(s) this way?
+- What would happen if we put this code ABOVE the middleware setup?
 
 ## Setting up The Database
 
@@ -158,16 +150,9 @@ We need to create a database and table for our bookmarks in Postgres.
 
 We could open up a shell and do it. However, it can be helpful to store our commands for reuse.
 
-When might we want to reuse them?
+- When might we want to reuse them?
 
-- When collaborating on a group project and you need your partner(s) to have the same setup
-- When you deploy your app in the cloud and want to be sure your db/tables are set up the same way
-- When you want to test your database with CircleCi or another automated testing
-- When you get a new computer and want to set up the project on your new computer
-
-**GOTCHA**: Do not name a database and a table the same name
-
-E.g., database `bookmarks` & table `bookmarks` - this will cause errors.
+> **Note**: Do not name a database and a table the same name, E.g., database `bookmarks` & table `bookmarks` - this will cause errors.
 
 We will call our database `bookmarks_dev` and our table `bookmarks`.
 
@@ -177,14 +162,12 @@ We will create two files.
 
 - **schema**: which is the representation of your data model and will also contain db/table(s) set up
 - **seed**: This is some starter data we can insert into the database
-
 - `mkdir db`
 - `touch db/schema.sql`
 - `touch db/seed.sql`
 
-**db/schema.sql**
-
-```sql
+```SQL
+-- db/schema.sql
 DROP DATABASE IF EXISTS bookmarks_dev;
 CREATE DATABASE bookmarks_dev;
 
@@ -200,7 +183,7 @@ CREATE TABLE bookmarks (
 
 ```
 
-Run this command
+Run this command:
 
 ```
 psql -U postgres -f db/schema.sql
@@ -214,9 +197,8 @@ This line of code says, run the app `psql`, use the `U`ser `postgres` and run th
 
 <hr />
 
-**db/seed.sql**
-
-```sql
+```SQL
+-- db/seed.sql
 \c bookmarks_dev;
 
 INSERT INTO bookmarks (name, url, category, is_favorite) VALUES
@@ -228,39 +210,43 @@ INSERT INTO bookmarks (name, url, category, is_favorite) VALUES
 Run this command
 
 ```
-
 psql -U postgres -f db/seed.sql
-
 ```
 
 **Success** should look something like this
 
 ![](../assets/success-seed.png)
 
+Create npm scripts in the `package.json` file to run the above commands:
+
+```json
+ "scripts": {
+ "db:init": "psql -U postgres -f db/schema.sql",
+ "db:seed": "psql -U postgres -f db/seed.sql"
+ },
+```
+
 ## Adding Postgres/pg-promise
 
-We're going to use an npm package called `pg-promise`; pg-promise will make it simple for us to connect to our Postgres database and allow us to write SQL commands that return JSON to us that we can then send out.
+- What does a request and response cycle look like when you include a client, server, and database?
 
-The server will now make requests to the database, and the database will send back a response, very much like the request/response cycle we've already seen between clients and servers.
+We're going to use an npm package called `pg-promise`.
 
-![](../assets/server-db.png)
+- What does `pg-promise` do?
 
-We will need to install and configure it.
+Install and configure it.
 
 - `npm install pg-promise`
 - `touch db/dbConfig.js`
 
-Currently, we'll be running our app on our computer, but later, we'll want to deploy it. So we will want to set up our environmental variables. Reminder - this (`.env`) is not a JavaScript file, do not use semi-colons or quotes.
+Why do we want to set up environmental variables instead of hard-coding values?
 
-When we installed Postgres, it set up to, by default, run on localhost with a port of 5432. We are going to keep these defaults. We can always check them with the Postgres App.
-
-![](../assets/postgres-config.png)
-
-The database `bookmarks_dev` doesn't exist yet. We'll create it next. (??)
-
-**.env**
+- By default, what is the port number for Postgres?
+- How can you find the port?
+- Can you run your server on the same port as Postgres?
 
 ```
+# .env
 PORT=3003
 PG_HOST=localhost
 PG_PORT=5432
@@ -270,23 +256,20 @@ PG_USER=postgres
 
 <br />
 
-**db/dbConfig.js**
-
-We can go to [the docs](http://vitaly-t.github.io/pg-promise/index.html) and see how to set it up (we will keep the default configuration and not pass any arguments)
+Begin configuring pg-promise to make a connection within your Express server:
 
 ```js
+// db/dbConfig.js
 const pgp = require("pg-promise")();
 
 module.exports = db;
 ```
 
-Now, we have to set up the connection. We will pass an object with the necessary information to connect our server with our database. We'll bring in the variables from our `.env` file.
-
-[Connection Object](https://github.com/vitaly-t/pg-promise/wiki/Connection-Syntax#configuration-object)
+We will pass an object with the necessary information to connect our server with our database. We'll bring in the variables from our `.env` file.
 
 Finally, we must open the connection with `const db = pgp(cn);`
 
-- `cn` - is short for connection
+- What is `cn` short for?
 
 ```js
 const pgp = require("pg-promise")();
@@ -304,18 +287,31 @@ const db = pgp(cn);
 module.exports = db;
 ```
 
+To add additional db connection status info (the following code is unnecessary to connect the db and run the app.) After a few more steps, you will not see this status message until you open a connection.
+
+```js
+db.connect()
+  .then((cn) => {
+    const { user, host, port, database } = cn.client;
+    console.log(
+      `Postgres connection established with user:\x1b[33m${user}\x1b[0m, host:\x1b[33m${host}\x1b[0m, port:\x1b[33m${port}\x1b[0m, database:\x1b[33m${database}\x1b[0m`
+    );
+    cn.done();
+  })
+  .catch((error) => console.log("database connection error", error));
+```
+
 ## Querying the Database
 
-We are going to separate our SQL queries from our routes. For organizational purposes, let's make a folder called `queries`
+We are going to separate our SQL queries from our routes. For organizational purposes, let's make a folder called `queries`.
 
 - `mkdir queries`
 - `touch queries/bookmarks.js`
 
-**queries/bookmarks.js**
-
-First, let's bring in our connection to the database and immediately export it (so we don't forget to do this later)
+First, let's bring in our connection to the database and immediately export it (so we don't forget to do this later).
 
 ```js
+// queries/bookmarks.js
 const db = require("../db/dbConfig.js");
 
 module.exports = {};
@@ -326,6 +322,7 @@ Next, let's write our first function, which will have a SQL query.
 **IMPORTANT** - this will be an async function. We need to wait for the database's response before we try to return a value.
 
 ```js
+// queries/bookmarks.js
 const db = require("../db/dbConfig.js");
 
 const getAllBookmarks = async () => {};
@@ -333,7 +330,7 @@ const getAllBookmarks = async () => {};
 module.exports = { getAllBookmarks };
 ```
 
-> **Note**: with `module.exports`, we are returning an object because we will return more than one function. Therefore, we will store it in an object.
+> **Note**: We are returning an object with `module.exports` because we will return more than one function. Therefore, we will store it in an object.
 
 Next, we want to set up a `try/catch` block so that if we have a problem, we can (likely) get a more informative error.
 
@@ -348,13 +345,14 @@ const getAllBookmarks = async () => {
 
 Finally, let's add our query.
 
-`db.any()` is a function that takes a string as a first argument.
-
-[.any()](https://github.com/vitaly-t/pg-promise#methods) means it will accept any return from the database, no rows, one row, or many rows of data.
+- What is `db.any()`?
+- What are the parameter(s) for `db.any()`?
+- Why are you using `db.any()` for the index route?
 
 Be sure to export this function.
 
 ```js
+// queries/bookmarks.js
 const getAllBookmarks = async () => {
   try {
     const allBookmarks = await db.any("SELECT * FROM bookmarks");
@@ -365,11 +363,10 @@ const getAllBookmarks = async () => {
 };
 ```
 
-**controllers/bookmarkController.js**
-
 Require `getAllBookmarks` function and update `bookmarks.get()` index route to be `async`.
 
 ```js
+// controllers/bookmarksController.js
 const express = require("express");
 const bookmarks = express.Router();
 const { getAllBookmarks } = require("../queries/bookmarks");
@@ -380,7 +377,7 @@ bookmarks.get("/", async (req, res) => {});
 module.exports = bookmarks;
 ```
 
-Let's create a new variable, `allBookmarks` which will be an array of bookmark objects. Remember, we must `await` for the value to come back from the database.
+Let's create a new variable, `allBookmarks`, an array of bookmark objects. Remember, we must `await` for the value to come back from the database.
 
 Then, we'll send it as JSON to the browser.
 
@@ -394,7 +391,10 @@ bookmarks.get("/", async (req, res) => {
 
 Let's do a little error handling.
 
+- Why is error handling important?
+
 ```js
+// INDEX
 bookmarks.get("/", async (req, res) => {
   const allBookmarks = await getAllBookmarks();
   if (allBookmarks[0]) {
@@ -413,3 +413,7 @@ How can you test this route?
 
 - `git add -A`
 - `git commit -m 'index route complete'`.
+
+## Reference build
+
+[Index route](https://github.com/pursuit-curriculum-resources/express-sql-seed-read-demo)

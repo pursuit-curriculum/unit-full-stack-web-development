@@ -17,11 +17,11 @@ By the end of this lesson, you should be able to:
 
 ## Rebuild a back-end API
 
-Earlier in this module, you built two apps: a back-end API that serves JSON and front-end that consumes the API.
+Earlier in this module, you built two apps: a back-end API that serves JSON and a front-end that consumes the API.
 
-You will rebuild the backend API in order to review Express and learn how to add a database in.
+You will rebuild the back-end API to review Express and learn how to add a database.
 
-Sometimes, rebuilding something can seem less exciting than trying something new. However, being able to compare and contrast the differences will help solidify what you have already learned and what parts are new.
+Sometimes, rebuilding something can seem less exciting than trying something new. However, comparing and contrasting the differences will help solidify what you have already learned and what parts are new.
 
 ## Getting Started
 
@@ -62,10 +62,6 @@ PORT=3003
 
 - What are acceptable port numbers?
 
-**Review Questions:**
-
-- What do this file and setup do?
-
 ```js
 // app.js
 // DEPENDENCIES
@@ -81,7 +77,7 @@ app.use(express.json());
 
 // ROUTES
 app.get("/", (req, res) => {
-  res.send("Youlcome to Colors App");
+  res.send("Welcome to Colors App");
 });
 
 // EXPORT
@@ -90,14 +86,7 @@ module.exports = app;
 
 **Review Questions:**
 
-- What do this file and setup do?
-- What is middleware?
-- What does `app.use(cors())` do?
-- What does `app.use(express.json())` set up?
-- What does `app.get()` do?
-- What is `req` short for?
-- What is `res` short for?
-- What is `module.exports`? What does it do?
+- What does this file and setup do?
 
 ```js
 // server.js
@@ -119,11 +108,19 @@ Test that your app works: http://localhost:3003
 **Review Questions:**
 
 - What do this file and setup do?
-- What is `app`? What does it do?
+- What is middleware?
+- What does `app.use(cors())` do?
+- What does `app.use(express.json())` set up?
+- What does `app.get()` do?
+- What is `req` short for?
+- What is `res` short for?
+- What is `module.exports`? What does it do?
 
 ## Colors Controller
 
-Use <kbd>control</kbd> <kbd>shift</kbd> <kbd>`</kbd> to open a new terminal tab so you can continue your work without having to shut your server down (please note that changes to configuration files do require a hard reset of your server).
+Use <kbd>control</kbd> <kbd>shift</kbd> <kbd>t</kbd> to open a new terminal tab so you can continue your work without having to shut your server down.
+
+> **Note**: Changes to configuration files require a hard server reset.
 
 **Terminal**
 
@@ -145,7 +142,7 @@ module.exports = colors;
 
 **Review Questions:**
 
-- What is the URL one needs to go to to see this message?
+- What URL must one go to to see this message?
 - Why doesn't it work yet?
 - Why don't you see a 404 message, either?
 
@@ -163,9 +160,9 @@ app.get("*", (req, res) => {
 
 Now try: http://localhost:3003/colors
 
-Why did you name your route `/colors`? Is there a reason you name your route(s) this way?
+- Why did you name your route `/colors`? Is there a reason you name your route(s) this way?
 
-What would happen if you put this code ABOVE the middleware setup?
+- What would happen if you put this code ABOVE the middleware setup?
 
 ## Setting up The Database
 
@@ -175,12 +172,12 @@ You could open up a shell and do it. However, it can be helpful to store your co
 
 When might you want to reuse them?
 
-- When collaborating on a group project and you need your partner(s) to have the same setup
-- When you deploy your app in the cloud and want to be sure your db/tables are set up the same way
-- When you want to test your database with CircleCi or another automated testing
-- When you get a new computer and want to set up the project on your new computer
+- When collaborating on a group project, you need your partner(s) to have the same setup.
+- When you deploy your app in the cloud and want to be sure your db/tables are set up the same way.
+- When you want to test your database with CircleCi or another automated testing.
+- When you get a new computer and want to set up the project on your new computer.
 
-**GOTCHA**: Do not name a database and a table the same name. E.g., database `colors` & table `colors` - this will cause errors.
+**GOTCHA**: Do not name a database and a table the same name. E.g., database `colors` & table `colors` - will cause errors.
 
 You will call your database `colors_dev` and your table `colors`.
 
@@ -195,9 +192,8 @@ You will create two files.
 - `touch db/schema.sql`
 - `touch db/seed.sql`
 
-**db/schema.sql**
-
-```sql
+```SQL
+-- db/schema.sql
 DROP DATABASE IF EXISTS colors_dev;
 CREATE DATABASE colors_dev;
 
@@ -211,7 +207,7 @@ CREATE TABLE colors (
 
 ```
 
-Run this command:
+Run this command (make sure you are on the same level as your package.json and you have created your db files and folders in the correct place.):
 
 ```bash
 psql -U postgres -f db/schema.sql
@@ -225,13 +221,12 @@ This line of code says, run the app `psql`, use the `U`ser `postgres` and run th
 
 <hr />
 
-**db/seed.sql**
-
-```sql
+```SQL
+-- db/seed.sql
 \c colors_dev;
 
 INSERT INTO colors (name, is_favorite) VALUES
-('Orchid',  true),
+('Orchid', true),
 ('Lavender', true),
 ('Salmon', true);
 ```
@@ -251,50 +246,48 @@ What does the above command do?
 
 ### Reusing the db commands
 
-As you develop your applications, you'll find you need to rerun the Postgres commands over and over again. In one case, because you've made changes to the database (added a column, changed a name, updated a constraint). In the case of the seed data, you may end up wanting to try new test-cases or resetting the data because something went wrong.
+As you develop your applications, you must rerun the Postgres commands repeatedly. In one case, because you've changed the database (added a column, changed a name, updated a constraint). In the case of the seed data, you may want to try new test cases or reset the data because something went wrong.
 
-Rather than looking up these commands over and over again, you can add them to your `package.json`
+Rather than looking up these commands over and over again, you can add them to your `package.json`.
 
 ```json
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "db:init": "psql -U postgres -f db/schema.sql",
-    "db:seed": "psql -U postgres -f db/seed.sql"
-  },
+ "scripts": {
+ "db:init": "psql -U postgres -f db/schema.sql",
+ "db:seed": "psql -U postgres -f db/seed.sql"
+ },
 ```
 
-To run, make sure your server is not running, then you can type:
+To run, make sure your server is not running. Then you can type:
 
 - `npm run db:init`
 - `npm run db:seed`
 
-> **Note**: When making changes to configurations, be sure to fully shut down your server and start again. Configuration changes are often not tracked/reset with nodemon.
+> **Note**: When making configuration changes, shut down your server entirely and start again. Configuration changes are often not tracked/reset with nodemon.
 
 ## Adding Postgres/pg-promise
 
-You're going to use an npm package called `pg-promise`; pg-promise will make it simple for you to connect to your Postgres database and allow you to write SQL commands that return JSON to you that you can then send out.
+![](./assets/server-db.png)
 
-The server will now make requests to the database, and the database will send back a response, very much like the request/response cycle we've already seen between clients and servers.
+You will use an npm package called `pg-promise`; pg-promise will make it simple for you to connect to your Postgres database and allow you to write SQL commands that return JSON to you that you can then send out.
 
-Requests require a path or URL to know where to go. The first part of adding pg-promise is to configure where the requests to the database should go.
+The server will now make requests to the database, and the database will send back a response, very much like the request/response cycle you've already seen between clients and servers.
+
+Requests require a path or URL to know where to go. The first part of adding pg-promise is configuring where the database requests should go.
 
 An example URL to a database is:
 
 ```
 postgres://john:password1234@localhost:5432/colors_dev
 \________/\___/\____________/\_______/\___/\_________/
-protocol   user   password      host   port sub-database
+protocol user password host port sub-database
 ```
 
-You will configure this URL below.
-
-![](./assets/server-db.png)
+You will configure this URL below. First, install `pg-promise` and create a file to set up the configuration:
 
 - `npm install pg-promise`
 - `touch db/dbConfig.js`
 
-Currently, we'll be running your app on your computer, but later, we'll want to deploy it. So you will want to set up your environmental variables. Reminder - this (`.env`) is not a JavaScript file, do not use semi-colons or quotes.
+Currently, you'll be running your app on your computer, but later, you'll want to deploy it. So you will want to set up environmental variables. Reminder - `.env` is not a JavaScript file, do not use semi-colons or quotes.
 
 When you installed Postgres, it set up to, by default, run on localhost with a port of 5432. You are going to keep these defaults. You can always check them with the Postgres App.
 
@@ -311,7 +304,7 @@ PG_USER=postgres
 
 <br />
 
-You can go to [the docs](http://vitaly-t.github.io/pg-promise/index.html) and see how complete or modify the set up (we will keep the default configuration and not pass any arguments).
+You can go to [the docs](http://vitaly-t.github.io/pg-promise/index.html) and see how complete or modify the setup is (for this build, you will keep the default configuration and not pass any arguments).
 
 Remember, a database like Postgres is very similar to a server in that it takes requests and makes responses.
 
@@ -326,14 +319,14 @@ Now, you have to set up the connection. You will pass an object with the necessa
 
 You will create a [Connection Object](https://github.com/vitaly-t/pg-promise/wiki/Connection-Syntax#configuration-object) that pg-promise will convert into a URL.
 
-In this case, you'll be using the user `postgres`, which by default, does not have a password. It's important to note, A setup without a specific username and no password is not secure but ok for participating in a lesson or working on a lab since there is no sensitive information being passed around.
+In this case, you'll be using the user `postgres`, which does not have a password by default. It's important to note a setup without a specific username and no password is not secure but ok for participating in a lesson or working on a lab since no sensitive information is being passed around.
 
-When you work for a company, you will have a specific username and password. As an aside, when you start your job as a dev, most companies will set up your computer for you with usernames, password and configurations. This will be handled either by an IT department or senior developer. Therefore, learning how to configure things like Postgres at this stage is less critical than learning to use it to build apps.
+You will have a specific username and password when you work for a company. As an aside, when you start your job as a dev, most companies will set up your computer for you with usernames, passwords, and configurations. This will be handled either by an IT department or a senior developer. Therefore, mastering how to configure things like Postgres at this stage is less critical than learning to use it to build apps.
 
 ```
 postgres://postgres@localhost:5432/colors_dev
 \________/\________/\_______/\___/\_________/
-protocol     user      host   port sub-database
+protocol user host port sub-database
 ```
 
 - `cn` - is short for connection
@@ -370,7 +363,7 @@ const db = pgp(cn);
 module.exports = db;
 ```
 
-If you would like more information about the connection, you can add the following function. This is not required to create the connection, but like the console.log in the `app.listen` function, gives you a status of the
+If you want more information about the connection, add the following function. This is not required to create the connection, but like the console.log in the `app.listen` function, it gives you the connection status to Postgres.
 
 ```js
 db.connect()
@@ -378,7 +371,7 @@ db.connect()
     const { user, host, port, database } = cn.client;
     console.log(
       "\x1b[90m" +
-        `Postgres connection established with user:${user}, host:${host},  port:${port}, database:${database}` +
+        `Postgres connection established with user:${user}, host:${host}, port:${port}, database:${database}` +
         "\x1b[0m"
     );
     cn.done();
@@ -386,18 +379,18 @@ db.connect()
   .catch((error) => console.log("database connection error", error));
 ```
 
-> **Note**: You will not see this message until you've made a request to the database. This request will not happen until you've taken a few more steps and called the query function in the controller. Follow the next steps to get there.
+> **Note**: You will not see this message until you request the database. This request will not happen until you've taken a few more steps and called the query function in the controller. Follow the next steps to get there.
 
 ## Querying the Database
 
-You are going to separate your SQL queries from your routes. For organizational purposes, let's make a folder called `queries`
+You are going to separate your SQL queries from your routes. This modularization will allow you to separate concerns and create reusable code. For organizational purposes, make a folder called `queries`.
 
 - `mkdir queries`
 - `touch queries/color.js`
 
 **queries/color.js**
 
-First, let's bring in your connection to the database and immediately export it (so you don't forget to do this later)
+First, bring your connection to the database and immediately export it (so you don't forget to do this later).
 
 ```js
 const db = require("../db/dbConfig.js");
@@ -405,9 +398,9 @@ const db = require("../db/dbConfig.js");
 module.exports = {};
 ```
 
-Next, let's write your first function, which will have a SQL query.
+Next, write your first function, which will have a SQL query.
 
-**IMPORTANT** - this will be an async function. You need to wait for the database's response before you try to return a value.
+**IMPORTANT** - this will be an async function. You need to wait for the database's response before returning a value.
 
 ```js
 const db = require("../db/dbConfig.js");
@@ -417,7 +410,7 @@ const getAllColors = async () => {};
 module.exports = { getAllColors };
 ```
 
-> **Note**: with `module.exports`, you are returning an object because you will return more than one function. Therefore, you will store it in an object.
+> **Note**: with `module.exports`, you are returning an object because you will return more than one function. Therefore, you will store the various functions in an object.
 
 Next, you want to set up a `try/catch` block so that if you have a problem, you can (likely) get a more informative error.
 
@@ -430,11 +423,9 @@ const getAllColors = async () => {
 };
 ```
 
-Finally, let's add your query.
+Finally, add your query.
 
-`db.any()` is a function that takes a string as a first argument.
-
-[.any()](https://github.com/vitaly-t/pg-promise#methods) means it will accept any return from the database, no rows, one row, or many rows of data.
+`db.any()` is a function that takes a string as a first argument. [.any()](https://github.com/vitaly-t/pg-promise#methods) means it will accept any return from the database, no rows, one row, or many rows of data.
 
 Be sure to export this function.
 
@@ -449,11 +440,10 @@ const getAllColors = async () => {
 };
 ```
 
-**controllers/colorController.js**
-
 Require `getAllColors()` function and update `colors.get()` index route to be `async`.
 
 ```js
+// controllers/colorController.js
 const express = require("express");
 const colors = express.Router();
 const { getAllColors } = require("../queries/color");
@@ -464,7 +454,7 @@ colors.get("/", async (req, res) => {});
 module.exports = colors;
 ```
 
-Let's create a new variable, `allColors` which will be an array of color objects. Remember, you must `await` for the value to come back from the database.
+Create a new variable, `allColors`, an array of color objects. Remember, you must `await` for the value to come back from the database.
 
 Then, we'll send it as JSON to the browser.
 

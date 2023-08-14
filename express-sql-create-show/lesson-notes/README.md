@@ -20,11 +20,10 @@ For example, looking at the data, we inserted `Apartment Therapy` should have an
 
 If we were to access it by array position, it would be at array position `1`. We used array positions earlier for simplicity. However, there is never a guarantee that an item will be in a particular order/array position, and it can change. So using the `id` now that we have a database is critical.
 
-**queries/bookmarks.js**
-
 Create an async arrow function and be sure to include it in `module.exports`
 
 ```js
+// queries/bookmarks.js
 // ONE Bookmark
 const getBookmark = async () => {};
 
@@ -38,9 +37,9 @@ We will get the `id` from the `req.params` in the show route (in bookmarkControl
 
 We will use `db.oneOrNone` because we expect one row to be returned.
 
-We are passing two arguments, one is the SQL query, and the second is the value coming in from the request. In this case, it is the `id` of the bookmark we want to show.
+We are passing two arguments, one is the SQL query, and the second is the value coming in from the request. In this case, we want to show the `id` of the bookmark.
 
-We represent that `id` in the SQL query by using `$1` rather than inserting the value, as we might if it were a JavaScript string interpolation.
+We represent that `id` in the SQL query using `$1` rather than inserting the value, as we might if it were a JavaScript string interpolation.
 
 The reason is safety.
 
@@ -63,22 +62,22 @@ const getBookmark = async (id) => {
 **NOTE**: You may also pass in arguments to your SQL query using an object with named keys like so:
 
 ```js
+// DEMO do not code
 await db.one("SELECT * FROM bookmarks WHERE id=$[id]", {
   id: id,
 });
 ```
 
-Knowing this alternate syntax can be helpful as you look at other coding examples. When you work on a project, stick with one type of syntax for readability and maintainability.
-
-**controllers/bookmarkController.js**
+Knowing this alternate syntax can be helpful as you look at other coding examples. When you work on a project, stick with one syntax type for readability and maintainability.
 
 Import the function
 
 ```js
+// controllers/bookmarkController.js
 const { getAllBookmarks, getBookmark } = require("../queries/bookmarks");
 ```
 
-Create the show route and test it in the browser/Postman
+Create the show route and test it in the browser/Postman.
 
 ```js
 // SHOW
@@ -105,11 +104,10 @@ bookmarks.get("/:id", async (req, res) => {
 
 ## Create
 
-**queries/bookmarks.js**
-
 Create an async arrow function and be sure to include it in `module.exports`
 
 ```js
+// queries/bookmarks.js
 const createBookmark = async (bookmark) => {
   try {
   } catch (error) {
@@ -153,10 +151,10 @@ const createBookmark = async (bookmark) => {
 };
 ```
 
-**controllers/bookmarkController.js**
 Import the function
 
 ```js
+// controllers/bookmarkController.js
 const {
   getAllBookmarks,
   getBookmark,
@@ -164,7 +162,7 @@ const {
 } = require("../queries/bookmarks");
 ```
 
-Create the show route and test it with Postman
+Create the show route and test it with Postman.
 
 ```js
 // CREATE
@@ -211,14 +209,13 @@ Forgetting a name:
 
 We get a hard-to-read error. We want to check if there is a name and then send back an appropriate status code and a more human-readable error.
 
-We can add this logic to our route, but then our route is validating and sending a response. It would be better to write a separate function that validates it. It also would make sense to put it in its own file for better organization.
+We can add this logic to our route, but then our route is validating and sending a response. It would be better to write a separate function that validates it. It also would make sense to put it in its file for better organization.
 
 - `mkdir validations`
 - `touch validations/checkBookmarks.js`
 
-**validations/checkBookmarks.js**
-
 ```js
+// validations/checkBookmarks.js
 const checkName = (req, res, next) => {
   console.log("checking name...");
 };
@@ -226,9 +223,8 @@ const checkName = (req, res, next) => {
 module.exports = { checkName };
 ```
 
-**controller/bookmarksController.js**
-
 ```js
+// controller/bookmarksController.js
 const { checkName } = require("../validations/checkBookmarks.js");
 ```
 
@@ -251,21 +247,32 @@ const checkName = (req, res, next) => {
 };
 ```
 
-Ok, we get our error message. But if we enter a name now, how do we return to our route?
+OK, we get our error message. But how do we return to our route if we enter a name now?
 
 We use the `next` function.
 
 ```js
 const checkName = (req, res, next) => {
   if (req.body.name) {
-    next();
+    return next();
   } else {
     res.status(400).json({ error: "Name is required" });
   }
 };
 ```
 
-Let's try again
+Let's try again:
+
+Error:
+
+```js
+{
+ "url": "https://www.avclub.com",
+ "is_favorite": "false"
+}
+```
+
+OK:
 
 ```js
 {
@@ -311,11 +318,11 @@ Don't forget to add this to the `bookmarkController.js`.
 const { checkBoolean, checkName } = require("../validations/checkBookmarks.js");
 
 
-// Further down...
+// Further down
 bookmarks.post("/", checkBoolean, checkName, async (req, res) => {
 ```
 
-Hmmm, not quite right. How can we check if the value of `req.body.is_favorite` is a boolean value?
+Hmmm, not quite right. How can we check if the `req.body.is_favorite` value is a boolean value?
 
 If you don't know, go ahead and google it.
 
@@ -342,3 +349,7 @@ const checkBoolean = (req, res, next) => {
 
 - `git add -A`
 - `git commit -m 'show and create complete'`.
+
+## Reference
+
+[See the build here](https://github.com/pursuit-curriculum-resources/express-sql-seed-read-demo/tree/show-create)
