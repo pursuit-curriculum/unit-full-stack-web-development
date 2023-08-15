@@ -331,10 +331,14 @@ If you don't know, go ahead and google it.
 ```js
 const checkBoolean = (req, res, next) => {
   const { is_favorite } = req.body;
+  // account if string or undefined
+  // the value false will evaluate to false
+  // therefore check if typeof is boolean as well
   if (
     is_favorite == "true" ||
     is_favorite == "false" ||
-    is_favorite == undefined
+    is_favorite == undefined ||
+    typeof is_favorite == "boolean"
   ) {
     next();
   } else {

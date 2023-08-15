@@ -38,3 +38,7 @@ The next four are ones that we will build in our front-end:
 |  4  |  Edit  | /bookmarks/:id/edit |    GET    | **R**ead |      Get a form to update a bookmark       |
 
 Which two are new, and which ones have we built with express?
+
+## Pre-reading code along
+
+There is no code along. However, you can clone down a fresh copy of the [colors react app](https://github.com/pursuit-curriculum-resources/pre-reading-connect-react-demo) and refactor it to work with a back-end that uses Postgres. One of the biggest changes is that you'll need to change from using the array position to ids. Why?
