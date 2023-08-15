@@ -34,7 +34,7 @@ VITE_BASE_URL=http://localhost:3003
 
 </details>
 
-Let's click on `Bookmarks` in the navigation to go to `/bookmarks`
+Let's click on `Bookmarks` in the navigation to go to `/bookmarks`.
 
 <details><summary>Index Page Empty</summary>
 
@@ -42,7 +42,7 @@ Let's click on `Bookmarks` in the navigation to go to `/bookmarks`
 
 </details>
 
-We can see that we have a view for our index page. But we need to connect this app to our back-end. We can do so using `axios` much like we did use third-party APIs.
+We can see that we have a view for our index page. But we need to connect this app to our back-end. We can do so using the fetch API much like we did using third-party APIs.
 
 ## Setting Up the App to Make Requests
 
@@ -106,7 +106,7 @@ Let's build out the show page.
 
 First, let's start with the JSX, then we'll go back and add functionality. This is the recommended approach, based on the docs: [Thinking in React](https://react.dev/learn/thinking-in-react)
 
-We are going to hard-code values to see our components and make sure things are set up and organized as we want. Then, we'll go back and add more functionality.
+We will hard-code values to see our components and make sure things are set up and organized as we want. Then, we'll go back and add more functionality.
 
 ```js
 // src/Components/BookmarkDetails.js
@@ -198,7 +198,7 @@ import { useState, useEffect } from "react";
 
 ```
 
-We will also require a bit more information from our app to make the API call. We need to know where to make the API call and the `id` of the bookmark. The `id` of the bookmark will come from the URL.
+We will also require more information from our app to make the API call. We need to know where to make the API call and the `id` of the bookmark. The `id` of the bookmark will come from the URL.
 
 ```js
 import { useState, useEffect } from "react";
@@ -210,15 +210,15 @@ function BookmarkDetails() {
  const [bookmark, setBookmark] = useState([]);
  let { id } = useParams();
 
-  useEffect(() => {
-    fetch(`${API}/bookmarks/${id}`)
-      .then((response) => response.json())
-      .then((responseJSON) => setBookmark(responseJSON))
-      .catch((error) => console.error(error));
-  }, [id, API]);
+ useEffect(() => {
+ fetch(`${API}/bookmarks/${id}`)
+ .then((response) => response.json())
+ .then((responseJSON) => setBookmark(responseJSON))
+ .catch((error) => console.error(error));
+ }, [id, API]);
 ```
 
-Now that it works as expected, let's go in and add the actual values where we've put our placeholders.
+Now that it works as expected let's go in and add the actual values where we've put our placeholders.
 
 ```js
 return (
@@ -257,7 +257,7 @@ return (
 
 ## Delete Functionality
 
-From this view, we want to be able to delete a bookmark. It's pretty common to name a function that handles an event (like a click or hover `handle`).
+From this view, we want to be able to delete a bookmark. It's common to name a function that handles an event (like a click or hover `handle`).
 
 - What are the pros of creating a generic `handleDelete` function?
 - What are the pros of just having the onClick event call the delete functionality?
