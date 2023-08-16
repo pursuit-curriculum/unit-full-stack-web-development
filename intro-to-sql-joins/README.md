@@ -264,8 +264,8 @@ ON
 | room_id | guest_id |  stay_dates   | \|  | id  |     name     |  pet  | \|  | id  |   name    | price | room_num | vacant | hotel_id |
 | :-----: | :------: | :-----------: | :-: | :-: | :----------: | :---: | :-: | :-: | :-------: | :---: | :------: | ------ | -------- |
 |   11    |   100    |   June 6-12   | \|  | 100 | Winter Jones | true  | \|  | 11  | Penthouse | 10000 |   303    | true   | 1        |
-|   12    |   120    |  August 6-12  | \|  | 120 | River Miller | true  | \|  |     |   Twin    |  600  |   101    | false  | 2        |
-|   10    |   110    | October 6-12  | \|  | 110 |  Forest Doe  | false | \|  |     |   Queen   | 1200  |   202    | true   | 2        |
+|   12    |   120    |  August 6-12  | \|  | 120 | River Miller | true  | \|  | 12  |   Twin    |  600  |   101    | false  | 2        |
+|   10    |   110    | October 6-12  | \|  | 110 |  Forest Doe  | false | \|  | 10  |   Queen   | 1200  |   202    | true   | 2        |
 |   11    |   120    | November 6-12 | \|  | 120 | River Miller | true  | \|  | 11  | Penthouse | 10000 |   303    | true   | 1        |
 
 You can keep going and add information from the hotels table and select the columns and sort the data:

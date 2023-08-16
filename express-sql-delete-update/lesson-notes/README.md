@@ -22,7 +22,7 @@ If we were to access it by array position, it would be at array position `1`. We
 
 ## Delete
 
-Create an async arrow function and be sure to include it in `module.exports`
+Start by creating the query. Create an async arrow function and be sure to include it in `module.exports`. Work from the outside in by creating the try/catch blocks first.
 
 ```js
 // queries/bookmarks.js
@@ -41,6 +41,8 @@ module.exports = {
 };
 ```
 
+Add the functionality.
+
 ```js
 const deleteBookmark = async (id) => {
   try {
@@ -55,7 +57,7 @@ const deleteBookmark = async (id) => {
 };
 ```
 
-Import the function
+Import the function to the controller.
 
 ```js
 // controllers/bookmarkController.js
@@ -67,13 +69,7 @@ const {
 } = require("../queries/bookmarks");
 ```
 
-Create the delete route and test it with Postman.
-
-Remember to have selected:
-
-- Route ` DELETE` `/bookmarks/:id`
-
-Test that the route works:
+Create just the delete route and test it with Postman.
 
 ```js
 // DELETE
@@ -110,15 +106,9 @@ bookmarks.delete("/:id", async (req, res) => {
 
 Test it with Postman.
 
-Remember to have:
-
-- route DELETE /bookmarks/:id
-
 ## Update
 
-**queries/bookmarks.js**
-
-Create an async arrow function and be sure to include it in `module.exports`
+Start by creating the query. Create an async arrow function and be sure to include it in `module.exports`
 
 ```js
 // queries/bookmarks.js
@@ -154,7 +144,7 @@ const updateBookmark = async (id, bookmark) => {
 };
 ```
 
-Import the function
+Import the function.
 
 ```js
 // controllers/bookmarkController.js
@@ -167,6 +157,8 @@ const {
 } = require("../queries/bookmarks");
 ```
 
+Create just the route and test it.
+
 ```js
 // UPDATE
 bookmarks.put("/:id", async (req, res) => {
@@ -175,7 +167,7 @@ bookmarks.put("/:id", async (req, res) => {
 });
 ```
 
-Now add the database call:
+Now add the database call.
 
 ```js
 // UPDATE
@@ -200,7 +192,7 @@ Test it and remember to have the following:
 
 Remember, the same rules apply that applied to create. There must be a name, and `is_favorite` must be a boolean (or undefined - why is undefined an ok option?).
 
-We can easily update our function to do those checks.
+We can easily update our function to do those checks because we created the functionality separate from the create route.
 
 ```js
 bookmarks.put("/:id", checkName, checkBoolean, async (req, res) => {
@@ -208,9 +200,7 @@ bookmarks.put("/:id", checkName, checkBoolean, async (req, res) => {
 
 ## Final Validation
 
-We checked for one more thing the first time we built this app.
-
-We checked if the URL provided starts with `http` or `https`.
+We checked for one more thing the first time we built this app. We checked if the URL provided starts with `http` or `https`.
 
 ```js
 // validations/checkBookmarks.js

@@ -10,7 +10,7 @@ You need a way to make the data persist so that you will still have the data if 
 
 There are many kinds of databases. A common type is a relational database, which stores data in tables and rows like an Excel or Google spreadsheet. You will interact with relational databases using a coding language called SQL (Structured Query Language). Some popular ones are MySQL, Oracle, SQL Server, SQLite, and PostgreSQL.
 
-While a Google sheet can hold hundreds or thousands of records, it isn't meant to hold millions or billions of records (think about a database that contains all the user data of FaceBook). Additionally, you can relate different tables (sheets), allowing you to do powerful things with data. You'll get to see this in action in the next lesson.
+While a Google sheet can hold hundreds or thousands of records, it isn't meant to hold millions or billions of records (think about a database that contains all the user data of FaceBook). Additionally, you can relate different tables (sheets), allowing you to do powerful things with data.
 
 You'll be working with [PostgreSQL](https://www.postgresql.org/docs/current/intro-whatis.html) (a successor to a database called `ingres`), an open-source RDBMS (relational database management system) created at the University of California Berkeley. It started being built in 1982. You can access the [official documentation here](https://www.postgresql.org/docs/current/index.html).
 
@@ -134,7 +134,7 @@ You'll see a colon that will let you know there is more data, which you can use 
 
 PostgreSQL is a database application. When you run the application, you can create `sub-databases` that allow you to work on different projects. For example, you may have one for your bookmarks app, one for your budgeting app, and more. These are sub-databases. However, they are often called `databases`, and you use the keyword `databases` to create them.
 
-Create a database and then drop (delete) it. Then we'll create a new one, connect it, and use it for the rest of this pre-reading.
+Create a database and then drop (delete) it. Then create a new one, connect it, and use it for the rest of this pre-reading.
 
 ```SQL
 -- Create the sub-database second
@@ -167,7 +167,7 @@ PostgreSQL is more strict and expects the correct data types in the columns you 
 1. `TIMESTAMP` - [date](https://www.postgresql.org/docs/current/datatype-datetime.html)
 1. `SERIAL` - [serial, automatically increments as new rows are created](https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL)
 
-## Create a Table
+## Create a table
 
 Inside a database, you can have many tables. You'll create a table of DVDs for sale. If you were working for an online DVD store, you'd have additional tables for users, orders, and more.
 
@@ -206,11 +206,11 @@ You want the ID to increment as you add a new DVD automatically. You can create 
 
 Additionally, there is no sense in having a DVD without a title. So that field must always have a value. To add a constraint that this value cannot be null, you add the key words `NOT NULL`.
 
-Ratings can be a single letter like `G` or four letters like `PG-13`. Limiting the characters can help keep the data consistent since only `G` can be entered, not `General`. You can limit the number of characters by using the datatype `VARCHAR(n)`.
+Ratings can be a single letter like `G` or four letters like `PG13`. Limiting the characters can help keep the data consistent since only `G` can be entered, rather than the full word `General`. You can limit the number of characters by using the datatype `VARCHAR(n)`.
 
 Price can be set as an integer set in cents. You can easily convert it to a dollar amount with JavaScript. You don't want to allow a negative price so you can use the constraint `CHECK (price >= 0 )`
 
-Finally, you can expect that most VHS tapes are still in print. However, sometimes they may be discontinued. Therefore, setting a default value of false if the user doesn't enter a value can be prudent.
+Finally, you can expect that most VHS tapes are still in print. However, sometimes they may be discontinued. Therefore, setting a `DEFAULT` value of false if the user doesn't enter a value can be prudent.
 
 ```SQL
 -- Note `ratingg` is not a typo in this case. You will update it to `rating` in a later section.
@@ -225,7 +225,7 @@ CREATE TABLE
 
 ![](./assets/create-and-see-table.png)
 
-### Alter a Table
+### Alter a table
 
 You can make changes to the table you've created.
 
@@ -249,7 +249,7 @@ ALTER TABLE VHS RENAME TO dvds;
 \d dvds
 ```
 
-## Insert Into The Table
+## Insert into the table
 
 You don't have to remember the order of the columns you created, but you have to match the order when inserting:
 
@@ -355,7 +355,7 @@ SELECT * FROM dvds WHERE discontinued IS NOT NULL;
 
 ```
 
-## Update a Row
+## Update a row and return the new value
 
 > **NOTE**: DANGER! Forgetting the `WHERE` clause for UPDATE or DELETE can cause every row to update/delete.
 
@@ -371,7 +371,7 @@ However, sometimes you want to see the changes you made. We can add a `RETURNING
 UPDATE dvds SET company='Disney' WHERE id = 2 RETURNING *;
 ```
 
-## Delete a Row
+## Delete a row
 
 ```SQL
 DELETE FROM dvds WHERE id = 1;
@@ -385,11 +385,11 @@ You can create more complex queries, using the syntax you've already learned.
 DELETE FROM dvds WHERE discontinued = false RETURNING title, company;
 ```
 
-## Quit PostgreSQL Shell
+## Quit PostgreSQL shell
 
 To quit `psql`, type `\q`.
 
-## Additional references
+## Additional actions
 
 Below are a few more things you can do with SQL. You don't have to learn all of this in one day. However, it should serve as a useful reference.
 
@@ -442,7 +442,7 @@ Combining statements takes a bit of thought and practice. It is also important t
 SELECT title, rating, price FROM dvds ORDER BY rating, price ASC LIMIT 2 OFFSET 2;
 ```
 
-### Counts and Aggregation
+### Counts and aggregation
 
 ```SQL
 -- show the total number of DVDs.

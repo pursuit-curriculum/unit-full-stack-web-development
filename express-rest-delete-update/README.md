@@ -172,6 +172,6 @@ You built your first single-model full CRUD RESTful API with Express!
 
 You have a simple app that stores HTML color names. Users can create, read, update, and delete colors.
 
-Unfortunately, asking users to make updates using Postman isn't giving your app any wow factor.
+Unfortunately, asking users to make updates using Postman isn't give your app any wow factor.
 
 For some wow factor, you'll need to build a front-end.

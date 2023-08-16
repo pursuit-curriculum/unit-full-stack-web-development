@@ -1,3 +1,5 @@
+# PERN Stack: CRUD
+
 ## Getting Started
 
 This build will review how to make:
@@ -8,11 +10,11 @@ This build will review how to make:
 
 The new and edit views are already set up for you.
 
-- Go to your bookmarks back-end app and get it started with `nodemon`.
-- Open a new tab in the terminal, do not shut down your bookmarks app
-- navigate up and out of the bookmarks app. Confirm you are not already inside a git repository.
-- Fork the [starter-pern-crud](https://github.com/pursuit-curriculum-resources/starter-pern-crud) in your class GitHub Organization
-- `git clone` the forked repository
+- Go to your bookmarks back-end app and get it started.
+- Open a new tab in the terminal, do not shut down your bookmarks back-end app.
+- Navigate up and out of the bookmarks app. Confirm you are not already inside a git repository.
+- Fork the [starter-pern-crud](https://github.com/pursuit-curriculum-resources/starter-pern-crud) in your class GitHub Organization.
+- `git clone` the forked repository.
 - `npm install` to install dependencies already included in the `package.json`.
 - `touch .env`
 
@@ -68,12 +70,6 @@ useEffect(() => {
 
 Work from the outside in. Build the outer functions first.
 
-- What does the first function do?
-- What does the first `.then()` function handle?
-- What does the second `.then()` function handle?
-- What does `.catch()` handle?
-- Why are there two `.then()` functions? Why can't the code be combined into one?
-
 ```js
 useEffect(() => {
   fetch(`${API}/bookmarks/${id}`)
@@ -82,6 +78,12 @@ useEffect(() => {
     .catch(() => {});
 }, []);
 ```
+
+- What does the first function do?
+- What does the first `.then()` function handle?
+- What does the second `.then()` function handle?
+- What does `.catch()` handle?
+- Why are there two `.then()` functions? Why can't the code be combined into one?
 
 Add the functionality in the right places:
 
@@ -186,6 +188,10 @@ return (
 
 We want to load the bookmark details on page load.
 
+- How can we load the bookmark details on page load?
+- Are there any dependencies needed?
+- Is the second argument of `useEffect()` (dependency array), necessary? What happens if you don't include the second argument?
+
 ```js
 import { useState, useEffect } from "react";
 
@@ -198,7 +204,7 @@ import { useState, useEffect } from "react";
 
 ```
 
-We will also require more information from our app to make the API call. We need to know where to make the API call and the `id` of the bookmark. The `id` of the bookmark will come from the URL.
+We will also require more information from the user to make the API call. We need to know the `id` of the bookmark for the show view. The `id` of the bookmark will come from the URL.
 
 ```js
 import { useState, useEffect } from "react";
@@ -308,3 +314,7 @@ const handleDelete = () => {
   deleteBookmark();
 };
 ```
+
+## Reference Build
+
+[The build](https://github.com/pursuit-curriculum-resources/starter-pern-crud/tree/solution).

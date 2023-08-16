@@ -1,4 +1,14 @@
-# Express & SQL w. PG Seed & Read
+# Express & SQL with PostgreSQL Database: Seed & Read
+
+It's time to combine what you've learned about servers and databases to make a back-end that is able to persist data.
+
+Earlier in this module, you built two apps: a back-end API that serves JSON and a front-end that consumes the API.
+
+You will rebuild the back-end API to review Express and learn how to add a database.
+
+Sometimes, rebuilding something can seem less exciting than trying something new. However, comparing and contrasting the differences will help solidify what you have already learned and what parts are new.
+
+The order provided to build this new back-end is to assist with building small testable pieces of code.
 
 ## Learning Objectives
 
@@ -12,16 +22,6 @@ By the end of this lesson, you should be able to:
 - Identify a database’s connection URL.
 
 ---
-
-## Adding a Database to your Express App
-
-## Rebuild a back-end API
-
-Earlier in this module, you built two apps: a back-end API that serves JSON and a front-end that consumes the API.
-
-You will rebuild the back-end API to review Express and learn how to add a database.
-
-Sometimes, rebuilding something can seem less exciting than trying something new. However, comparing and contrasting the differences will help solidify what you have already learned and what parts are new.
 
 ## Getting Started
 
@@ -42,7 +42,6 @@ node_modules
 - `npm init -y` (this will automatically say yes to all the npm default settings - this is fine for tutorials, small test builds, etc.)
 - `touch app.js .env`
 - `npm install express dotenv cors`
-
 - `git init`
 - `git add -A`
 - `git commit -m 'first commit'`
@@ -174,7 +173,7 @@ When might you want to reuse them?
 
 - When collaborating on a group project, you need your partner(s) to have the same setup.
 - When you deploy your app in the cloud and want to be sure your db/tables are set up the same way.
-- When you want to test your database with CircleCi or another automated testing.
+- When you want to test your database with GitHub Actions, CircleCi or another automated testing tool.
 - When you get a new computer and want to set up the project on your new computer.
 
 **GOTCHA**: Do not name a database and a table the same name. E.g., database `colors` & table `colors` - will cause errors.
@@ -187,6 +186,8 @@ You will create two files.
 
 - **schema**: which is the representation of your data model and will also contain db/table(s) set up
 - **seed**: This is some starter data you can insert into the database
+
+Take the following steps to create these files (make sure you are on the same level as `package.json` when creating the folder and files):
 
 - `mkdir db`
 - `touch db/schema.sql`
@@ -252,8 +253,8 @@ Rather than looking up these commands over and over again, you can add them to y
 
 ```json
  "scripts": {
- "db:init": "psql -U postgres -f db/schema.sql",
- "db:seed": "psql -U postgres -f db/seed.sql"
+    "db:init": "psql -U postgres -f db/schema.sql",
+    "db:seed": "psql -U postgres -f db/seed.sql"
  },
 ```
 
@@ -278,8 +279,8 @@ An example URL to a database is:
 
 ```
 postgres://john:password1234@localhost:5432/colors_dev
-\________/\___/\____________/\_______/\___/\_________/
-protocol user password host port sub-database
+\________/\___/\________________/\_______/\___/\_________/
+protocol   user    password         host   port  sub-database
 ```
 
 You will configure this URL below. First, install `pg-promise` and create a file to set up the configuration:
@@ -326,7 +327,7 @@ You will have a specific username and password when you work for a company. As a
 ```
 postgres://postgres@localhost:5432/colors_dev
 \________/\________/\_______/\___/\_________/
-protocol user host port sub-database
+protocol     user       host  port  sub-database
 ```
 
 - `cn` - is short for connection
@@ -379,7 +380,7 @@ db.connect()
   .catch((error) => console.log("database connection error", error));
 ```
 
-> **Note**: You will not see this message until you request the database. This request will not happen until you've taken a few more steps and called the query function in the controller. Follow the next steps to get there.
+> **Note**: You will not see this message until you make a request to the database. This request will not happen until you've taken a few more steps and called the query function in the controller. Follow the next steps to get there.
 
 ## Querying the Database
 
@@ -490,6 +491,6 @@ Go to http://localhost:3003/colors
 - `git add -A`
 - `git commit -m 'index route complete'`.
 
-## Reference application
+## Reference build
 
 [pre-reading-express-sql-seed-read](https://github.com/pursuit-curriculum-resources/pre-reading-express-sql-seed-read)

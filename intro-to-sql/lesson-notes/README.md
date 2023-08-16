@@ -43,7 +43,7 @@ The application should already be running. You should be able to enter the Postg
 
 - `psql` anywhere in Terminal.
 
-## SQL Syntax
+## SQL syntax
 
 Which is the correct convention for SQL keywords?
 
@@ -75,7 +75,7 @@ Will you get an error if you don't capitalize correctly?
 
 ![](../assets/q-out-of-view.png)
 
-## Create a Database
+## Create a database
 
 Let's create a database and then drop (delete) it. Then we'll create a new one, connect it, and use it for the rest of this lesson.
 
@@ -98,7 +98,7 @@ CREATE DATABASE lesson_db;
 
 ## Data types
 
-Here are some of the most common datatypes for PostgreSQL. Define what each one is
+Here are some of the most common datatypes for PostgreSQL. Define what each one is.
 
 1. `INT`
 1. `DECIMAL`
@@ -108,9 +108,9 @@ Here are some of the most common datatypes for PostgreSQL. Define what each one 
 1. `TIMESTAMP`
 1. `SERIAL`
 
-## Create a Table
+## Create a table
 
-Inside a database, we can have many tables. We'll create a table of houses for sale. If we were working for a real estate company, we would have separate tables for buyers, agents, commercial properties, etc.
+Inside a database, we can have many tables. We'll create a table of houses for sale. If we were working for a real estate company, we would have separate tables for buyers, agents, commercial properties, etc. For this lesson, we'll only focus on houses.
 
 Tables have columns and rows. We will define the names of the columns and their data types.
 
@@ -130,7 +130,7 @@ Use the following table for the rest of the class activity.
 
 ```SQL
 
--- 'houses' table has an id column `serial`, which increases with each addition, and columns for address, city, state, price, and boolean properties for pool and for_sale.
+-- 'homes' table has an id column `serial`, which increases with each addition, and columns for address, city, state, price, and boolean properties for pool and for_sale.
 
 CREATE TABLE
  homes
@@ -154,7 +154,7 @@ CREATE TABLE
 
 - What does they keyword `DEFAULT` do?
 
-### Alter a Table
+### Alter a table
 
 You can make changes to the table you've created.
 
@@ -181,7 +181,7 @@ See the columns in the house's table again.
 \d+ houses
 ```
 
-## Insert Into The Table
+## Insert into the table
 
 You don't have to remember the order of the columns you created, but you have to match the order when inserting:
 
@@ -285,7 +285,7 @@ SELECT * FROM houses WHERE pool IS NOT NULL;
 
 ```
 
-## Update a Row
+## Update a row
 
 Use the keyword `UPDATE` to update one or more rows.
 
@@ -301,7 +301,7 @@ However, sometimes we want to see the changes we made. We can add a `RETURNING` 
 UPDATE houses SET for_sale = TRUE WHERE id = 9 RETURNING *;
 ```
 
-## Delete a Row
+## Delete a row
 
 ```SQL
 DELETE FROM houses WHERE id = 1;
@@ -309,13 +309,13 @@ DELETE FROM houses WHERE id = 1;
 
 > **NOTE**: DANGER! Forgetting the `WHERE` clause for Update or DELETE can cause every row to update/delete.
 
-## Delete Many Rows and See the Address
+## Delete many rows and see the address and state
 
 ```SQL
 DELETE FROM houses WHERE pool = false RETURNING address, state;
 ```
 
-## Quit PostgreSQL Shell
+## Quit PostgreSQL shell
 
 To quit `psql`, type `\q`.
 
@@ -380,7 +380,7 @@ SELECT address, city, state FROM houses state ASC LIMIT 2 OFFSET 2 ORDER BY city
 
 What kind of messages do you get when you create statements that are out of order?
 
-### Counts and Aggregation
+### Counts and aggregation
 
 ```SQL
 -- show the total number of houses.

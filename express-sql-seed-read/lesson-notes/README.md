@@ -1,8 +1,8 @@
+# # Express & SQL with PostgreSQL Database: Seed & Read
+
 ## Recommendation
 
-All the code blocks are here to help guide you and help you if you get stuck.
-
-You will gain the best understanding if you try to type everything out. Even though it takes longer and can feel frustrating, there is much more benefit in trying to do so.
+All the code blocks are here to help guide you and help you if you get stuck. However, you will gain the best understanding if you try to type everything out. Even though it takes longer and can feel frustrating, there is much more benefit in trying to do so. Each error will give you insight to how things work, improving your understanding and debugging skills.
 
 ## Getting Started
 
@@ -101,7 +101,7 @@ Test that your app works: http://localhost:3003
 
 ## Bookmarks Controller
 
-Use <kbd>control</kbd> <kbd>shift</kbd> <kbd>`</kbd> to open a new terminal tab so you can continue your work without having to shut your server down (please note that changes to configuration files do require a hard reset of your server).
+Use <kbd>control</kbd> <kbd>shift</kbd> <kbd>t</kbd> to open a new terminal tab so you can continue your work without having to shut your server down (please note that changes to configuration files do require a hard reset of your server).
 
 **Terminal**
 
@@ -144,7 +144,7 @@ Now try: http://localhost:3003/bookmarks
 - Why did we name our route `/bookmarks`? Is there a reason we name our route(s) this way?
 - What would happen if we put this code ABOVE the middleware setup?
 
-## Setting up The Database
+## Setting up the database
 
 We need to create a database and table for our bookmarks in Postgres.
 
@@ -243,8 +243,8 @@ Install and configure it.
 Why do we want to set up environmental variables instead of hard-coding values?
 
 - By default, what is the port number for Postgres?
-- How can you find the port?
-- Can you run your server on the same port as Postgres?
+- How can you find the port number for Postgres?
+- Can you run your Express server on the same port as Postgres?
 
 ```
 # .env
@@ -288,7 +288,7 @@ const db = pgp(cn);
 module.exports = db;
 ```
 
-To add additional db connection status info (the following code is unnecessary to connect the db and run the app.) After a few more steps, you will not see this status message until you open a connection.
+To add additional db connection status info (the following code is not necessary to connect the db and run the app.) After a few more steps, you will not see this status message until you open a connection.
 
 ```js
 db.connect()
@@ -331,7 +331,7 @@ const getAllBookmarks = async () => {};
 module.exports = { getAllBookmarks };
 ```
 
-> **Note**: We are returning an object with `module.exports` because we will return more than one function. Therefore, we will store it in an object.
+> **Note**: We are returning an object with `module.exports` because we will be returning more than one function. Therefore, we will store it in an object.
 
 Next, we want to set up a `try/catch` block so that if we have a problem, we can (likely) get a more informative error.
 

@@ -1,12 +1,12 @@
-# Express & SQL Update & Delete
+# Express and PostgreSQL: Update & Delete
+
+This is a continuation of the build that started with seed and read, and then show and create.
 
 ## Learning Objectives
 
 - Create a model file connected to a database that can update a specific row in a table and remove a particular row from a table.
 - Handle asynchronous errors within a controller file and respond from the server appropriately.
 - Use asynchronous code within a controller file to respond to client requests with persisted data.
-
-Continue the previous lesson.
 
 ## Delete
 
@@ -43,7 +43,7 @@ const deleteColor = async (id) => {
 };
 ```
 
-Import the function
+Import the function:
 
 ```js
 // controllers/colorController.js
@@ -55,9 +55,7 @@ const {
 } = require("../queries/color");
 ```
 
-Create the delete route and test it with Postman.
-
-Remember to have selected:
+Create the delete route and test it with Postman. Remember to have selected:
 
 - Route ` DELETE` `/colors/:id`
 
@@ -97,7 +95,7 @@ colors.delete("/:id", async (req, res) => {
 });
 ```
 
-Test it with Postman.
+Test it with Postman again.
 
 Remember to have:
 
@@ -154,6 +152,8 @@ const {
 } = require("../queries/color");
 ```
 
+First confirm the route is reachable.
+
 ```js
 // UPDATE
 colors.put("/:id", async (req, res) => {
@@ -162,7 +162,7 @@ colors.put("/:id", async (req, res) => {
 });
 ```
 
-Now add the database call:
+Now add the database call.
 
 ```js
 // UPDATE
@@ -184,9 +184,9 @@ Test it and remember to have the following:
 }
 ```
 
-Remember, the same rules apply that applied to create. There must be a name, and `is_favorite` must be a boolean (or undefined - why is undefined an ok option?).
+Remember, the same rules apply that applied to create. There must be a `name`, and `is_favorite` must be a boolean (or undefined - why is undefined an ok option?).
 
-We can easily update our function to do those checks.
+You can now easily update the route to do those checks because you separated this functionality from the create route.
 
 ```js
 colors.put("/:id", checkName, checkBoolean, async (req, res) => {

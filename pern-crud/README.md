@@ -1,10 +1,10 @@
 # PERN Stack: CRUD
 
-# Express Connect React - REVIEW
+There will only be minor changes to the front-end to get it to work with your new back-end. Therefore this lesson will be review.
 
 ## Intro
 
-We now have a nicely working back-end with full CRUD using Express. Unfortunately, it isn't the best user experience for non-developers. We need to build a front-end.
+You now have a nicely working back-end with full CRUD using Express. Unfortunately, it isn't the best user experience for non-developers. You need to build a front-end.
 
 When you stack **P**ostgres, **E**press, **R**eact, and **N**ode, it is often called the `PERN` Stack.
 
@@ -14,7 +14,7 @@ There are many different technology stacks. You may see some when you start look
 
 The seven RESTful routes are often the classic example of a RESTful pattern. Despite the different tech stacks listed above, many will still follow this pattern, usually some version of MVC.
 
-While this pattern is classic, and we will follow it exactly for learning fundamentals, you will see many variations in the wild. These variations are to meet specific functionality needs or improve user experience.
+While this pattern is classic, and we will follow it exactly for learning fundamentals, you will see many variations in the wild. These variations are to meet specific functionality needs or improve user experience. Patterns are recommendations, not rules.
 
 We have built the first five routes in Express:
 
@@ -41,4 +41,4 @@ Which two are new, and which ones have we built with Express?
 
 ## Pre-reading code along
 
-There is no code along. However, you can clone down a fresh copy of the [colors react app](https://github.com/pursuit-curriculum-resources/pre-reading-connect-react-demo) and refactor it to work with a back-end that uses Postgres. One of the most significant changes is that you'll need to change from using the array position to ids. Why?
+There is no step-by-step code along. However, you can clone down a fresh copy of the [colors react app](https://github.com/pursuit-curriculum-resources/pre-reading-connect-react-demo) and refactor it to work with a back-end that uses Postgres. One of the most significant changes is that you'll need to change from using the array position to ids. Why?
