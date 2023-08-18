@@ -33,7 +33,7 @@ You can image a table like so:
 
 But to book a room, you would need information on the rooms available in each hotel. **One** hotel **has many** hotel rooms.
 
-Let's try to put the info in one table:
+Let's try to put the info in a one table:
 
 |      name      |    city    |   state    | rating | pets |        room 1         |           room 2            |       room 3        |
 | :------------: | :--------: | :--------: | :----: | :--: | :-------------------: | :-------------------------: | :-----------------: |
@@ -204,7 +204,7 @@ SELECT * FROM hotels RIGHT JOIN rooms ON hotels.id = rooms.hotel_id;
 |  2  |  Great Northern  | Twin Peaks | Washington |   3    | true | \|  | 11  | Penthouse | 10000 |   303    |  true  |    1     |
 |     |                  |            |            |        |      | \|  | 13  |   King    | 6000  |   001    | false  |    4     |
 
-Now you see that the Grand Budapest Hotel is excluded, but the mystery room with no hotel is now showing up.
+Now you see that the Grand Budapest Hotel is excluded, but the mystery room with no matching hotel is now showing up.
 
 ## Many-to-many joins
 
@@ -300,7 +300,7 @@ ORDER BY
 
 This type of query, while complex, relays important information in a concise and meaningful way.
 
-Finally, when looking at the above table, there are three columns named `name`. You can create aliases for columns
+Finally, when looking at the above table, there are three columns named `name`. You can create aliases for columns.
 
 ```SQL
 SELECT

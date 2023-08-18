@@ -37,7 +37,7 @@ After this lesson, you should be able to:
 
 ### Getting Started
 
-You should have already downloaded PostgreSQL at the start of this course. [Pursuit Core Environment Set Up](https://github.com/pursuit-curriculum-resources/guide-computer-setup/tree/main/postgresql)
+You should have already downloaded PostgreSQL at the start of this course. [Pursuit Core Environment Set Up](https://github.com/pursuit-curriculum-resources/guide-computer-setup/tree/main/postgresql).
 
 The application should already be running. You should be able to enter the Postgres shell by typing:
 
@@ -98,7 +98,7 @@ CREATE DATABASE lesson_db;
 
 ## Data types
 
-Here are some of the most common datatypes for PostgreSQL. Define what each one is.
+Here are some of the most common datatypes for PostgreSQL. Define what each one is and give an example (For example: TEXt could hold text for a news article).
 
 1. `INT`
 1. `DECIMAL`
@@ -142,7 +142,7 @@ CREATE TABLE
 
 - What is the purpose of the `id` field?
 
-- What is the keyword `serial`?
+- What is the keyword `SERIAL`?
 
 - What does `PRIMARY KEY` do?
 
@@ -307,7 +307,7 @@ UPDATE houses SET for_sale = TRUE WHERE id = 9 RETURNING *;
 DELETE FROM houses WHERE id = 1;
 ```
 
-> **NOTE**: DANGER! Forgetting the `WHERE` clause for Update or DELETE can cause every row to update/delete.
+- What happens if you don't include a `WHERE` clause for a delete statement?
 
 ## Delete many rows and see the address and state
 

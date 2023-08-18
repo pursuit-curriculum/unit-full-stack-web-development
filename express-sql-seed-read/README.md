@@ -25,7 +25,7 @@ By the end of this lesson, you should be able to:
 
 ## Getting Started
 
-- navigate to your Desktop or another convenient folder
+- Navigate to your Desktop or another convenient folder
 - `git status` to make sure you are not already in a `git` repository
 - `mkdir pg-colors-api`
 - `cd pg-colors-api`
@@ -46,7 +46,7 @@ node_modules
 - `git add -A`
 - `git commit -m 'first commit'`
 
-**Thought question** - Why is it essential to add and commit after setting up the .gitignore?
+**Thought question** - Why is it essential to add and commit after setting up the `.gitignore` and not before?
 
 **Follow-up question** - How would you fix adding and committing folders and files (like `node_modules`) you did not mean to add?
 
@@ -279,7 +279,7 @@ An example URL to a database is:
 
 ```
 postgres://john:password1234@localhost:5432/colors_dev
-\________/\___/\________________/\_______/\___/\_________/
+\________/\___/\____________/\_______/\___/\_________/
 protocol   user    password         host   port  sub-database
 ```
 
@@ -364,7 +364,7 @@ const db = pgp(cn);
 module.exports = db;
 ```
 
-If you want more information about the connection, add the following function. This is not required to create the connection, but like the console.log in the `app.listen` function, it gives you the connection status to Postgres.
+If you want more information about the connection, add the following function. This is not required to create the connection, but like the console.log in the Express server `app.listen()` function, it gives you the connection status to Postgres.
 
 ```js
 db.connect()
@@ -389,11 +389,10 @@ You are going to separate your SQL queries from your routes. This modularization
 - `mkdir queries`
 - `touch queries/color.js`
 
-**queries/color.js**
-
 First, bring your connection to the database and immediately export it (so you don't forget to do this later).
 
 ```js
+// queries/color.js
 const db = require("../db/dbConfig.js");
 
 module.exports = {};
@@ -426,7 +425,7 @@ const getAllColors = async () => {
 
 Finally, add your query.
 
-`db.any()` is a function that takes a string as a first argument. [.any()](https://github.com/vitaly-t/pg-promise#methods) means it will accept any return from the database, no rows, one row, or many rows of data.
+`db.any()` is a function that takes a string that will be your SQL statement as a first argument. [.any()](https://github.com/vitaly-t/pg-promise#methods) means it will accept any return from the database, no rows, one row, or many rows of data.
 
 Be sure to export this function.
 

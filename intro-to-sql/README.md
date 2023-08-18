@@ -6,7 +6,7 @@ A database is an organized collection of data stored and accessed electronically
 
 You've been hard-coding some data for your CRUD apps to learn the fundamentals of servers and RESTFul routes. You could make some temporary changes, but the changes would disappear as soon as you shut down or restarted the server.
 
-You need a way to make the data persist so that you will still have the data if the server is restarted or shut down. You'll use a database to store and access data to do this.
+You need a way to make the data persist so that you will still have the data if the server is restarted or shut down. You'll use a database to store and access data.
 
 There are many kinds of databases. A common type is a relational database, which stores data in tables and rows like an Excel or Google spreadsheet. You will interact with relational databases using a coding language called SQL (Structured Query Language). Some popular ones are MySQL, Oracle, SQL Server, SQLite, and PostgreSQL.
 
@@ -78,7 +78,7 @@ It should already be running, and you should see an icon of an elephant in your 
 
 ![](./assets/postgres-app-icon.png)
 
-If you don't see it, but you've installed it, use Mac's `spotlight` search feature .<kbd>command</kbd> <kbd>spacebar</kbd> to search and load it.
+If you don't see it, but you've installed it, use Mac's `spotlight` search feature: <kbd>command</kbd> <kbd>spacebar</kbd> to search and load it.
 
 ![](./assets/spotlight-postgres.png)
 
@@ -132,7 +132,11 @@ You'll see a colon that will let you know there is more data, which you can use 
 
 ## Create a Database
 
-PostgreSQL is a database application. When you run the application, you can create `sub-databases` that allow you to work on different projects. For example, you may have one for your bookmarks app, one for your budgeting app, and more. These are sub-databases. However, they are often called `databases`, and you use the keyword `databases` to create them.
+PostgreSQL is a database application. When you run the application, you can create `sub-databases` that allow you to work on different projects. For example, you may have one for your bookmarks app, one for your budgeting app, and more. These are sub-databases. However, they are often referred to as `databases`, and you use the keyword `DATABASE` to create them.
+
+![database, subdatabase](./assets/database-subdatabase.png)
+
+Feel free to read or code-along with the following examples.
 
 Create a database and then drop (delete) it. Then create a new one, connect it, and use it for the rest of this pre-reading.
 
@@ -155,7 +159,7 @@ CREATE DATABASE pre_reading_code_along;
 
 ## Data types
 
-With JavaScript, you could play it fast and loose with datatypes when creating data as arrays of objects. You could enter `4` as `4` (a number) or `'4'` - a string. You could also put different datatypes, like booleans or numbers; JavaScript doesn't force consistent datatypes.
+With JavaScript, you could play it fast and loose with datatypes when creating data as arrays of objects. You could enter the number 4 as `4` (datatype number) or `'4'` (datatype string). You could also put different datatypes, like booleans or arrays into a field; JavaScript doesn't enforce datatypes.
 
 PostgreSQL is more strict and expects the correct data types in the columns you will create. Here are some of the most common ones:
 
@@ -167,11 +171,13 @@ PostgreSQL is more strict and expects the correct data types in the columns you 
 1. `TIMESTAMP` - [date](https://www.postgresql.org/docs/current/datatype-datetime.html)
 1. `SERIAL` - [serial, automatically increments as new rows are created](https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL)
 
+Thought question: Why is it important or useful to set and enforce a datatype for a field?
+
 ## Create a table
 
-Inside a database, you can have many tables. You'll create a table of DVDs for sale. If you were working for an online DVD store, you'd have additional tables for users, orders, and more.
+Inside a database, you can have many tables. You'll create a table of DVDs for sale. If you were working for an online DVD store, you'd have additional tables for users, orders, and more. For this lesson, you'll only work on one table. In a later lesson, you'll learn how to work with two or more tables.
 
-Tables have columns and rows. To create a new table, you will define the names of the columns and their data types.
+Tables have columns and rows. To create a new table, you will define the names of the columns and their datatypes.
 
 The following table has just one column called `name` with a datatype of `TEXT`. You can drop it immediately, as this is just a demonstration of the syntax.
 
@@ -202,13 +208,13 @@ For the online DVD store, let's assume you would want the following data:
 
 You need to determine the datatype for each column. Additionally, you want to add some [constraints](https://www.postgresql.org/docs/current/ddl-constraints.html).
 
-You want the ID to increment as you add a new DVD automatically. You can create an automatically incrementing value using the datatype `SERIAL`. Additionally, adding `PRIMARY KEY` will create a constraint that this cell cannot be null and must have a unique value.
+You want the `id` to increment as you add a new DVD automatically. You can create an automatically incrementing value using the datatype `SERIAL`. Additionally, adding `PRIMARY KEY` will create a constraint that this cell cannot be null and must have a unique value.
 
 Additionally, there is no sense in having a DVD without a title. So that field must always have a value. To add a constraint that this value cannot be null, you add the key words `NOT NULL`.
 
 Ratings can be a single letter like `G` or four letters like `PG13`. Limiting the characters can help keep the data consistent since only `G` can be entered, rather than the full word `General`. You can limit the number of characters by using the datatype `VARCHAR(n)`.
 
-Price can be set as an integer set in cents. You can easily convert it to a dollar amount with JavaScript. You don't want to allow a negative price so you can use the constraint `CHECK (price >= 0 )`
+Price can be set as an integer set in cents. You can easily convert it into and out of a dollar amount with JavaScript. You don't want to allow a negative price so you can use the constraint `CHECK (price >= 0 )`.
 
 Finally, you can expect that most VHS tapes are still in print. However, sometimes they may be discontinued. Therefore, setting a `DEFAULT` value of false if the user doesn't enter a value can be prudent.
 
@@ -251,7 +257,7 @@ ALTER TABLE VHS RENAME TO dvds;
 
 ## Insert into the table
 
-You don't have to remember the order of the columns you created, but you have to match the order when inserting:
+You don't have to remember the order of the columns you created, but you have to match the order when inserting data into the table.
 
 ```SQL
 INSERT INTO
@@ -260,7 +266,7 @@ VALUES
 ('Hackers', TRUE, 100, 'PG13', 'United Artists');
 ```
 
-**Success** will look something like
+A successful message will look something like the following:
 
 ```SQL
 INSERT 0 1
@@ -272,7 +278,7 @@ You can see the data by doing a query. The `*` (star) means to show all the colu
 SELECT * FROM dvds;
 ```
 
-You don't have to enter all the fields (only the required ones)
+You don't have to enter all the fields (only the required ones).
 
 ```SQL
 INSERT INTO
@@ -281,7 +287,7 @@ VALUES
 ('Tron');
 ```
 
-Remember, you can use the `up` arrow to scroll to previous commands to rerun a command.
+Remember, you can use the `up` arrow in the Terminal to scroll to previous commands to easily rerun a command.
 
 ```SQL
 SELECT * FROM dvds;

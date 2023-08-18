@@ -28,7 +28,7 @@ For example, looking at the data, we inserted `Apartment Therapy` should have an
 
 It would be at array position `1` if we would access it by array position. You used array positions earlier for simplicity. However, there is never a guarantee that an item will be in a particular order/array position, and it can change. So using the `id` now that we have a database is critical.
 
-Create and include an async arrow function in `module.exports`.
+To start working on the show route, open your `queries/colors.js` file, create and include an async arrow function in `module.exports`.
 
 ```js
 // queries/colors.js
@@ -225,6 +225,8 @@ For example they can forget to provide a color name (or accidentally send the re
 ```
 
 When you try to make the POST request with the above JSON, you get a hard-to-read error that is Postgres's default error. You can look for the error code and other details, however, you can also create some logic to avoid this error. You can do this by checking if there is a name and then send back an appropriate status code and a more human-readable error.
+
+It can also be important to include error handling, because some errors will crash your server.
 
 You can add this logic to the route, but then our route starts to become a function that is handling more than one thing: it is validating and sending a response. It would be better to write a separate function that validates it. It also would make sense to put the validation function in its file for better organization.
 

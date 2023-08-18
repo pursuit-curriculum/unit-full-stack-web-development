@@ -1,8 +1,8 @@
-# 13 PERN Stack: One to Many - Part 2 Front-end
+# PERN Stack: One to Many - Front-end
 
 ## Important
 
-Make sure all your routes work as expected. It does not matter how amazing your front-end code is; it cannot repair a broken back end.
+Make sure all your routes work as expected. It does not matter how amazing your front-end code is; it cannot repair a broken back-end.
 
 It's essential to test all your routes with something like Postman to be sure you know what the expected responses are. When you encounter a bug, it is critical that you can clearly and quickly isolate whether the issue is coming from the back-end or the front-end.
 
@@ -12,21 +12,19 @@ We will be adding views of reviews only to the `BookmarkDetails` view.
 
 - Keep your back-end running
 - make sure you are at the root of your react-app (same level as its `package.json`)
-- `touch src/Components/Review.js`
-- `touch src/Components/Reviews.js`
-- `touch src/Components/ReviewForm.js`
+- `touch src/Components/Review.jsx`
+- `touch src/Components/Reviews.jsx`
+- `touch src/Components/ReviewForm.jsx`
 
 ## Reviews All
 
-**src/Reviews.js**
-
 ```js
-import axios from "axios";
+// src/Reviews.js
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Review from "./Review";
 
-const API = process.env.REACT_APP_API_URL;
+const API = import.meta.env.VITE_BASE_URL;
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -50,9 +48,8 @@ function Reviews() {
 export default Reviews;
 ```
 
-**src/Review.js**
-
 ```js
+// src/Review.js
 function Review({ review }) {
   return (
     <div className="Review">
@@ -68,11 +65,10 @@ function Review({ review }) {
 export default Review;
 ```
 
-**src/BookmarkDetails.js**
-
 Import `Reviews`
 
 ```js
+// src/BookmarkDetails.js
 import Reviews from "./Reviews";
 ```
 
@@ -88,11 +84,10 @@ After the buttons and closing `div`s (right above the closing `article` tag):
 
 </details>
 
-**src/index.css**
-
 Let's add a little CSS to highlight our new components.
 
 ```css
+// src/index.css
 .Reviews {
   background-color: whitesmoke;
   padding: 1em;
@@ -105,7 +100,7 @@ Let's add a little CSS to highlight our new components.
   background-color: ghostwhite;
 }
 .Reviews div:nth-child(odd) {
-  background-color: aliceblue;
+  background-color: rgb(244, 216, 251);
 }
 ```
 
@@ -127,9 +122,8 @@ We want to be able to pre-fill the data if it is the edit form. We can `useEffec
 
 If it is the new form, we want to display an extra `h3` to inform the users this is the form to create a new review. We will do this by using `props.children`
 
-**src/ReviewForm.js**
-
 ```js
+// src/ReviewForm.js
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -224,22 +218,24 @@ export default ReviewForm;
 
 ## Add New Review Functionality
 
-**src/Reviews.js**
-
 Here are the new pieces of code. Place them in their appropriate locations(along the top, inside the function, inside the return).
 
 ```js
+// src/Reviews.js
 import ReviewForm from "./ReviewForm";
 
 const handleAdd = (newReview) => {
-  axios
-    .post(`${API}/bookmarks/${id}/reviews`, newReview)
-    .then(
-      (response) => {
-        setReviews([response.data, ...reviews]);
-      },
-      (error) => console.error(error)
-    )
+  fetch(`${API}/bookmarks/${id}/reviews`, {
+    method: "POST",
+    body: JSON.stringify(newReview),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((responseJSON) => {
+      setReviews([responseJSON, ...reviews]);
+    })
     .catch((c) => console.warn("catch", c));
 };
 
@@ -318,9 +314,8 @@ The way we will approach this is to add a button to edit. This will toggle the v
 
 Let's code it:
 
-**Components/Review**
-
 ```js
+// Components/Review
 import ReviewForm from "./ReviewForm";
 
 function Review({ review, handleDelete, handleSubmit }) {
@@ -349,19 +344,19 @@ function Review({ review, handleDelete, handleSubmit }) {
 
 Add the Review form, parenthesis, and cut and paste the review details into the statement.
 
-```
+```js
 {
- viewEditForm ? (
- <ReviewForm reviewDetails={review} />
- ) : (
- <div>
- <h4>
- {review.title} <span>{review.rating}</span>
- </h4>
- <h5>{review.reviewer}</h5>
- <p>{review.content}</p>
- </div>
- )
+  viewEditForm ? (
+    <ReviewForm reviewDetails={review} />
+  ) : (
+    <div>
+      <h4>
+        {review.title} <span>{review.rating}</span>
+      </h4>
+      <h5>{review.reviewer}</h5>
+      <p>{review.content}</p>
+    </div>
+  );
 }
 ```
 
@@ -371,9 +366,8 @@ Now you should be able to click the `edit this review` button and toggle between
 
 When thinking in react, when we edit, we want to return to the view of the review from the form. And we want to be sure we've updated the list of reviews. Again that means we are going to have to put the state in the `reviews` component and pass it down and then [lift state up](https://reactjs.org/docs/lifting-state-up.html)
 
-**src/Reviews.js**
-
 ```js
+// src/Reviews.js
 const handleEdit = (updatedReview) => {
   axios
     .put(`${API}/bookmarks/${id}/reviews/${updatedReview.id}`, updatedReview)
@@ -398,19 +392,21 @@ const handleEdit = (updatedReview) => {
 />;
 ```
 
-**src/Review.js**
-
 We'll have to continue to pass the `handleSubmit` function down. Passing props down two or more times can be called `props drilling`. A little bit of props drilling is ok. However, if your app grows to be large, there end up being solutions that fit better for a larger application.
+
+```js
+// src/Review.js
+import ReviewForm from "./ReviewForm";
+function Review({ review, handleDelete, toggleView, handleSubmit }) {
+```
 
 ```js
 <ReviewForm
   reviewDetails={review}
   toggleView={toggleView}
-  handleSubmit={props.handleSubmit}
+  handleSubmit={handleSubmit}
 />
 ```
-
-**BONUS**: Where else could we pull `handleSubmit` out of `props`?
 
 And that should be it! A one-to-many relationship is one way to do full CRUD on a second model.
 

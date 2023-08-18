@@ -8,7 +8,7 @@ You now have a nicely working back-end with full CRUD using Express. Unfortunate
 
 When you stack **P**ostgres, **E**press, **R**eact, and **N**ode, it is often called the `PERN` Stack.
 
-There are many different technology stacks. You may see some when you start looking for jobs, like Ruby on Rails, LAMP, MEAN, Django, and Laravel - generally, these stacks refer to a back-end language/framework, a database, and some way of rendering views. As you encounter these stacks, google them as needed. It will be improbable that you will have worked with every technology listed in a stack. In tech, it's more important to be ready to learn what you need as you build than to try to learn everything first.
+There are many different technology stacks. You may see some when you start looking for jobs, like Ruby on Rails, LAMP, MEAN, Django, and Laravel - generally, these stacks refer to a back-end language/framework, a database, and some way of rendering views. As you encounter these stacks, google them as needed. It will be improbable that you will have worked with every technology listed in a stack. In tech, it's more important to have strong fundamentals so that you will be ready to learn what you need as you build.
 
 ## REVIEW: The Seven RESTful Routes
 
