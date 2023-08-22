@@ -1,4 +1,4 @@
-# # Express & SQL with PostgreSQL Database: Seed & Read
+# Express & SQL with PostgreSQL Database: Seed & Read
 
 ## Recommendation
 

@@ -2,24 +2,24 @@
 
 ## Important
 
-Make sure all your routes work as expected. It does not matter how amazing your front-end code is, it cannot repair a broken back end.
+Make sure all your back-end routes work as expected. It does not matter how amazing your front-end code is, it cannot repair a broken back end.
 
 It's important to test all your routes with something like Postman to be sure you know what the expected responses are. It is critical that when you encounter a bug you can clearly and easily isolate whether the issue is coming from the back-end or front-end.
 
-Here is a refresher of the routes you built
+Here is a refresher of the routes you built for the bookmarks app:
 
-|     | Action  |            URL            | HTTP Verb |    CRUD    |                        Description                        |
-| :-: | :-----: | :-----------------------: | :-------: | :--------: | :-------------------------------------------------------: |
-|  1  | Create  |          /users           |   POST    | **C**reate |                     Create a new user                     |
-|  2  |  Index  |          /users           |    GET    |  **R**ead  |            Get a list (or index) of all users             |
-|  3  |  Show   |        /users/:id         |    GET    |  **R**ead  |          Get an individual view (show one user)           |
-|  4  | Update  |        /users/:id         |    PUT    | **U**pdate |                       Update a user                       |
-|  5  | Destroy |        /users/:id         |  DELETE   | **D**elete |                       Delete a user                       |
-|  6  | Create  |     /users/:id/posts      |   POST    | **C**reate |         Create a new post associated with a user          |
-|  7  |  Index  |     /users/:id/posts      |    GET    |  **R**ead  | Get a list (or index) of all posts associated with a user |
-|  8  |  Show   | /users/:id/posts/:post_id |    GET    |  **R**ead  |       Get an individual post associated with a user       |
-|  9  | Update  | /users/:id/posts/:post_id |    PUT    | **U**pdate |                       Update a post                       |
-| 10  | Destroy | /users/:id/posts/:post_id |  DELETE   | **D**elete |                       Delete a post                       |
+|     | Action  |                URL                | HTTP Verb |    CRUD    |                           Description                           |
+| :-: | :-----: | :-------------------------------: | :-------: | :--------: | :-------------------------------------------------------------: |
+|  1  | Create  |            /bookmarks             |   POST    | **C**reate |                      Create a new bookmark                      |
+|  2  |  Index  |            /bookmarks             |    GET    |  **R**ead  |             Get a list (or index) of all bookmarks              |
+|  3  |  Show   |          /bookmarks/:id           |    GET    |  **R**ead  |           Get an individual view (show one bookmark)            |
+|  4  | Update  |          /bookmarks/:id           |    PUT    | **U**pdate |                        Update a bookmark                        |
+|  5  | Destroy |          /bookmarks/:id           |  DELETE   | **D**elete |                        Delete a bookmark                        |
+|  6  | Create  |      /bookmarks/:id/reviews       |   POST    | **C**reate |         Create a new review associated with a bookmark          |
+|  7  |  Index  |      /bookmarks/:id/reviews       |    GET    |  **R**ead  | Get a list (or index) of all reviews associated with a bookmark |
+|  8  |  Show   | /bookmarks/:id/reviews/:review_id |    GET    |  **R**ead  |       Get an individual review associated with a bookmark       |
+|  9  | Update  | /bookmarks/:id/reviews/:review_id |    PUT    | **U**pdate |                         Update a review                         |
+| 10  | Destroy | /bookmarks/:id/reviews/:review_id |  DELETE   | **D**elete |                         Delete a review                         |
 
 Thought question: Is the route `http://localhost:3003/reviews` available?
 

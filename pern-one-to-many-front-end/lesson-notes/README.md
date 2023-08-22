@@ -4,14 +4,22 @@
 
 Make sure all your routes work as expected. It does not matter how amazing your front-end code is; it cannot repair a broken back-end.
 
-It's essential to test all your routes with something like Postman to be sure you know what the expected responses are. When you encounter a bug, it is critical that you can clearly and quickly isolate whether the issue is coming from the back-end or the front-end.
+OOOOOOPS NEEDS TO BE FRONT-END NOT BACK END!!!!!
+If needed, you can clone down the completed back-end [here](https://github.com/pursuit-curriculum-resources/express-sql-seed-read-demo/).
 
-## Onwards
+- Clone it
+- Checkout a new branch: `git checkout -b one-to-many`
+- Pull in the `one-to-many` branch - `git pull origin one-to-many`
+- `npm install`
+- Check `.env` variables'
+  XXXXXXXXXXXX
+
+## Adding the front-end
 
 We will be adding views of reviews only to the `BookmarkDetails` view.
 
 - Keep your back-end running
-- make sure you are at the root of your react-app (same level as its `package.json`)
+- Make sure you are at the root of your react-app (same level as its `package.json`)
 - `touch src/Components/Review.jsx`
 - `touch src/Components/Reviews.jsx`
 - `touch src/Components/ReviewForm.jsx`
