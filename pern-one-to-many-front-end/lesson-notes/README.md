@@ -14,7 +14,7 @@ Make sure all your routes work as expected. It does not matter how amazing your 
 - Pull in the `one-to-many` branch - `git pull origin starter-one-to-many`
 - `npm install`
 - `touch .env`
-- Add `.env` variables'
+- Add `.env` variables (base URL for the back-end see `.env.template`)
 
 ## Adding the front-end
 
@@ -23,7 +23,7 @@ We will be adding views of reviews only to the `BookmarkDetails` view.
 - Keep your back-end running
 - Make sure you are at the root of your react-app (same level as its `package.json`)
 - `touch src/Components/Review.jsx`
-- `touch src/Components/Reviews.jsxx`
+- `touch src/Components/Reviews.jsx`
 
 ## Reviews All
 
@@ -108,7 +108,7 @@ In the interest of time during the lecture, let's copy-paste this code and discu
 
 Depending on whether we want to add a new review or update a review, `handleSubmit` will run a different function. We'll see how the pieces come together as we build the rest.
 
-We want to be able to pre-fill the data if it is the edit form. We can `useEffect` to check if data is being passed down and update the form inputs.
+We want to be able to pre-fill the data if it is the edit form. We can `useEffect()` to check if data is being passed down and update the form inputs.
 
 If it is the new form, we want to display an extra `h3` to inform the users this is the form to create a new review. We will do this by using `children` to display this additional `h3`.
 
@@ -117,9 +117,12 @@ If it is the new form, we want to display an extra `h3` to inform the users this
 Here are the new pieces of code. Place them in their appropriate locations(along the top, inside the function, inside the return).
 
 ```js
+// Top of file
 // src/Reviews.jsx
 import ReviewForm from "./ReviewForm";
+```
 
+```js
 // add this inside the Reviews() function
 const handleAdd = (newReview) => {
   fetch(`${API}/bookmarks/${id}/reviews`, {
@@ -135,7 +138,10 @@ const handleAdd = (newReview) => {
     })
     .catch((error) => console.error("catch", error));
 };
+```
 
+```js
+// replace the return statement with this code
 return (
   <section className="Reviews">
     <h2>Reviews</h2>
@@ -172,9 +178,9 @@ const handleDelete = (id) => {
 };
 ```
 
-// in the return
+Add the delete method to the Review component.
 
-```
+```js
 <Review key={review.id} review={review} handleDelete={handleDelete} />
 ```
 
@@ -286,13 +292,11 @@ export default Review;
 
 Now you should be able to click the `edit this review` button and toggle between the two components.
 
-We'll have to continue to pass the `handleSubmit` function down. Passing props down two or more times can be called `props drilling`. A little bit of props drilling is ok. However, if you find you need to use it a lot, you can look into a React API (like Context or Redux) to help manage state.
-
 And that should be it! A one-to-many relationship is one way to do full CRUD on a second model.
 
 ### Bonus
 
-Can you figure out a way that _when_ the viewEditForm is visible, the button would say `see review`, but if the value is toggled back to false, the button would say `edit this review` instead?
+Those ratings numbers are boring. Can you figure out a way to display teh correct number of star emojis ⭐️ to represent ratings?
 
 ## New Bookmarks Bonus Challenges/Lab time
 
