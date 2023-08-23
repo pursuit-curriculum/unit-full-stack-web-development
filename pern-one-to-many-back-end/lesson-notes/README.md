@@ -27,7 +27,7 @@ We added foreign keys (the primary key `id` of the `one` to the `many`).
 - `npm install`
 - Update the `.env` to work on your machine
 
-## Continue
+### Continue
 
 Let's add a new table for reviews. We want to add a couple of constraints.
 
@@ -170,7 +170,7 @@ const reviewsController = require("./reviewsController.js");
 bookmarks.use("/:bookmark_id/reviews", reviewsController);
 ```
 
-Now we can go to http://localhost:3333/bookmarks/1/reviews
+Now we can go to http://localhost:3003/bookmarks/1/reviews
 
 We've made progress! However, instead of seeing the reviews for the bookmark with the `id` of 1, we see all the reviews.
 
@@ -213,7 +213,7 @@ Import the query `getBookmark` to the reviews controller.
 const { getBookmark } = require("../queries/bookmarks.js");
 ```
 
-Call it and make a new object to send back.
+Call it and make a new nested object to send back.
 
 ```js
 // controllers/reviewsController.js
@@ -309,6 +309,8 @@ Update the new bookmark (include a review's id in the URL and a bookmark_id). It
 Make the updates to accept the correct arguments so that the ids come from the URL.
 
 ```js
+// controllers/reviewsController.js
+// UPDATE
 reviews.put("/:id", async (req, res) => {
   const { id, bookmark_id } = req.params;
   console.log(id, req.params.bookmark_id);
