@@ -1,26 +1,40 @@
-# Express Request
+# Introduction to Express Request
 
-## Getting Started
+## Learning Objectives
 
-### Quick Review
+By the end of this lesson, you should be able to:
 
-- Express is a code framework hosted on npm and written in JavaScript. Express is a framework for building a web server
-- We initialize our folder as an npm project by typing `npm init`
-- Add npm packages by typing `npm install <package-name> `, e.g., `npm install express`
-- Use the `require()` function to bring in the express code so that we can use it
-- Add `app.listen(PORT)` to turn on our server. By default, it will listen to http://localhost. When we work on our computers, we have to pick a port. Usually, ports for servers we'll be building are in the numeric range of 3000 - 9000. When we host our projects on the web, the port will be automatically configured for us
+- Begin organizing your application into separate files with different roles for long-term maintainability
+- Describe what a resource is and how it relates to internet applications.
+- Make requests with query parameters and URL queries to a locally running server via the browser.
+- Identify common errors that occur in building Express routes.
+- Common error: Two responses
+- Common error: Place routes in the correct order
+- Access request parameters in an Express route.
+- Access query parameters in an Express route.
+- Access important data from the request object.
 
-We are going to add more complexity to this setup so that we can start to bring some more best practices into our app.
+---
 
-### Start coding
+## Quick Review
 
-- navigate to your Desktop or another convenient folder
+- What is Express?
+
+- How do you start a new npm project?
+
+- How do you add the Express package?
+
+- When you start your Express server, what address must you visit in the browser?
+
+## Start coding
+
+- Navigate to your Desktop or another convenient folder
 - `git status` to make sure you are not already in a `git` repository
 - `mkdir express-minerals`
 - `cd express-minerals`
 - `touch server.js`
 - `npm init -y` (this will automatically say yes to all the npm default settings - this is fine for tutorials, small test builds, etc.)
-- `npm install express`
+- `npm install express@4 dotenv@2`
 - `touch .gitignore` (tell git which files to ignore) and add the following to the file:
 
 ```
@@ -28,26 +42,9 @@ node_modules
 .env
 ```
 
-This file is not JavaScript, so don't add semi-colons.
+- Why and when do to start file/folder names with a `.`?
 
-**Thought question**: Why and when do we start file/folder names with a `.`?
-
-### JavaScript Environments
-
-There are many places (environments) to run JavaScript, for example, in the browser or terminal. Each place is a different environment: Your computer is a different environment than your friend's computer. Therefore, being able to add a file that stores specific information about running the code in the environment it is in is a helpful feature.
-
-Let's make our environmental variable file. We'll call it `.env`. We've already chosen not to track the file in our `.gitignore`. This will allow each environment to keep its own file, and if there is sensitive information like passwords or API keys, they will also not be shared on GitHub.
-
-- `touch .env`
-- `npm install dotenv`
-
-- Open `.env` add
-
-```
-PORT=3333
-```
-
-This file is also not JavaScript, so don't add semi-colons, quotes, or extra white space.
+- Why must the version be included when installing packages for a class or tutorial?
 
 ### Set Up App
 
@@ -73,18 +70,7 @@ module.exports = app;
 
 ### Separating Concerns
 
-We will be adding code testing for our subsequent assignments and assessments. To set it up correctly, we have to set up the server in one file and then our routes and other logic in other files.
-
-When we import an npm package, like express, we require it by name.
-We can also include code from other files we've created. We have to give the relative path when it is a file we've made.
-
-When we set up our `server.js` file, we must first import our code from our app.js.
-
-Then, we need to configure our app to use our environment variables.
-
-We're using a package called [dotenv](https://www.npmjs.com/package/dotenv)
-
-We will follow the basic instructions/example code provided in the docs.
+You will now create another file to set up your basic server:
 
 **server.js**
 
@@ -104,20 +90,27 @@ app.listen(PORT, () => {
 
 Get the app running with `nodemon server.js` and go to http://localhost:3333
 
-**Note:** Having the variable `PORT` in all caps is the default for deploying your back-end on the cloud(make it live). In other languages, all caps denote that the variable is a constant and cannot be changed. So even though it is not necessary for JavaScript, we will keep this variable in all caps so we are ready for deployment and won't have to go back and edit it.
+- Why is the variable named `PORT` and not `port`?
 
-### Building An App
+- What is the function of each file?
 
-Right now, we'll be focused on learning express. Later we'll learn about databases and how to integrate a database into our express app.
+- `package.json`
+- `.env`
+- `app.js`
+- `server.js`
 
-In the meantime, we're mocking a database by just using arrays of objects that will live in memory while the server is running.
+- Why is it important to make different files?
 
-Data modeling is a technique for defining business requirements for a database. In our case, we are making a simple version of a rock shop, and our data will be an array of objects. We're going to store this data in a file called `rock.js` that will be inside a folder called `models`.
+## Mocking data
 
 - `mkdir models`
 - `touch models/rock.js`
 
-We need to assign it to `module.exports` so we can import it elsewhere in our app.
+- Why is the folder named `models`?
+
+- What are data models?
+
+- Why must you assign it to `module.exports`?
 
 **models/rock.js**
 
@@ -134,9 +127,7 @@ module.exports = [
 
 Copy and paste this array into `rock.js`
 
-**IMPORTANT** if you forget to use `module.exports` or misspell it as `module.export`, you will get an empty object. Be sure to check this carefully, as it is a common bug.
-
-Let's make an index of all the rocks.
+Make an index route of all the rocks. Be sure to import your data first.
 
 **app.js**
 
@@ -153,6 +144,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to Express Minerals App");
 });
 
+// Index route
 app.get("/rocks", (req, res) => {
   res.send(rocks);
 });
@@ -165,42 +157,7 @@ http://localhost:3333/rocks
 
 ### Showing each rock
 
-We have 6 rocks for sale. We could create a route for each rock. Six is very doable. But what if this store is a huge success, and we end up having hundreds or thousands of rocks?
-
-Writing a route for each one would be
-
-- tedious
-- hard to maintain
-
-Instead, we want user input for the rock the user wants to see. We'll use the array position and have the user type in the URL for now. Eventually, we would create a complete web page with links and id numbers for our rocks.
-
-Let's try it out.
-
-We create a request parameter by adding a `:` to distinguish it from a regular path.
-
-Whatever value the user types will then be sent with the request and is accessible inside the `request.params` object.
-
-Let's try it:
-
-```js
-// ROUTES
-app.get("/rocks/:index", (req, res) => {
-  res.send(req.params);
-});
-```
-
-http://localhost:3333/rocks/1
-
-We can now use this value to access the item in the array's position 1.
-
-```js
-// ROUTES
-app.get("/rocks/:index", (req, res) => {
-  res.send(rocks[req.params.index]);
-});
-```
-
-We can make this code easier to read by using object deconstruction. Let's try it.
+Create a dynamic route and access a specific rock using the index position.
 
 ```js
 // ROUTES
@@ -210,20 +167,24 @@ app.get("/rocks/:index", (req, res) => {
 });
 ```
 
+http://localhost:3333/rocks/1
+
+- What is a server resource?
+
 ## A Common Error
 
-You can only have one response for every request: This is the rule of the http protocol. If you try to send multiple responses, you'll get an error in the terminal. Let's try it!
+You can only have one response for every request: This is the rule of the http protocol. You'll get an error in the terminal if you try to send multiple responses.
 
 ```js
 app.get("/rocks/oops/:index", (req, res) => {
   const { index } = req.params;
   res.send(rocks[index]);
   // error cannot send more than one response!
-  res.send("this is the index: " + index);
+  res.send("This is the index: " + index);
 });
 ```
 
-We can, however, have multiple statements if we use our `if` statements or other program logic correctly:
+Is it possible to have multiple statements as part of the route's logic?
 
 ```js
 app.get("/rocks/:index", (req, res) => {
@@ -231,12 +192,12 @@ app.get("/rocks/:index", (req, res) => {
   if (rocks[index]) {
     res.send(rocks[index]);
   } else {
-    res.send("cannot find any rocks at this index: " + index);
+    res.send("Cannot find any rocks at this index: " + index);
   }
 });
 ```
 
-http://localhost:3333/rocks/98
+http://localhost:3333/rocks/777
 
 or
 
@@ -244,22 +205,14 @@ http://localhost:3333/rocks/not_a_valid_index_position
 
 ## Place routes in the correct order
 
-- Express starts at the top of your `app.js` file and attempts to match the URL used by the browser with routes in the order in which they're defined.
-- URL params (e.g. `:foo`, `:example`, `like `) can be anything, a number or a string
-- Therefore, if you have these routes in this order in your `server.js`:
-- `/:color`
-- `/rocks`
-- And you want to get to `/rocks` - you'll always hit the `/:color` route because the URL parameter will accept _any_ string. It doesn't know that `rocks` is something specific/special
-- To fix this, we put the more specific routes first
-- `/rocks`
-- `/:color`
-  Now, from top to bottom, the more specific route `/rocks` will be triggered when the URL has `/rocks`, and if it doesn't match `/rocks`, it will go to the following route.
+- What is a static route?
+- What is a dynamic route?
 
-Let's code an example of this together:
+First, demonstrate what happens when the dynamic route comes first:
 
 ```javascript
 app.get("/rocks/:index", (req, res) => {
-  //:index can be anything, even awesome
+  // :index can be anything, even awesome
   res.send(rocks[req.params.index]);
 });
 
@@ -272,12 +225,12 @@ app.get("/rocks/awesome", (req, res) => {
 });
 ```
 
-If this happens, reorder them so that more specific routes come before less specific routes (those with params in them)
+Now, reorder them so that more specific routes come before less specific routes (those with params in them):
 
 ```javascript
 app.get("/rocks/awesome", (req, res) => {
   res.send(`
- <h1>rocks are awesome!</h1>
+ <h1> Rocks are awesome!</h1>
  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pyrite_-_Huanzala_mine%2C_Huallanca%2C_Bolognesi%2C_Ancash%2C_Peru.jpg/260px-Pyrite_-_Huanzala_mine%2C_Huallanca%2C_Bolognesi%2C_Ancash%2C_Peru.jpg" >
  `);
 });
@@ -287,26 +240,27 @@ app.get("/rocks/:index", (req, res) => {
   if (rocks[index]) {
     res.send(rocks[index]);
   } else {
-    res.send("cannot find anything at this index: " + index);
+    res.send("Cannot find anything at this index: " + index);
   }
 });
 ```
 
 ## Multiple Parameters
 
-We can add more parameters to the `req.params` object:
+You can add more parameters to the `req.params` object:
 
 ```js
-app.get("/hello/:firstName/:lastName", (req, res) => {
+app.get("/question/:firstName/:lastName", (req, res) => {
   console.log(req.params);
   const { firstName, lastName } = req.params;
-  res.send(`hello ${firstName} ${req.params.lastName}`);
+  res.send(`${firstName} ${lastName} asks if there is life on Mars?`);
 });
 ```
 
-http://localhost:3333/hello/karolin/rafalski
+http://localhost:3333/question/David/Bowie
 
-Try other first names and last names!
+- Try other first names and last names
+- Can you have special characters like `.` or a space?
 
 ## Query Strings
 
@@ -327,7 +281,7 @@ app.get("/calculator/:operator", (req, res) => {
 
 http://localhost:3333/calculator/add?num1=5&num2=4
 
-Uh oh! We got 54 instead of 9. Remember, incoming requests always come in as strings. Let's clean up our code:
+Remember, incoming requests always come in as strings.
 
 ```js
 app.get("/calculator/:operator", (req, res) => {
@@ -337,19 +291,33 @@ app.get("/calculator/:operator", (req, res) => {
 });
 ```
 
-Let's add a bit more logic.
+Add a bit more logic.
 
 ```js
 app.get("/calculator/:operator", (req, res) => {
   const { num1, num2 } = req.query;
   let sum = 0;
-  if ((req.params.operator === "add")) {
+  if (req.params.operator === "add") {
     sum = Number(num1) + Number(num2);
   }
-  res.send("sum is " + sum);
+  res.send(sum);
+});
+```
+
+- Why did you get an error with the response?
+- How can you correct the error?
+
+```js
+app.get("/calculator/:operator", (req, res) => {
+  const { num1, num2 } = req.query;
+  let sum = 0;
+  if (req.params.operator === "add") {
+    sum = Number(num1) + Number(num2);
+  }
+  res.send("" + sum);
 });
 ```
 
 **Bonus**
 
-Can you figure out how to add the functionality of `subtract`, `multiple`, and `divide` ?
+Can you figure out how to add the functionality of `subtract`, `multiple`, and `divide`?

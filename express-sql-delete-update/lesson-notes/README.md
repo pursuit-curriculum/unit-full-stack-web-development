@@ -22,11 +22,10 @@ If we were to access it by array position, it would be at array position `1`. We
 
 ## Delete
 
-**queries/bookmarks.js**
-
-Create an async arrow function and be sure to include it in `module.exports`
+Start by creating the query. Create an async arrow function and be sure to include it in `module.exports`. Work from the outside in by creating the try/catch blocks first.
 
 ```js
+// queries/bookmarks.js
 const deleteBookmark = async (id) => {
   try {
   } catch (error) {
@@ -42,6 +41,8 @@ module.exports = {
 };
 ```
 
+Add the functionality.
+
 ```js
 const deleteBookmark = async (id) => {
   try {
@@ -56,10 +57,10 @@ const deleteBookmark = async (id) => {
 };
 ```
 
-**controllers/bookmarkController.js**
-Import the function
+Import the function to the controller.
 
 ```js
+// controllers/bookmarkController.js
 const {
   getAllBookmarks,
   getBookmark,
@@ -68,13 +69,7 @@ const {
 } = require("../queries/bookmarks");
 ```
 
-Create the delete route and test it with Postman
-
-Remember to have selected:
-
-- Route ` DELETE` `/bookmarks/:id`
-
-Test that the route works:
+Create just the delete route and test it with Postman.
 
 ```js
 // DELETE
@@ -109,19 +104,14 @@ bookmarks.delete("/:id", async (req, res) => {
 });
 ```
 
-Test it with Postman
-
-Remember to have:
-
-- route DELETE /bookmarks/:id
+Test it with Postman.
 
 ## Update
 
-**queries/bookmarks.js**
-
-Create an async arrow function and be sure to include it in `module.exports`
+Start by creating the query. Create an async arrow function and be sure to include it in `module.exports`
 
 ```js
+// queries/bookmarks.js
 const updateBookmark = async (id, bookmark) => {
   try {
   } catch (error) {
@@ -154,10 +144,10 @@ const updateBookmark = async (id, bookmark) => {
 };
 ```
 
-**controllers/bookmarkController.js**
-Import the function
+Import the function.
 
 ```js
+// controllers/bookmarkController.js
 const {
   getAllBookmarks,
   getBookmark,
@@ -167,6 +157,8 @@ const {
 } = require("../queries/bookmarks");
 ```
 
+Create just the route and test it.
+
 ```js
 // UPDATE
 bookmarks.put("/:id", async (req, res) => {
@@ -175,7 +167,7 @@ bookmarks.put("/:id", async (req, res) => {
 });
 ```
 
-Now add the database call:
+Now add the database call.
 
 ```js
 // UPDATE
@@ -186,7 +178,7 @@ bookmarks.put("/:id", async (req, res) => {
 });
 ```
 
-Test it and remember to have:
+Test it and remember to have the following:
 
 - route PUT /bookmarks/:id
 
@@ -200,7 +192,7 @@ Test it and remember to have:
 
 Remember, the same rules apply that applied to create. There must be a name, and `is_favorite` must be a boolean (or undefined - why is undefined an ok option?).
 
-We can easily update our function to do those checks.
+We can easily update our function to do those checks because we created the functionality separate from the create route.
 
 ```js
 bookmarks.put("/:id", checkName, checkBoolean, async (req, res) => {
@@ -208,11 +200,10 @@ bookmarks.put("/:id", checkName, checkBoolean, async (req, res) => {
 
 ## Final Validation
 
-We checked for one more thing the first time we built this app.
-
-We checked if the URL provided starts with `http` or `https`.
+We checked for one more thing the first time we built this app. We checked if the URL provided starts with `http` or `https`.
 
 ```js
+// validations/checkBookmarks.js
 const validateURL = (req, res, next) => {
   if (
     req.body.url.substring(0, 7) === "http://" ||
@@ -235,3 +226,7 @@ Please take a few minutes to add this validation as middleware to the create and
 
 - `git add -A`
 - `git commit -m 'update and delete complete'`.
+
+## Reference
+
+[Reference build](https://github.com/pursuit-curriculum-resources/express-sql-seed-read-demo/tree/update-delete)

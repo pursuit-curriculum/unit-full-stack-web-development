@@ -632,3 +632,5 @@ Currently, there are several limitations of our app:
 What would be helpful would be the ability to create a user session that would store the information about the logged-in user. That way, a logged-in user could only create/edit/delete reviews they've written.
 
 Additionally, we may only want the initial creator of a bookmark or someone with admin privileges to be able to edit/delete a bookmark.
+
+Futhermore, we are sending "flat" data. Many rows repeat themselves. It would be better to have nested objects with parent and children relationships. How could you achieve transforming the data?

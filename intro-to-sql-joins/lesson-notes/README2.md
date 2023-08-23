@@ -1,34 +1,54 @@
-## Getting it Together Part 2: Many-to-Many Joins
+# Many-to-Many Joins
+
+By the end of this lesson, you should be able to:
+
+- Explain how to create and use a many-to-many relationship between two entities.
+- Explain what a lookup table is and what function it serves
 
 ## Intro
 
-Next up, we can create tables with relationships of many to many. For example, a guest can have (book) many hotel rooms, and a hotel room can have (be booked by) many guests.
+Next up, we can create tables with relationships of many-to-many. For example, a guest can have (book) many hotel rooms and a hotel room can have (be booked by) many guests.
 
 Let's make some guests. We imagine we'd have information like a first name, last name, credit card number, email, phone, etc. But to keep things simple for this demonstration, our guests will only have one column for their name and whether or not they are traveling with a pet.
 
-```sql
+Create table:
+
+```SQL
 CREATE TABLE guests (id SERIAL PRIMARY KEY, name TEXT, pet BOOLEAN);
 ```
 
-```sql
+Insert data:
+
+```SQL
 INSERT INTO guests (name, pet)
 VALUES
 ('Winter Jones', true),
 ('Forest Doe', false),
 ('River Miller', true);
+```
 
+Confirm correct table and insertion of data:
+
+```SQL
 SELECT * FROM guests;
 ```
 
-How can we create a table that allows for this relationship? If we try to add to rooms, we end up with a similar predicament as when we first created our one-to-many relationship, and we would have the same troubles if we try to tack on the data in some columns to the guests table.
+- How can we create a table that allows for this relationship?
 
-To do this, we're going to make a `join` or `look up` table. This table will have no serial primary key. The room id and the guest id will distinguish the rows. We can also add some additional info, for example, the dates (we will use simple text for demonstration purposes)
+- What is a lookup (or join) table?
+- What is the purpose of a lookup table?
+- What kind of values can a lookup table have?
+- Does a lookup table require a unique id field? Why or why not?
 
-```sql
+Create table:
+
+```SQL
 CREATE TABLE rooms_guests (room_id INT, guest_id INT, stay_dates TEXT);
 ```
 
-```sql
+Insert data:
+
+```SQL
 INSERT INTO rooms_guests (room_id, guest_id, stay_dates)
 VALUES
 (1,1, 'June 6-12'),
@@ -44,19 +64,21 @@ VALUES
 (2,1, 'April 6-12'),
 (3,1, 'June 22-28'),
 (4,1, 'July 19-22');
+```
 
+Confirm correct table and insertion of data:
+
+```SQL
 SELECT * FROM rooms_guests;
 ```
 
-While this table has data, it's not very useful for us to look at.
-
-Let's do a query to show which rooms our guests have stayed in
+While this table has data, it's not very useful for us to look at. Joining all three tables will provide a useful view of the data.
 
 Select all columns (all tables) from rooms_guests, join the table guests on where guests.id matches rooms_guests.guest_id match.
 
 Join those results to rooms_guests on where rooms.id rooms_guests.room_id match.
 
-```sql
+```SQL
 SELECT
  *
 FROM

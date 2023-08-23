@@ -1,12 +1,26 @@
 # Intro to the Internet and Servers
 
-Typically, when software engineers begin learning about the internet, they start with the front end of a website and spend less time focusing on the back end. In this unit, you will focus on back-end and full-stack web development.
+## Introduction
 
-The back end of an application is made up of servers and databases. Without a robust back-end application, a front-end application is only capable of statically displaying information. While it can be interactive for a user, it cannot store data or handle unknown requests. In this lesson, you will learn how these two sides of applications interact with one another.
+Typically, when software engineers begin learning about the internet, they start with the front-end of a website and spend less time focusing on the back-end. In this unit, you will focus on back-end and full-stack web development.
+
+The back-end of an application is made up of servers and databases. Without a robust back-end application, a front-end application is only capable of statically displaying information. While it can be interactive for a user, it cannot store data or handle unknown requests. In this lesson, you will learn how these two sides of applications interact with one another.
+
+## Learning Objectives
+
+By the end of this lesson, you should be able to:
+
+- Define clients, servers, and databases.
+- Define the basic components of the internet.
+- Describe the request-response cycle.
+- Identify the key components of an HTTP request.
+- Identify the key components of an HTTP response.
+
+---
 
 ## Components of the internet
 
-In order to learn how to build a back end, it is helpful to understand the basics of the internet and the request-response cycle.
+In order to learn how to build a back-end, it is helpful to understand the basics of the internet and the request-response cycle.
 
 The internet is made up of many different elements. Most of these components are abstracted away from your day-to-day experience of the internet. People rarely consider the components described in this reading when they use the internet. However, as a software developer, you need to know some fundamentals about how the internet works.
 
@@ -41,12 +55,12 @@ Here is a simplified diagram of how they interact:
 
 A client is anything that connects to the internet and makes _requests_ to servers. Think about the last time you used the internet outside of class. You may have:
 
-- requested weather data from a weather website
-- checked the time your favorite coffee shop opens
-- looked up the price of a flight
-- shopped for a gift
-- confirmed an appointment
-- used an app to turn off the lights in your home
+- Requested weather data from a weather website.
+- Checked the time your favorite coffee shop opens.
+- Looked up the price of a flight.
+- Shopped for a gift.
+- Confirmed an appointment.
+- Used an app to turn off the lights in your home.
 
 Each of these activities involves a client (you and your phone/laptop) making requests to a server and getting responses from the server with some information.
 
@@ -79,7 +93,7 @@ For example, a shopping website may store an account with information like your 
 
 In order to build web applications you will use _HTTP_.
 
-HTTP stands for HyperText Transfer Protocol. It is helpful to remember that HTML stands for Hyper-Text Markup Language. The initial purpose of the HTTP protocol was to transfer HTML. Over time it has extended to allow the transfer of JSON, images, and several other types of data. "
+HTTP stands for HyperText Transfer Protocol. It is helpful to remember that HTML stands for Hyper-Text Markup Language. The initial purpose of the HTTP protocol was to transfer HTML. Over time it has extended to allow the transfer of JSON, images, and several other types of data.
 
 Requests and responses are sent via HTTP. The requests are sent to an address represented by a URL.
 
@@ -87,7 +101,7 @@ Requests and responses are sent via HTTP. The requests are sent to an address re
 
 URLs are addresses of computers and resources on the internet. Requests and responses use these addresses to find one other.
 
-URL stands for Uniform Resource Locator. It's a string of text characters that are formatted in a uniform manner. Web browsers (and other software) use these strings to help locate where to send requests and find resources."
+URL stands for Uniform Resource Locator. It's a string of text characters that are formatted in a uniform manner. Web browsers (and other software) use these strings to help locate where to send requests and find resources.
 
 You can see a URL in the browser. Usually, the URL bar is along the top:
 

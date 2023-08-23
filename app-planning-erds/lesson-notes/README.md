@@ -1,18 +1,17 @@
 # App Planning: ERDs
 
-## Learning Objectives
+## Lesson Objectives
 
-By the end of this lesson you should be able to:
-
-- Describe what is an ERD
-- Describe the purpose of an ERD
-- Be able to create an entity either on a whiteboard, paper or with a free version of an app
-- Be able to create relations between entities
-
+- Describe the purpose of an ERD and how it helps in planning applications.
+- Describe what an entity is and how it relates to business and technical requirements.
+- Create an ERD for an application when given a business case.
+- Given an ERD, identify the relationships between different entities and how that may influence the table schema.
 <hr>
 
 ## Guiding Questions
 
+- What is an ERD?
+- What is the purpose of an ERD?
 - Why is it important to plan before coding?
 - How do ERDs fit into building a full-stack web application?
 - How do you decide when some data goes into one table or is split across two or more tables?

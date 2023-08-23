@@ -1,75 +1,92 @@
-## Getting Started
+# Intro to Databases/SQL Part 1
 
-You should have already downloaded PostgreSQL at the start of this course. [Pursuit Core Environment Set Up](https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/fundamentals/local_environment/README.md#postgresql)
+## Lesson Objectives
 
-It should already be running, and you should see an icon of an elephant in your Mac's bar.
+After this lesson, you should be able to:
 
-![](../assets/postgres-app-icon.png)
+- Define databases and their role in a full-stack app
+- Introduction to PostgreSQL
+- Differentiate between data definition language (DDL) and data manipulation language (DML).
+- Connect to the `psql` shell via the command line.
+- Perform common commands in the `psql` shell.
+- Set up and drop (delete) a (sub) database
+- Perform the following actions with tables:
+- Create a table, and set columns with
+  - datatypes
+  - constraints
+- Alter the table.
+- Drop the table.
+- Perform the following actions with table data:
+  - **C**reate a row and put it into the table (insert data)
+  - **R**ead from the table (query data)
+  - Filter data using the `WHERE` clause.
+  - **U**pdate from the table
+  - **D**elete from the table
+- Write more complex queries that:
+  - Limit
+  - Sort
+  - Aggregate
 
-If you don't see it, but you've installed it, use `spotlight` <kbd>command</kbd> <kbd>spacebar</kbd> to search and load it.
+---
 
-![](../assets/spotlight-postgres.png)
+## Introduction
 
-You can configure PostgreSQL to always load on startup and stop/start your server from the icon.
+- What is a database?
+- Why do you need to connect a database to a server?
+- What is PostgreSQL?
 
-![](../assets/postgres-icon-details.png)
+### Getting Started
 
-Today, we're going to use the PostgreSQL shell in the terminal. To launch it, go _anywhere_ in the terminal and type.
+You should have already downloaded PostgreSQL at the start of this course. [Pursuit Core Environment Set Up](https://github.com/pursuit-curriculum-resources/guide-computer-setup/tree/main/postgresql).
 
-- `psql`
+The application should already be running. You should be able to enter the Postgres shell by typing:
 
-![](../assets/launch-psql.png)
+- `psql` anywhere in Terminal.
 
-## SQL Syntax
+## SQL syntax
 
-Even though keywords in SQL are not case-sensitive, the convention is to capitalize them.
+Which is the correct convention for SQL keywords?
 
-```sql
--- correct
+```SQL
+-- first
 SELECT * FROM bookmarks;
 
--- incorrect
+-- second
 select * from bookmarks;
 ```
 
+Will you get an error if you don't capitalize correctly?
+
 **Note:** Comments start with two dashes `--`
 
-## SQL's Big GOTCHAS
+## SQL's big syntax gotchas
 
-Postgres in the terminal gives you some cues, but they can be hard to spot as a new user.
-
-A prompt ready to go is preceded by `=#`.
+- What status does the following prompt let you know?
 
 ![](../assets/prompt-ready.png)
 
-Semi-colons are required to end your statement. If you forget your semi-colon, the prompt will drop to the following line and appear as a `-#`.
+- What status does the following prompt let you know?
 
 ![](../assets/prompt-forgot-semi-colon.png)
 
-To fix this, add a semi-colon and press <kbd>return<kbd>
+- How can you fix this prompt back to a ready state?
 
-![](../assets/enter-semi-colon-to-end-statement.png)
-
-Another thing that can happen is that you get a lot of rows of data back, and you may not want to scroll through them all. To `q`uit that view, press `q`.
-
-You'll see a colon that will let you know there is more data, which you can use the down arrow to scroll through or press `q` to get your prompt back.
+- How do you quit out of a view with lots of data?
 
 ![](../assets/q-out-of-view.png)
 
-## Create a Database
-
-PostgreSQL is a Database. When you run the application, you can create `sub-databases` that allow you to work on different projects. For example, you may have one for your bookmarks app, one for your budgeting app, and more. These sub-databases are most often referred to as `databases`, and you use the keyword `databases` to create them.
+## Create a database
 
 Let's create a database and then drop (delete) it. Then we'll create a new one, connect it, and use it for the rest of this lesson.
 
 ```SQL
--- create the sub-database foo
-CREATE DATABASE foo;
+-- Create the sub-database bar
+CREATE DATABASE bar;
 
 -- drop it
-DROP DATABASE foo;
+DROP DATABASE bar;
 
--- get started with our code along
+-- Get started with our code along
 CREATE DATABASE lesson_db;
 
 -- connect to the lesson_db sub database
@@ -81,78 +98,90 @@ CREATE DATABASE lesson_db;
 
 ## Data types
 
-As we've been using Express and creating our data as arrays inside objects, we could play it fast and loose with datatypes. We could enter `4` as `4` (a number) or `'4'` - a string. JavaScript didn't care.
+Here are some of the most common datatypes for PostgreSQL. Define what each one is and give an example (For example: TEXt could hold text for a news article).
 
-PostgreSQL is more strict and expects the correct data types in the columns we will create. Here are some of the most common ones
+1. `INT`
+1. `DECIMAL`
+1. `BOOL`
+1. `VARCHAR(n) `
+1. `TEXT`
+1. `TIMESTAMP`
+1. `SERIAL`
 
-1. int - whole number
-1. decimal - float/decimal
-1. bool - boolean
-1. varchar(n) - small text
-1. text - large text
-1. timestamp - date
+## Create a table
 
-### Extra Reading
-
-[Hello, My Name is Mr. Null](https://www.wired.com/2015/11/null/)
-
-## Create a Table
-
-Inside a database, we can have many tables. We'll create a table of houses for sale. If we were working for a real estate company, we would have separate tables for buyers, agents, commercial properties, etc.
+Inside a database, we can have many tables. We'll create a table of houses for sale. If we were working for a real estate company, we would have separate tables for buyers, agents, commercial properties, etc. For this lesson, we'll only focus on houses.
 
 Tables have columns and rows. We will define the names of the columns and their data types.
 
 ```SQL
--- describe your tables
+-- Demo create, see and drop
 CREATE TABLE foo ( name TEXT ); -- create a table called 'foo' with one column called 'name', which is a small text column
 
 -- see table
 \dt
 
--- drop a table
+-- Drop the table
 DROP TABLE foo;
 
--- 'houses' table has an id column `serial`, a number that increases with each addition, and columns for address, city, state, price, and boolean properties for pool and for_sale.
-
-CREATE TABLE
- Houses
- ( id serial, address TEXT NOT NULL, city TEXT, st varchar(2), price INT, pool BOOLEAN DEFAULT false, for_sale BOOLEAN);
-
--- show description of columns for the table houses
-\d houses;
 ```
 
-Additionally, we are adding an `id` - an id is a helpful field. All of our data is subject to change. The hotel name can change, and there can be a typo that needs fixing. An id is a unique identifier for each row. The keyword [serial](https://www.postgresql.org/docs/9.2/datatype-numeric.html) provides us with this functionality of increasing the id number automatically.
+Use the following table for the rest of the class activity.
 
-![](../assets/create-and-see-table.png)
+```SQL
 
-### Alter a Table
+-- 'homes' table has an id column `serial`, which increases with each addition, and columns for address, city, state, price, and boolean properties for pool and for_sale.
+
+CREATE TABLE
+ homes
+ ( id SERIAL PRIMARY KEY, address TEXT NOT NULL, city TEXT, st VARCHAR(2), price INT, pool BOOLEAN DEFAULT false, for_sale BOOLEAN);
+
+-- Show description of columns for the table homes
+\d homes;
+```
+
+- What is the purpose of the `id` field?
+
+- What is the keyword `SERIAL`?
+
+- What does `PRIMARY KEY` do?
+
+- What does the constraint `NOT NULL` do?
+
+- What is the difference between `TEXT` and `VARCHAR(n)`?
+
+- When is it preferable to use `VARCHAR(n)` over `TEXT`?
+
+- What does they keyword `DEFAULT` do?
+
+### Alter a table
 
 You can make changes to the table you've created.
 
 **IMPORTANT:** You cannot roll back changes or undo deletes with a PostgreSQL database. When working in production, be sure to have backup systems in place.
 
-```sql
--- add a test string column
+```SQL
+-- Rename a table
+ALTER TABLE homes RENAME TO houses;
+
+-- Add a test string column
 ALTER TABLE houses ADD COLUMN test TEXT;
 
--- drop the test column
+-- Drop the test column
 ALTER TABLE houses DROP COLUMN test;
 
--- rename a column
+-- Rename a column
 ALTER TABLE houses RENAME st TO state;
 
--- rename a table
-ALTER TABLE Houses RENAME TO houses;
 ```
 
 See the columns in the house's table again.
 
-```sql
+```SQL
 \d+ houses
 ```
 
-## Insert Into The Table
+## Insert into the table
 
 You don't have to remember the order of the columns you created, but you have to match the order when inserting:
 
@@ -163,19 +192,15 @@ VALUES
 ('99 Sunnyside Drive', TRUE, 100, 'NY', 'Springfield', true);
 ```
 
-**Success** will look something like
-
-```SQL
-INSERT 0 1
-```
-
-We can see our data by doing a query. The `*` (star) means show all the columns.
+- How can you see the data in your table?
 
 ```SQL
 SELECT * FROM houses;
 ```
 
-You don't have to enter all the fields (only the required ones)
+- What does the `*` (star) mean?
+
+- Create a new row. Will the following insertion work, or will it error?
 
 ```SQL
 INSERT INTO
@@ -190,9 +215,7 @@ Remember, you can use the `up` arrow to scroll to previous commands to run.
 SELECT * FROM houses;
 ```
 
-Again to see the new entry.
-
-Let's add some more houses (copy-paste from the notes into your terminal):
+Let's add some more houses (copy-paste from the notes into your Terminal):
 
 ```SQL
 INSERT INTO
@@ -212,57 +235,59 @@ VALUES
 Here, we can explore some powerful queries we can make using SQL.
 
 ```SQL
--- select all rows from the house's table. display only the address column
+-- Select all rows from the house's table. display only the address column
 SELECT address FROM houses;
 
--- select all rows from the house's table. Display only the address and state column
+-- Select all rows from the house's table. Display only the address and state column
 SELECT address, state FROM houses;
 
- -- select all rows from the house's table. display only all the columns
+ -- Select all rows from the house's table. display only all the columns
 SELECT * FROM houses;
 
--- select all rows from the house's table where the name column is set to 'Monroe'
+-- Select all rows from the house's table where the name column is set to 'Monroe'
 SELECT * FROM houses WHERE city = 'Monroe';
 
--- select all rows from the house's table where the name column is set to 'ny' or 'Ny' or 'NY' (case insensitive)
+-- Select all rows from the house's table where the name column is set to 'ny' or 'Ny' or 'NY' (case insensitive)
 SELECT * FROM houses WHERE state ILIKE 'NY';
 
--- select all rows from the house's table where the name column contains 'Drive'
+-- Select all rows from the house's table where the name column contains 'Drive'
 SELECT * FROM houses WHERE address LIKE '%Drive%';
 
--- select all rows from the house's table where the city column is set to 'Monroe' AND the state column is set to 'CT'
+-- Select all rows from the house's table where the city column is set to 'Monroe' AND the state column is set to 'CT'
 SELECT * FROM houses WHERE city = 'Monroe' AND state = 'CT';
 
--- select all rows from the house's table where either the pool column is set to TRUE OR the city column is set to 'Twin Peaks'
+-- Select all rows from the house's table where either the pool column is set to TRUE OR the city column is set to 'Twin Peaks'
 SELECT * FROM houses WHERE pool = TRUE OR city = 'Twin Peaks';
 
--- select all rows from the house's table where the price is set to 200
+-- Select all rows from the house's table where the price is set to 200
 SELECT * FROM houses WHERE price = 200;
 
--- select all rows from the house's table where the price column is not set to 180
+-- Select all rows from the house's table where the price column is not set to 180
 SELECT * FROM houses WHERE price != 180;
 
--- select all rows from the house's table where the price column is greater than 165
+-- Select all rows from the house's table where the price column is greater than 165
 SELECT * FROM houses WHERE price > 165;
 
- -- select all rows from the house's table where the price column is less than 165
+ -- Select all rows from the house's table where the price column is less than 165
 SELECT * FROM houses WHERE price < 165;
 
--- select all rows from the house's table where the price column is greater than or equal to 165
+-- Select all rows from the house's table where the price column is greater than or equal to 165
 SELECT * FROM houses WHERE price >= 165;
 
--- select all rows from the house's table where the price column is less than or equal to 165
+-- Select all rows from the house's table where the price column is less than or equal to 165
 SELECT * FROM houses WHERE price <= 165;
 
--- select all rows from the house's table where the price column is null
+-- Select all rows from the house's table where the price column is null
 SELECT * FROM houses WHERE price IS NULL;
 
--- select all rows from the house's table where the pool column has a value
+-- Select all rows from the house's table where the pool column has a value
 SELECT * FROM houses WHERE pool IS NOT NULL;
 
 ```
 
-## Update a Row
+## Update a row
+
+Use the keyword `UPDATE` to update one or more rows.
 
 ```SQL
 UPDATE houses SET pool = TRUE WHERE id = 7;
@@ -270,86 +295,98 @@ UPDATE houses SET pool = TRUE WHERE id = 7;
 
 Typically actions like creating a new item or updating and deleting an item don't return any rows.
 
-However, sometimes we want to see the changes we made. We can add a `RETURNING` statement. This saves us from making a follow-up query if we want that data.
+However, sometimes we want to see the changes we made. We can add a `RETURNING` statement. This saves us from making a follow-up query if we use the data immediately.
 
 ```SQL
 UPDATE houses SET for_sale = TRUE WHERE id = 9 RETURNING *;
 ```
 
-## Delete a Row
+## Delete a row
 
 ```SQL
 DELETE FROM houses WHERE id = 1;
 ```
 
-## Delete Many Rows and See the Address
+- What happens if you don't include a `WHERE` clause for a delete statement?
+
+## Delete many rows and see the address and state
 
 ```SQL
 DELETE FROM houses WHERE pool = false RETURNING address, state;
 ```
 
-## Quit PostgreSQL Shell
+## Quit PostgreSQL shell
 
 To quit `psql`, type `\q`.
 
-## BONUS
+## Bonus lesson content
 
 ### Limit
 
-Our data set is very tiny right now. If we were to imagine a shopping site, we usually don't want to load hundreds or thousands of products simultaneously. It would be very slow and typically unnecessary.
-
-We can limit how many rows we get back.
+Imagine the database had 10,000 entries. What is the benefit of a `LIMIT` clause?
 
 ```SQL
--- select all rows from the house's table, but show only the first row
+-- Select all rows from the house's table, but show only the first row
 SELECT * FROM houses LIMIT 1;
 ```
 
 ### Offset
 
-If we were to imagine pagination for our store, we would also want to offset (start at a later row) the responses on upcoming pages.
+Imagine this data was (again, 10,000+ rows big) and being used for a real estate website. What would benefit from using the `OFFSET` and `LIMIT` clauses?
+
+- When you visit a website with many items, does it typically load all the items at once? Why or why not?
 
 ```SQL
 -- For comparison to the next one
 SELECT * FROM houses;
--- select all rows from the house's table, but show only one row. Skip the first row
+-- Select all rows from the house's table, but show only one row. Skip the first row
 SELECT * FROM houses LIMIT 1 OFFSET 1;
 
 ```
 
 ### Sorting
 
-It's essential not to rely on the order you put things in the database as a form of sorting. When you need to sort your data, do so with specific SQL commands.
+If you want to sort your data, you should rely on `ORDER BY` and not the order you think the rows are in. Why?
 
-```sql
--- select all rows from the houses table, order by name alphabetically
+```SQL
+-- Select all rows from the houses table, order by name alphabetically
 SELECT * FROM houses ORDER BY city ASC;
 
--- select all rows from the houses table, order by name reverse alphabetically
+-- Select all rows from the houses table, order by name reverse alphabetically
 SELECT * FROM houses ORDER BY city DESC;
 
--- select all rows from the houses table, order by price ascending
+-- Select all rows from the houses table, order by price ascending
 SELECT * FROM houses ORDER BY price ASC;
 
--- select all rows from the houses table, order by price descending
+-- Select all rows from the houses table, order by price descending
 SELECT * FROM houses ORDER BY price DESC;
 ```
 
 ### Combination
 
+Of the following statements, which is a valid order?
+
 ```SQL
 SELECT address, city, state FROM houses ORDER BY city, state ASC LIMIT 2 OFFSET 2;
 ```
 
-## SUPER BONUS
+```SQL
+ ORDER BY city, state ASC LIMIT 2 OFFSET 2 SELECT address, city, state FROM houses;
+```
 
-### Counts and Aggregation
+```SQL
+SELECT address, city, state FROM houses state ASC LIMIT 2 OFFSET 2 ORDER BY city;
+```
 
-```sql
+What kind of messages do you get when you create statements that are out of order?
+
+### Counts and aggregation
+
+```SQL
 -- show the total number of houses.
 SELECT COUNT(price) FROM houses;
 
--- divide all rows into groups by city and state. Show the number of rows in each group. Also, show the city and state of each group
+-- Divide all rows into groups by city and state. Show the number of rows in each group. Also, show the city and state of each group
 SELECT COUNT(*) address, city, state FROM houses GROUP BY city, state;
 
  -- Show the SUM of all the house prices.
@@ -358,13 +395,13 @@ SELECT SUM(price) FROM houses WHERE price IS NOT NULL;
  -- Show the SUM of all the house prices where the pool is true
 SELECT SUM(price) FROM houses WHERE pool IS TRUE;
 
--- divide all rows into groups by whether or not they are for sale. Show the AVG of the price of each group. Also, show the for_sale property of each group
+-- Divide all rows into groups by whether or not they are for sale. Show the AVG of the price of each group. Also, show the for_sale property of each group
 SELECT AVG(price), for_sale FROM houses GROUP BY for_sale;
 
 -- show the MIN price of houses.
 SELECT MIN(price) FROM houses;
 
--- divide all rows into groups by for_sale. Show the MIN of the price of each group. Also, show the for_sale of each group
+-- Divide all rows into groups by for_sale. Show the MIN of the price of each group. Also, show the for_sale of each group.
 SELECT MAX(price), for_sale FROM houses GROUP BY for_sale;
 
 ```
