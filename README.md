@@ -29,3 +29,26 @@ Finally, we'll connect our server to our database so that we can create full sta
 - Use SQL to run CRUD operations and JOINs
 - Use pg-promise npm package to build a web application backed by SQL
 - Build a backend with multiple models that have at least one relationship (one to many)
+
+|                                      lesson                                      |                lab                 |
+| :------------------------------------------------------------------------------: | :--------------------------------: |
+|                      Introduction to the Internet & Servers                      |     Canvas written assignment      |
+|                  [Express Response](intro-to-express-response)                   |   lab-intro-to-express-response    |
+|                   [Express Request](intro-to-express-request)                    |    lab-intro-to-express-request    |
+|                [Express CRUD & MVC](express-rest-crud-mvc-index)                 |  lab-express-rest-crud-mvc-index   |
+| [Express Middleware & RESTful Routes: Show and Create](express-rest-show-create) |    lab-express-rest-show-create    |
+|     [Express RESTful Routes: Update and Delete](express-rest-delete-update)      |   lab-express-rest-delete-update   |
+|                [Connect Express and React](express-connect-react)                |     lab-express-connect-react      |
+|                                  Budgeting App                                   |                none                |
+|                     [Intro to Databases: SQL](intro-to-sql)                      |          lab-intro-to-sql          |
+|                     [App Planning: ERDs](app-planning-erds)                      |       lab-app-planning-erds        |
+|               [Intro to Databases: SQL Joins](intro-to-sql-joins)                |       lab-intro-to-sql-joins       |
+|               [Express & SQL: Seed & Read](express-sql-seed-read)                |     lab-express-sql-seed-read      |
+|             [Express & SQL: Show & Create](express-sql-create-show)              |    lab-express-sql-create-show     |
+|           [Express & SQL: Update & Delete](express-sql-delete-update)            |   lab-express-sql-delete-update    |
+|                          [PERN Stack: CRUD](pern-crud)                           |           lab-pern-crud            |
+|                             Single Resource Project                              |                none                |
+|           [PERN STack One-to-Many Back-end](pern-one-to-many-back-end)           | lab-pern-crud-one-to-many-back-end |
+|          [Pern Stack One-to-Many Front-end](pern-one-to-many-front-end)          |   lab-pern-one-to-many-front-end   |
+|                 [Bonus: Express many-to-many](pern-many-to-many)                 |                none                |
+|                           Full-Stack Portfolio Project                           |                                    |
