@@ -107,8 +107,8 @@ sequence:
       kind: lesson
       ########### NEEDS ATTENTION ############
       # Students should submit their backend as a lab
-      # This is a monorepo, so the next thing they will do is the front-end
-      # They should submit the front-end as a separate lab, even though it is in the same repo
+      #  The next thing they will do is the front-end
+      # They should submit the front-end as a separate lab
       # Finally, they should submit their attempt at one to many as a third lab
       # The challenge is that the pursuit path changes for lesson to lesson
       # But the pursuit path should stay the same for the lab(s)
@@ -117,6 +117,15 @@ sequence:
       #######################################
       starter: pern-crud
       activity: ~ # continue previous lab
+    - name: Single Resource Pair
+      pursuit_path: single-resource
+      kind: project
+      activity: repository
+      points_possible: 80
+    - name: Single Resource Pair Project Teamwork
+      pursuit_path: single-resource-teamwork
+      kind: project
+      points_possible: 20
     - name: PERN Stack - One to Many Back-End
       pursuit_path: pern-one-to-many-back-end
       kind: lesson
@@ -128,28 +137,7 @@ sequence:
     - name: PERN BONUS Topic
       pursuit_path: pern-many-to-many
       kind: lesson
-      activity: repository
-    - name: PERN BONUS Topic
-      pursuit_path: pern-many-to-many
-      kind: lesson
       activity: ~ # Continue last lab
-    - name: App Planning - Trello
-      pursuit_path: app-planning-trello
-      kind: lesson
-      activity: repository
-    - name: App Planning - Wireframes
-      pursuit_path: app-planning-wireframes
-      kind: lesson
-      activity: repository
-    - name: Single Resource Pair
-      pursuit_path: single-resource
-      kind: project
-      activity: repository
-      points_possible: 80
-    - name: Single Resource Pair Project Teamwork
-      pursuit_path: single-resource-teamwork
-      kind: project
-      points_possible: 20
     - name: Full-Stack Portfolio
       pursuit_path: full-stack-portfolio
       kind: project
